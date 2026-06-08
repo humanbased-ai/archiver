@@ -1,0 +1,34 @@
+# Twitter API
+tweepy==4.14.0
+
+# Claude AI
+anthropic==0.40.0
+
+# Lark & Web
+requests==2.32.4
+Flask==3.0.0
+
+# Database
+sqlalchemy==2.0.25
+
+# Utilities
+python-dotenv==1.0.0
+PyYAML==6.0.1
+schedule==1.2.0
+
+# Image Processing & AI
+Pillow>=10.0.0  # Use >=10.0.0 for Python 3.9+ compatibility
+replicate==0.25.1
+numpy>=1.24.0,<2.0.0  # Compatible with Python 3.9+
+
+# Production
+gunicorn==21.2.0
+
+# Development & Security
+pytest==8.0.0
+black==24.3.0
+bandit==1.7.5
+pip-audit==2.6.1
+
+# Security
+Flask-Limiter==3.5.0

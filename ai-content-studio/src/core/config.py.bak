@@ -1,0 +1,58 @@
+"""配置管理"""
+import os
+import yaml
+from dotenv import load_dotenv
+from pathlib import Path
+
+# Load .env from config directory
+env_path = Path(__file__).parent.parent.parent / 'config' / '.env'
+load_dotenv(dotenv_path=env_path)
+
+class Config:
+    """配置类"""
+    
+    # Twitter
+    TWITTER_API_KEY = os.getenv('TWITTER_API_KEY')
+    TWITTER_API_SECRET = os.getenv('TWITTER_API_SECRET')
+    TWITTER_ACCESS_TOKEN = os.getenv('TWITTER_ACCESS_TOKEN')
+    TWITTER_ACCESS_SECRET = os.getenv('TWITTER_ACCESS_SECRET')
+    TWITTER_BEARER_TOKEN = os.getenv('TWITTER_BEARER_TOKEN')
+    
+    # Claude
+    CLAUDE_API_KEY = os.getenv('CLAUDE_API_KEY')
+    
+    # Lark
+    LARK_APP_ID = os.getenv('LARK_APP_ID')
+    LARK_APP_SECRET = os.getenv('LARK_APP_SECRET')
+    LARK_CHAT_ID = os.getenv('LARK_CHAT_ID')
+    LARK_WEBHOOK_URL = os.getenv('LARK_WEBHOOK_URL')  # Backup
+    LARK_VERIFICATION_TOKEN = os.getenv('LARK_VERIFICATION_TOKEN')  # Event verification
+    
+    # Database
+    DATABASE_URL = os.getenv('DATABASE_URL', 'sqlite:///jessie.db')
+    
+    # Mode
+    BOT_MODE = os.getenv('BOT_MODE', 'semi-autonomous')
+    
+    # Skills
+    SKILLS_PATH = Path(__file__).parent.parent.parent / 'skills'
+    
+    @classmethod
+    def load_yaml_config(cls):
+        """加载 YAML 配置"""
+        config_path = Path(__file__).parent.parent.parent / 'config' / 'config.yaml'
+        with open(config_path) as f:
+            return yaml.safe_load(f)
+    
+    @classmethod
+    def validate(cls):
+        """验证配置"""
+        required = [
+            'TWITTER_BEARER_TOKEN',
+            'CLAUDE_API_KEY',
+            'LARK_WEBHOOK_URL'
+        ]
+        
+        missing = [key for key in required if not getattr(cls, key)]
+        if missing:
+            raise ValueError(f"Missing required config: {missing}")

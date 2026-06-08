@@ -1,0 +1,47 @@
+{
+  "generated_posts": [
+    {
+      "id": 1,
+      "text": "gm builders",
+      "content_type": "gm",
+      "timestamp": "2025-12-29T23:36:23.373257",
+      "metadata": {
+        "theme": "work",
+        "day": "Monday"
+      }
+    },
+    {
+      "id": 2,
+      "text": "gm from the trenches",
+      "content_type": "gm",
+      "timestamp": "2025-12-29T23:36:23.373564",
+      "metadata": {
+        "theme": "tired",
+        "day": "Tuesday"
+      }
+    },
+    {
+      "id": 3,
+      "text": "gm 🥱",
+      "content_type": "gm",
+      "timestamp": "2025-12-29T23:36:23.373847",
+      "metadata": {
+        "theme": "minimal",
+        "day": "Wednesday"
+      }
+    }
+  ],
+  "training_data_updates": [
+    {
+      "type": "gm",
+      "samples_added": 19,
+      "date": "2025-12-29T23:36:23.374013",
+      "notes": "初始训练：19个 Binance GM 样本"
+    }
+  ],
+  "alerts": [],
+  "stats": {
+    "total_generated": 3,
+    "last_training_date": "2025-12-29T23:36:23.374015"
+  }
+}

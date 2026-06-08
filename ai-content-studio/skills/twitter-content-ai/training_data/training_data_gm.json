@@ -1,0 +1,704 @@
+{
+  "training_samples": [
+    {
+      "id": "gm_001",
+      "text": "Just me, my coffee, and the markets. GM!",
+      "style": "casual_builder",
+      "emoji_usage": false,
+      "length": "short",
+      "tone": "chill, relatable",
+      "image": {
+        "has_image": true,
+        "type": "work_scene",
+        "description": "户外工作场景：笔记本电脑（显示 Binance 交易界面）+ 冰咖啡 + Binance 帽子，背景是湖边/海滩，自然光，绿色野餐桌",
+        "elements": ["laptop with charts", "iced coffee", "branded hat", "outdoor scene", "beach/lake background"],
+        "style": "realistic photo, lifestyle",
+        "vibe": "relaxed, work-from-anywhere"
+      },
+      "key_features": [
+        "极简文案",
+        "无 emoji（干净）",
+        "生活化场景照",
+        "传达工作与生活的平衡"
+      ],
+      "engagement": "high (239.9K views)"
+    },
+    {
+      "id": "gm_002",
+      "text": "GM",
+      "style": "meme_format",
+      "emoji_usage": false,
+      "length": "minimal",
+      "tone": "self-deprecating, funny",
+      "image": {
+        "has_image": true,
+        "type": "meme",
+        "description": "黑底黄字 Meme：MY WEEKEND SCHEDULE - 8 AM: GM, 10AM-10PM: WATCH CHARTS, 12 AM: GN",
+        "elements": ["black background", "yellow bold text", "schedule format", "humor about crypto addiction"],
+        "style": "meme template, minimal design",
+        "vibe": "relatable, self-aware humor"
+      },
+      "key_features": [
+        "只有 'GM' 两个字母",
+        "配图承载主要幽默",
+        "自嘲周末都在看盘",
+        "crypto degen 共鸣"
+      ],
+      "engagement": "very high (149.1K views)"
+    },
+    {
+      "id": "gm_003",
+      "text": "gm 🤨",
+      "style": "single_emoji",
+      "emoji_usage": true,
+      "emoji_type": "🤨",
+      "length": "minimal",
+      "tone": "skeptical, playful",
+      "image": {
+        "has_image": true,
+        "type": "casual_life",
+        "description": "狗狗穿着 Binance 黑色卫衣，站在家里木地板上，表情有点无辜/困惑",
+        "elements": ["dog wearing Binance hoodie", "home setting", "hardwood floor", "cute/relatable"],
+        "style": "candid photo, cute",
+        "vibe": "wholesome, brand personality"
+      },
+      "key_features": [
+        "只用一个 emoji 表达态度",
+        "🤨 传达质疑/好奇",
+        "超可爱的狗狗照片",
+        "品牌人格化（不是人，是宠物）"
+      ],
+      "engagement": "highest (282.9K views)"
+    },
+    {
+      "id": "gm_004",
+      "text": "I say gm, you gm back — deal?",
+      "style": "call_to_action",
+      "emoji_usage": false,
+      "length": "short",
+      "tone": "friendly, engagement-focused",
+      "image": {
+        "has_image": false,
+        "type": "none",
+        "description": "纯文字推文",
+        "elements": [],
+        "style": "",
+        "vibe": "direct, conversational"
+      },
+      "key_features": [
+        "互动导向（要求回复）",
+        "对话式语气",
+        "无配图（文字足够强）",
+        "简单有力"
+      ],
+      "engagement": "very high (352.3K views)"
+    },
+    {
+      "id": "gm_005",
+      "text": "Dear algorithm, show the gm post to my 14.9M followers, please.",
+      "style": "meta_humor",
+      "emoji_usage": false,
+      "length": "medium",
+      "tone": "playful, self-aware about social media",
+      "image": {
+        "has_image": true,
+        "type": "meme",
+        "description": "男生对着砖墙大喊（像在向虚空呼唤），表达「向算法祈祷」的无奈",
+        "elements": ["person shouting at brick wall", "meme format", "relatable frustration", "social media meta-humor"],
+        "style": "candid photo, meme-worthy",
+        "vibe": "frustrated but funny, meta"
+      },
+      "key_features": [
+        "吐槽社交媒体算法",
+        "自嘲明明有 1490 万粉丝但触达有限",
+        "所有 social media manager 都懂的痛",
+        "幽默且真实"
+      ],
+      "engagement": "highest (438.6K views)"
+    },
+    {
+      "id": "gm_006",
+      "text": "⠀⠀⠀⠀⣠⣴⣶⣿⣿⣷⣶⣄⣀⣀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣾⣿⣿⡿⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀\n⠀⠀⠀⠀⠀⠀⢀⣾⣿⣿⡟⠁⣰⣿⣿⣿⡿⠿⠻⠿⣿⣿⣿⣿⣧\n⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⠏⠀⣴⣿⣿⣿⠉⠀⠀⠀⠀⠀⠈⢻⣿⣿⣇\n⠀⠀⠀⠀⢀⣠⣼⣿⣿⡏⠀⢠⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⣿⡀\n⠀⠀⠀⣰⣿⣿⣿⣿⣿⡇⠀⢸⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⡇\n⠀⠀⢰⣿⣿⡿⣿⣿⣿⡇⠀⠘⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⢀⣸⣿⣿⣿⠁\n⠀⠀⣿⣿⣿⠁⣿⣿⣿⡇⠀⠀⠻⣿⣿⣿⣷⣶⣶⣶⣶⣶⣿⣿⣿⣿⠃\n⠀⢰⣿⣿⡇⠀⣿⣿⣿⠀⠀⠀⠀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁\n⠀⢸⣿⣿⡇⠀⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠉⠛⠛⠛⠉⢉⣿⣿⠀⠀\n⠀⢸⣿⣿⣇⠀⣿⣿⣿⠀⠀⠀⠀⠀⢀⣤⣤⣤⡀⠀⠀⢸⣿⣿⣿⣷⣦\n⠀⠀⢻⣿⣿⣶⣿⣿⣿⠀⠀⠀⠀⠀⠈⠻⣿⣿⣿⣦⡀⠀⠉⠉⠻⣿⣿⡇\n⠀⠀⠀⠛⠿⣿⣿⣿⣿⣷⣤⡀⠀⠀⠀⠀⠈⠹⣿⣿⣇⣀⠀⣠⣾⣿⣿⡇\n⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣦⣤⣤⣤⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⢿⣿⣿⣿⣿⣿⣿⠿⠋⠉\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ 💛GM 💛⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+      "style": "ascii_art_creative",
+      "emoji_usage": true,
+      "emoji_type": "💛",
+      "length": "creative_format",
+      "tone": "creative, artistic, unique",
+      "image": {
+        "has_image": false,
+        "type": "text_art",
+        "description": "纯文字 ASCII 艺术，用字符画出图案，中间嵌入 💛GM💛",
+        "elements": ["ASCII art", "creative typography", "heart emoji", "unique visual"],
+        "style": "text-based art",
+        "vibe": "creative, stands out, artistic"
+      },
+      "key_features": [
+        "超创意 ASCII 艺术形式",
+        "文字即是图片",
+        "用 💛 点缀 GM",
+        "在信息流中脱颖而出",
+        "技术感 + 艺术感"
+      ],
+      "engagement": "very high (246.4K views)"
+    },
+    {
+      "id": "gm_007",
+      "text": "gm`😎😎",
+      "style": "minimal_double_emoji",
+      "emoji_usage": true,
+      "emoji_type": "😎😎",
+      "length": "minimal",
+      "tone": "cool, confident",
+      "image": {
+        "has_image": false,
+        "type": "none",
+        "description": "纯文字",
+        "elements": [],
+        "style": "",
+        "vibe": "cool, effortless"
+      },
+      "key_features": [
+        "极简：gm + 2个相同emoji",
+        "😎😎 传达自信/酷",
+        "无需多言",
+        "emoji 重复使用增强语气"
+      ],
+      "engagement": "highest (363.4K views)"
+    },
+    {
+      "id": "gm_008",
+      "text": "gm... 🤯",
+      "style": "minimal_tired_emoji",
+      "emoji_usage": true,
+      "emoji_type": "🤯",
+      "length": "minimal",
+      "tone": "exhausted, mind-blown",
+      "image": {
+        "has_image": false,
+        "type": "none",
+        "description": "纯文字",
+        "elements": [],
+        "style": "",
+        "vibe": "tired, overwhelmed"
+      },
+      "key_features": [
+        "用 ... 表达疲惫/犹豫",
+        "🤯 传达脑子爆炸的感觉",
+        "极简但有态度",
+        "relatable 的疲惫感"
+      ],
+      "engagement": "high (274.2K views)"
+    },
+    {
+      "id": "gm_009",
+      "text": "Gm from LV426",
+      "style": "geek_reference",
+      "emoji_usage": false,
+      "length": "minimal",
+      "tone": "nerdy, sci-fi reference",
+      "image": {
+        "has_image": true,
+        "type": "illustration_scifi",
+        "description": "地球从太空看的视角，云层形成 'GM' 字样，深邃太空背景",
+        "elements": ["Earth from space", "clouds forming 'GM'", "stars", "sci-fi aesthetic", "epic scale"],
+        "style": "AI-generated illustration, cinematic",
+        "vibe": "epic, geek culture, Alien movie reference"
+      },
+      "key_features": [
+        "LV-426 是《异形》电影中的星球",
+        "极客文化梗",
+        "无 emoji，靠梗本身",
+        "配图：地球 + GM 云层（史诗感）",
+        "吸引科幻迷/geek 群体"
+      ],
+      "engagement": "high (176.7K views)"
+    },
+    {
+      "id": "gm_010",
+      "text": "👈\ngm\n👇",
+      "style": "emoji_arrows_creative",
+      "emoji_usage": true,
+      "emoji_type": "👈👇",
+      "length": "minimal",
+      "tone": "playful, directional",
+      "image": {
+        "has_image": false,
+        "type": "none",
+        "description": "纯文字，用箭头 emoji 指向 gm",
+        "elements": [],
+        "style": "",
+        "vibe": "playful, visual hierarchy"
+      },
+      "key_features": [
+        "用 emoji 箭头创造视觉层次",
+        "极简但有创意",
+        "多行排版吸引眼球",
+        "无需多言"
+      ],
+      "engagement": "very high (248.1K views)"
+    },
+    {
+      "id": "gm_011",
+      "text": "gn 🌍\ngm 🌎",
+      "style": "gn_gm_combo",
+      "emoji_usage": true,
+      "emoji_type": "🌍🌎",
+      "length": "minimal",
+      "tone": "global, timezone awareness",
+      "image": {
+        "has_image": false,
+        "type": "none",
+        "description": "两行：gn + gm，代表全球不同时区",
+        "elements": [],
+        "style": "",
+        "vibe": "global community, inclusive"
+      },
+      "key_features": [
+        "同时 gn 和 gm",
+        "承认全球社区（不同时区）",
+        "🌍🌎 传达全球覆盖",
+        "极简但贴心"
+      ],
+      "engagement": "moderate (445 likes)"
+    },
+    {
+      "id": "gm_012",
+      "text": "gm gm gm gm    gm             gm\ngm          gm gm       gm gm\ngm     gm gm   gm    gm   gm\ngm         gm    gm   gm   gm\ngm gm gm gm   gm        gm\n\nto the legends who say it back 🚀",
+      "style": "ascii_pattern_creative",
+      "emoji_usage": true,
+      "emoji_type": "🚀",
+      "length": "creative_format",
+      "tone": "community, call-to-action, artistic",
+      "image": {
+        "has_image": false,
+        "type": "text_art",
+        "description": "用 'gm' 重复排列成图案 + 底部文案",
+        "elements": ["text pattern", "community call", "rocket emoji"],
+        "style": "creative typography",
+        "vibe": "community-focused, artistic"
+      },
+      "key_features": [
+        "用 gm 排列成视觉图案",
+        "底部互动导向文案",
+        "🚀 emoji 点缀",
+        "号召大家回复"
+      ],
+      "engagement": "moderate (1.002K views)"
+    },
+    {
+      "id": "gm_013",
+      "text": "Gm",
+      "style": "minimal_capital_g",
+      "emoji_usage": false,
+      "length": "ultra_minimal",
+      "tone": "simple, clean",
+      "image": {
+        "has_image": true,
+        "type": "meme_mood",
+        "description": "孤独的人影坐在电脑前看窗外，字幕：'It's amazing how physically exhausting it can be to do nothing.'",
+        "elements": ["silhouette", "window view", "relatable quote", "mood aesthetic"],
+        "style": "cinematic still, mood piece",
+        "vibe": "exhausted, relatable, deep"
+      },
+      "key_features": [
+        "文案极简（就2个字母）",
+        "配图承载情绪",
+        "relatable 疲惫感",
+        "大写 G 略正式但仍简洁"
+      ],
+      "engagement": "moderate (419 likes)"
+    },
+    {
+      "id": "gm_014",
+      "text": "Wake up and smell the future of finance.",
+      "style": "motivational_statement",
+      "emoji_usage": false,
+      "length": "short",
+      "tone": "motivational, serious, visionary",
+      "image": {
+        "has_image": false,
+        "type": "none",
+        "description": "纯文字",
+        "elements": [],
+        "style": "",
+        "vibe": "serious, future-focused"
+      },
+      "key_features": [
+        "没用 'gm' 但是是 GM 类推文",
+        "更正式/严肃的语气",
+        "行业视野",
+        "适合 DeFi/金融账号"
+      ],
+      "engagement": "moderate (170 likes)"
+    },
+    {
+      "id": "gm_015",
+      "text": "Gm everyone☕☀️\nLet's connect",
+      "style": "call_to_action_friendly",
+      "emoji_usage": true,
+      "emoji_type": "☕☀️",
+      "length": "short",
+      "tone": "friendly, inviting, warm",
+      "image": {
+        "has_image": true,
+        "type": "meme_illustration",
+        "description": "两张图：1) Pepe角色爬楼梯 2) Pepe说话框'Gm And in case I don't see ya Ga,Ge, and Gn'（模仿《楚门的世界》台词）",
+        "elements": ["meme character", "motivational stairs", "movie reference", "wholesome"],
+        "style": "meme illustration combo",
+        "vibe": "wholesome, community-focused, movie reference"
+      },
+      "key_features": [
+        "双emoji组合（☕☀️）",
+        "号召连接/互动",
+        "配图用梗（Truman Show）",
+        "温暖社区感"
+      ],
+      "engagement": "moderate (105 likes)"
+    },
+    {
+      "id": "gm_016",
+      "text": "gm☀️\n\nhang in there",
+      "style": "encouraging_supportive",
+      "emoji_usage": true,
+      "emoji_type": "☀️",
+      "length": "minimal",
+      "tone": "supportive, encouraging",
+      "image": {
+        "has_image": true,
+        "type": "meme_photo",
+        "description": "Pepe角色悬浮在空中（像在hang/挂着），背景是真实户外场景",
+        "elements": ["literal visual pun", "hang in there", "surreal", "funny"],
+        "style": "surreal meme photo",
+        "vibe": "supportive but playful, visual pun"
+      },
+      "key_features": [
+        "两行排版",
+        "鼓励性文案",
+        "配图是视觉双关（hang字面意思）",
+        "幽默+支持"
+      ],
+      "engagement": "moderate (103 likes)"
+    },
+    {
+      "id": "gm_017",
+      "text": "coffee may be optional, but gm isnt",
+      "style": "statement_priorities",
+      "emoji_usage": false,
+      "length": "short",
+      "tone": "matter-of-fact, priorities-focused",
+      "image": {
+        "has_image": true,
+        "type": "product_shot",
+        "description": "键盘特写，绿色GM按键（像Enter键）突出显示",
+        "elements": ["keyboard", "GM key", "tech aesthetic", "clean product shot"],
+        "style": "clean product photography",
+        "vibe": "tech-focused, minimalist"
+      },
+      "key_features": [
+        "优先级陈述（gm > coffee）",
+        "小写无标点（casual）",
+        "配图强化信息（GM键盘）",
+        "tech圈共鸣"
+      ],
+      "engagement": "very low (6 likes)"
+    },
+    {
+      "id": "gm_018",
+      "text": "GM, who needs a cup of ☕?",
+      "style": "question_offering",
+      "emoji_usage": true,
+      "emoji_type": "☕",
+      "length": "short",
+      "tone": "hospitable, offering, warm",
+      "image": {
+        "has_image": true,
+        "type": "product_lifestyle",
+        "description": "下雨天窗边，Binance品牌咖啡杯冒着热气，雨滴背景",
+        "elements": ["branded coffee cup", "rainy window", "steam", "cozy atmosphere", "brand placement"],
+        "style": "lifestyle product shot",
+        "vibe": "cozy, inviting, rainy day comfort"
+      },
+      "key_features": [
+        "提问式互动",
+        "提供咖啡（hospitable）",
+        "配图氛围感强（雨天+热咖啡）",
+        "品牌植入自然"
+      ],
+      "engagement": "good (237 likes)"
+    },
+    {
+      "id": "gm_019",
+      "text": "gm 🤝",
+      "style": "minimal_handshake",
+      "emoji_usage": true,
+      "emoji_type": "🤝",
+      "length": "ultra_minimal",
+      "tone": "partnership, connection, simple",
+      "image": {
+        "has_image": true,
+        "type": "creative_product",
+        "description": "眼睛特写，Binance品牌睫毛刷（黄色）放在眼睛旁边，极具创意的品牌植入",
+        "elements": ["eye closeup", "branded mascara/brush", "creative brand placement", "beauty aesthetic"],
+        "style": "creative product photography",
+        "vibe": "artistic, unexpected, beauty-focused"
+      },
+      "key_features": [
+        "超极简文案（2个字符+emoji）",
+        "🤝传达连接/合作",
+        "配图超创意（美妆风格品牌植入）",
+        "打破常规"
+      ],
+      "engagement": "highest (4.1K likes)"
+    }
+  ],
+  "pattern_analysis": {
+    "text_patterns": {
+      "length_distribution": {
+        "ultra_minimal (1-2 words)": "32% (19个中6个: gm_002, gm_003, gm_007, gm_008, gm_013, gm_019)",
+        "minimal (3-5 words)": "42% (19个中8个: gm_009, gm_010, gm_011, gm_015, gm_016, gm_017, gm_018, gm_004)",
+        "short (6-10 words)": "16% (19个中3个: gm_001, gm_005, gm_014)",
+        "creative_format (ASCII/pattern)": "11% (19个中2个: gm_006, gm_012)"
+      },
+      "emoji_usage": "58% (19个中11个用了emoji)",
+      "emoji_patterns": [
+        "单个 emoji 表达情绪（🤨🤯🚀🤝）",
+        "重复 emoji 增强语气（😎😎）",
+        "点缀用法（💛GM💛）",
+        "配合 ... 传达疲惫感（gm... 🤯）",
+        "箭头 emoji 创造视觉层次（👈👇）",
+        "地球 emoji 表达全球社区（🌍🌎）",
+        "多 emoji 组合（☕☀️）传达丰富氛围",
+        "握手 emoji 表达连接（🤝）"
+      ],
+      "tone_variety": [
+        "casual/chill",
+        "self-deprecating",
+        "playful",
+        "meta/self-aware",
+        "call-to-action",
+        "cool/confident",
+        "exhausted/overwhelmed",
+        "geek culture",
+        "artistic/creative",
+        "global/inclusive",
+        "motivational/visionary",
+        "encouraging/supportive (new)",
+        "hospitable/offering (new)",
+        "partnership/connection (new)"
+      ]
+    },
+    "image_patterns": {
+      "image_rate": "53% (19个中10个有图)",
+      "image_types": {
+        "work_scene": "5%",
+        "meme_mood_format": "26%",
+        "casual_life": "5%",
+        "scifi_illustration": "5%",
+        "product_shot": "11%",
+        "none": "47%"
+      },
+      "image_characteristics": [
+        "真实感强（实拍照片）",
+        "或者超创意（ASCII art, AI 生成太空场景）",
+        "品牌元素自然融入（Binance 杯子、键盘、睫毛刷）",
+        "幽默感 OR 艺术感",
+        "很多强推文完全不需要图片（47% 无图）",
+        "Meme 格式图最多（5个样本）",
+        "产品创意摄影很有效（gm_019 最高互动 4.1K）",
+        "氛围感照片（雨天咖啡）提升代入感"
+      ]
+    },
+    "creative_formats": {
+      "ascii_art": {
+        "example": "gm_006 - ASCII 艺术画图案",
+        "benefit": "在纯文字信息流中脱颖而出",
+        "challenge": "Twitter 可能打乱格式"
+      },
+      "emoji_arrows": {
+        "example": "gm_010 - 👈 gm 👇",
+        "benefit": "创造视觉层次，引导注意力",
+        "usage": "playful, directional"
+      },
+      "gn_gm_combo": {
+        "example": "gm_011 - gn 🌍 / gm 🌎",
+        "benefit": "承认全球社区，包容不同时区",
+        "tone": "thoughtful, global"
+      },
+      "text_pattern": {
+        "example": "gm_012 - gm 排列成图案",
+        "benefit": "艺术感，社区号召",
+        "usage": "community-focused posts"
+      },
+      "double_emoji": {
+        "example": "gm_007 - 😎😎",
+        "benefit": "增强情绪表达",
+        "usage": "偶尔为之，不要过度"
+      },
+      "ellipsis": {
+        "example": "gm_008 - gm...",
+        "benefit": "传达犹豫/疲惫/无奈",
+        "tone": "relatable tiredness"
+      },
+      "geek_references": {
+        "example": "gm_009 - LV426 (Alien)",
+        "benefit": "吸引特定圈层（sci-fi fans）",
+        "risk": "不懂梗的人可能不get"
+      },
+      "ultra_minimal_with_image": {
+        "example": "gm_013 - 就 'Gm' + mood 图",
+        "benefit": "文案极简，配图承载情绪",
+        "usage": "let the image do the talking"
+      },
+      "no_gm_morning_alternative": {
+        "example": "gm_014 - 'Wake up and smell...'",
+        "benefit": "换个说法但仍是 morning greeting",
+        "tone": "more formal, visionary"
+      },
+      "question_format": {
+        "example": "gm_018 - 'who needs a cup of ☕?'",
+        "benefit": "互动性强，邀请回复",
+        "engagement": "good (237 likes)"
+      },
+      "supportive_message": {
+        "example": "gm_016 - 'hang in there'",
+        "benefit": "鼓励性、温暖、社区关怀",
+        "image": "配合视觉双关增强幽默感"
+      },
+      "statement_priorities": {
+        "example": "gm_017 - 'coffee may be optional, but gm isnt'",
+        "benefit": "表达价值观和优先级",
+        "tone": "casual but principled"
+      },
+      "multi_emoji_combo": {
+        "example": "gm_015 - ☕☀️",
+        "benefit": "双 emoji 传达更丰富氛围（咖啡+阳光）",
+        "usage": "morning vibes"
+      }
+    },
+    "engagement_insights": {
+      "highest_performing": [
+        "Meta humor about algorithm (438.6K views)",
+        "Double emoji cool vibes (363.4K views)",
+        "Call-to-action format (352.3K views)",
+        "Cute dog photo (282.9K views)",
+        "Tired/overwhelmed mood (274.2K views)",
+        "ASCII art creativity (246.4K views)",
+        "Ultra-minimal + creative product shot (4.1K likes) ⭐ NEW WINNER"
+      ],
+      "key_success_factors": [
+        "极简主义 - 74% 是 1-5 个词",
+        "Emoji 使用率 58% 但都很精准（不滥用）",
+        "创意格式（ASCII, 双 emoji, geek 梗, 问题式）",
+        "relatable 情绪（累、酷、无奈、鼓励、连接）",
+        "真实 > 完美",
+        "有时完全不需要配图（47% 无图）",
+        "超创意产品摄影带来最高互动（gm_019: 4.1K likes）",
+        "多行排版增加视觉层次（gm_016: gm☀️\\n\\nhang in there）",
+        "问题式互动有效（gm_018: 237 likes）",
+        "鼓励性/温暖语气产生社区凝聚力"
+      ]
+    }
+  },
+  "recommendations_for_jessie": {
+    "what_to_learn": [
+      "极简主义 - 74% 的推文是 1-5 个词",
+      "幽默 > 说教 - 自嘲、吐槽比宣传更有效",
+      "配图要么很真实，要么是 meme - 不要勉强配图（47% 无图）",
+      "偶尔用 emoji（58%使用率），但都很精准",
+      "互动导向的文案很有效（'deal?', '谁需要咖啡?'）",
+      "多行排版增加视觉冲击（gm☀️\\n\\nhang in there）",
+      "鼓励性语气建立社区温暖感（hang in there）",
+      "问题式 GM 邀请互动（who needs...?）",
+      "超创意产品摄影 > 常规配图"
+    ],
+    "jessie_adaptation": {
+      "examples": [
+        {
+          "style": "minimal",
+          "text": "gm from the trenches",
+          "image": "none"
+        },
+        {
+          "style": "minimal_emoji",
+          "text": "gm 🫠",
+          "image": "none"
+        },
+        {
+          "style": "double_emoji",
+          "text": "gm 🧹🧹",
+          "image": "none",
+          "note": "用 Jessie 的标志性 emoji🧹"
+        },
+        {
+          "style": "ellipsis_tired",
+          "text": "gm... 🤯",
+          "image": "none",
+          "note": "表达疲惫/脑子爆炸"
+        },
+        {
+          "style": "call_to_action",
+          "text": "i say gm, you tell me what you're building — deal?",
+          "image": "none"
+        },
+        {
+          "style": "meta_humor",
+          "text": "dear algorithm pls show this gm to the 3 people who care about data quality",
+          "image": "none"
+        },
+        {
+          "style": "geek_reference",
+          "text": "gm from the neural nets",
+          "image": "none",
+          "note": "AI/tech 圈梗"
+        },
+        {
+          "style": "work_scene",
+          "text": "just me, my coffee, and 10k samples. gm",
+          "image": "laptop + coffee + data labeling interface"
+        }
+      ],
+      "new_learnings_from_batch_2": {
+        "ascii_art": {
+          "适用性": "Jessie 可能不太适合 ASCII art（技术难度高，格式易乱）",
+          "替代方案": "专注于简洁有力的文字"
+        },
+        "double_emoji": {
+          "jessie_version": "gm 🧹🧹 或 gm 🎀🎀",
+          "usage": "偶尔用，不要过度"
+        },
+        "ellipsis": {
+          "jessie_version": "gm... 🫠（Monday 疲惫）",
+          "benefit": "传达真实的疲惫感"
+        },
+        "geek_references": {
+          "jessie_version": "gm from the neural nets / gm from the training data",
+          "benefit": "吸引 AI/ML 圈子"
+        },
+        "minimal_is_king": {
+          "insight": "74% 的推文是 1-5 个词（高互动相关性强）",
+          "action": "Jessie 应该多用极简 GM，少说废话"
+        },
+        "question_format_works": {
+          "insight": "问题式 GM 邀请互动（gm_018: 237 likes）",
+          "jessie_version": "gm, who's deep in the data trenches today?",
+          "benefit": "邀请回复，增加互动"
+        },
+        "supportive_tone": {
+          "insight": "鼓励性语气建立社区温暖（gm_016）",
+          "jessie_version": "gm\n\nwe got this",
+          "benefit": "传达关怀和团队感"
+        },
+        "multi_emoji_atmosphere": {
+          "insight": "双 emoji 传达更丰富氛围（☕☀️）",
+          "jessie_version": "gm 🧹💻 或 gm ☕🤯",
+          "benefit": "emoji 组合表达复杂情绪"
+        },
+        "ultra_minimal_wins": {
+          "insight": "gm_019 只有 'gm 🤝' 获得最高互动（4.1K）",
+          "jessie_version": "gm 🧹 或 gm 🎀",
+          "action": "不要害怕超极简，配对的创意图更重要"
+        }
+      }
+    }
+  }
+}

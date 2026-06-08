@@ -1,0 +1,14 @@
+{
+  "timestamp": "2025-12-29T23:27:25.863544",
+  "type": "content_freshness_low",
+  "severity": "LOW",
+  "message": "📊 **GM 内容新鲜度报告**\n得分: **0.51 / 1.00**\n\n⚠️ **检测到的问题**:\n  - 📅 距离上次训练已过 28 天\n\n💡 **建议行动**:\n  1. 定期补充新素材可以保持内容新鲜度\n  2. 建议 2 周内添加 3-5 个新样本\n\n🔧 **快速操作**:\n```bash\n# 查看详情\npython3 manage_training.py check --type gm\n\n# 生成训练模板\npython3 manage_training.py template --type gm --output new.json\n```",
+  "details": {
+    "content_type": "gm",
+    "freshness_score": 0.51,
+    "exact_duplicate_rate": "0.0%",
+    "similar_duplicate_rate": "4.5%",
+    "phrase_reuse_rate": "19.5%",
+    "days_since_training": 29
+  }
+}

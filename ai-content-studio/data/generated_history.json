@@ -1,0 +1,249 @@
+{
+  "generated_posts": [
+    {
+      "id": 1,
+      "text": "gm 🫠",
+      "content_type": "gm",
+      "timestamp": "2025-12-29T22:52:09.925095",
+      "metadata": {
+        "theme": "minimal",
+        "day": "Monday"
+      }
+    },
+    {
+      "id": 2,
+      "text": "gm lets debug",
+      "content_type": "gm",
+      "timestamp": "2025-12-29T22:52:12.711537",
+      "metadata": {
+        "theme": "tired",
+        "day": "Tuesday"
+      }
+    },
+    {
+      "id": 3,
+      "text": "gm 🥱",
+      "content_type": "gm",
+      "timestamp": "2025-12-29T22:52:15.384306",
+      "metadata": {
+        "theme": "work_mode",
+        "day": "Wednesday"
+      }
+    },
+    {
+      "id": 4,
+      "text": "gm builders 🔨",
+      "content_type": "gm",
+      "timestamp": "2025-12-29T22:52:17.872219",
+      "metadata": {
+        "theme": "builder_energy",
+        "day": "Thursday"
+      }
+    },
+    {
+      "id": 5,
+      "text": "gm friday feels",
+      "content_type": "gm",
+      "timestamp": "2025-12-29T22:52:33.022537",
+      "metadata": {
+        "theme": "chill",
+        "day": "Friday"
+      }
+    },
+    {
+      "id": 6,
+      "text": "gm weekend mode activated",
+      "content_type": "gm",
+      "timestamp": "2025-12-29T22:52:54.737616",
+      "metadata": {
+        "theme": "weekend",
+        "day": "Saturday"
+      }
+    },
+    {
+      "id": 7,
+      "text": "gm sunday vibes",
+      "content_type": "gm",
+      "timestamp": "2025-12-29T22:53:12.831200",
+      "metadata": {
+        "theme": "minimal",
+        "day": "Sunday"
+      }
+    },
+    {
+      "id": 8,
+      "text": "gm monday blues",
+      "content_type": "gm",
+      "timestamp": "2025-12-29T22:53:29.879115",
+      "metadata": {
+        "theme": "tired",
+        "day": "Monday"
+      }
+    },
+    {
+      "id": 9,
+      "text": "gm debugging before coffee",
+      "content_type": "gm",
+      "timestamp": "2025-12-29T22:53:49.470529",
+      "metadata": {
+        "theme": "work_mode",
+        "day": "Tuesday"
+      }
+    },
+    {
+      "id": 10,
+      "text": "gm wednesday chaos",
+      "content_type": "gm",
+      "timestamp": "2025-12-29T22:54:08.039510",
+      "metadata": {
+        "theme": "builder_energy",
+        "day": "Wednesday"
+      }
+    },
+    {
+      "id": 11,
+      "text": "gm neural net maintenance day",
+      "content_type": "gm",
+      "timestamp": "2025-12-29T22:54:27.273730",
+      "metadata": {
+        "theme": "chill",
+        "day": "Thursday"
+      }
+    },
+    {
+      "id": 12,
+      "text": "gm survivors",
+      "content_type": "gm",
+      "timestamp": "2025-12-29T22:54:46.419728",
+      "metadata": {
+        "theme": "weekend",
+        "day": "Friday"
+      }
+    },
+    {
+      "id": 13,
+      "text": "gm saturday peace",
+      "content_type": "gm",
+      "timestamp": "2025-12-29T22:55:04.714158",
+      "metadata": {
+        "theme": "minimal",
+        "day": "Saturday"
+      }
+    },
+    {
+      "id": 14,
+      "text": "gm monday energy loading",
+      "content_type": "gm",
+      "timestamp": "2025-12-29T22:55:23.730460",
+      "metadata": {
+        "theme": "work_mode",
+        "day": "Monday"
+      }
+    },
+    {
+      "id": 15,
+      "text": "gm builders ship today",
+      "content_type": "gm",
+      "timestamp": "2025-12-29T22:55:44.370364",
+      "metadata": {
+        "theme": "builder_energy",
+        "day": "Tuesday"
+      }
+    },
+    {
+      "id": 16,
+      "text": "gm almost friday energy",
+      "content_type": "gm",
+      "timestamp": "2025-12-29T22:56:02.548249",
+      "metadata": {
+        "theme": "weekend",
+        "day": "Thursday"
+      }
+    },
+    {
+      "id": 17,
+      "text": "gm friday survivors",
+      "content_type": "gm",
+      "timestamp": "2025-12-29T22:56:22.727377",
+      "metadata": {
+        "theme": "minimal",
+        "day": "Friday"
+      }
+    },
+    {
+      "id": 18,
+      "text": "gm sleepy saturday mode",
+      "content_type": "gm",
+      "timestamp": "2025-12-29T22:56:39.984422",
+      "metadata": {
+        "theme": "tired",
+        "day": "Saturday"
+      }
+    }
+  ],
+  "training_data_updates": [
+    {
+      "type": "gm",
+      "samples_added": 19,
+      "date": "2025-12-29T22:59:49.485917",
+      "notes": "初始训练：19个 Binance GM 样本"
+    }
+  ],
+  "alerts": [
+    {
+      "timestamp": "2025-12-29T22:57:38.772588",
+      "content_type": "gm",
+      "alerts": [
+        {
+          "severity": "LOW",
+          "type": "training_staleness",
+          "message": "📅 距离上次训练已过 999 天",
+          "details": {
+            "days_since_training": 999,
+            "last_training_date": null,
+            "message": "从未记录过训练更新"
+          }
+        }
+      ],
+      "freshness_score": 0.8999999999999999
+    },
+    {
+      "timestamp": "2025-12-29T22:58:10.784250",
+      "content_type": "gm",
+      "alerts": [
+        {
+          "severity": "LOW",
+          "type": "training_staleness",
+          "message": "📅 距离上次训练已过 999 天",
+          "details": {
+            "days_since_training": 999,
+            "last_training_date": null,
+            "message": "从未记录过训练更新"
+          }
+        }
+      ],
+      "freshness_score": 0.8999999999999999
+    },
+    {
+      "timestamp": "2025-12-29T22:58:10.788045",
+      "content_type": "gm",
+      "alerts": [
+        {
+          "severity": "LOW",
+          "type": "training_staleness",
+          "message": "📅 距离上次训练已过 999 天",
+          "details": {
+            "days_since_training": 999,
+            "last_training_date": null,
+            "message": "从未记录过训练更新"
+          }
+        }
+      ],
+      "freshness_score": 0.8999999999999999
+    }
+  ],
+  "stats": {
+    "total_generated": 18,
+    "last_training_date": "2025-12-29T22:59:49.485961"
+  }
+}

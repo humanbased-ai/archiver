@@ -1,0 +1,386 @@
+{
+  "version": "6.0-complete-all-accounts",
+  "mode": "semi-autonomous",
+  "last_updated": "2025-12-29",
+  "total_accounts": 151,
+  "note_on_count": "151 complete tracked accounts, covering all important ecosystems and KOLs",
+
+  "time_allocation": {
+    "active_creation": "40%",
+    "passive_interaction": "40%",
+    "other": "20%",
+    "note": "Active = post Codatta content; Passive = interact across ecosystems to build presence"
+  },
+
+  "weekly_goals": {
+    "active_tweets": "7-10 original posts",
+    "breakdown": {
+      "codatta_related": "6-7 Codatta-related posts (data ownership, product, industry insights)",
+      "casual_community": "1-2 casual/community posts (GM, Milady observations, memes)",
+      "pure_milady": "0-1 pure Milady posts (occasionally, if there's good content)"
+    },
+    "passive_interactions": "20-30 interactions",
+    "interaction_breakdown": {
+      "deep_engagement": "15-20 times (deep engagement on relevant topics)",
+      "gm_casual": "3-5 times (GM posts to show activity)",
+      "community_moments": "2-5 times (celebrations, milestones)"
+    },
+    "note": "Community account can be more casual, ~85% relevant + ~15% authenticity = not a marketing account"
+  },
+
+  "must_interact": {
+    "note": "Highest priority, must interact with all important tweets",
+    "response_time": "1-2 hours",
+    "total": 4,
+    "accounts": [
+      {
+        "handle": "@codatta_io",
+        "priority": "highest",
+        "role": "Official Account",
+        "strategy": "Must reply to all @mentions, retweet major announcements + Jessie's interpretation"
+      },
+      {
+        "handle": "@drtwo101",
+        "priority": "highest",
+        "role": "Founder & CEO - Yi Zhang",
+        "focus": ["DeAI", "Technical Vision", "Industry Insights", "Recruitment"],
+        "strategy": "Learn, spread, and amplify",
+        "interaction_style": {
+          "technical_posts": "Learn tech → translate to plain language → amplify and spread",
+          "vision_posts": "Learn vision → amplify → add janitor perspective",
+          "ama_spaces": "Warm up → participate → spread"
+        }
+      },
+      {
+        "handle": "@qiw",
+        "priority": "highest",
+        "role": "Co-founder & CPO",
+        "focus": ["Product", "UX", "Robotics", "AI Applications"],
+        "strategy": "Learn, spread, and amplify",
+        "robotics_connection": "Robotics需要高质量训练数据 → 贡献者应该公平补偿 → Codatta使命"
+      },
+      {
+        "handle": "@ddcrying",
+        "priority": "highest",
+        "role": "Test Account",
+        "strategy": "Test account - interact with all tweets"
+      }
+    ]
+  },
+
+  "industry_top_influencers": {
+    "note": "Top industry influencers, selective interaction",
+    "priority": "high",
+    "total": 30,
+    "weekly_goal": "5-8 interactions",
+    "accounts": [
+      {"handle": "@MessariCrypto", "priority": "highest", "category": "Analytics"},
+      {"handle": "@nansen_ai", "priority": "highest", "category": "Analytics"},
+      {"handle": "@binance", "priority": "high", "category": "Exchange"},
+      {"handle": "@cz_binance", "priority": "high", "category": "KOL"},
+      {"handle": "@heyibinance", "priority": "high", "category": "Binance"},
+      {"handle": "@wallet", "priority": "medium", "category": "Wallet"},
+      {"handle": "@tengyanAI", "priority": "medium", "category": "AI"},
+      {"handle": "@BinanceResearch", "priority": "medium", "category": "Research"},
+      {"handle": "@VitalikButerin", "priority": "highest", "category": "KOL"},
+      {"handle": "@balajis", "priority": "highest", "category": "KOL"},
+      {"handle": "@elonmusk", "priority": "medium", "category": "KOL", "note": "interact cautiously"},
+      {"handle": "@jessepollak", "priority": "highest", "category": "Base"},
+      {"handle": "@DefiIgnas", "priority": "high", "category": "Education"},
+      {"handle": "@MustStopMurad", "priority": "medium", "category": "KOL"},
+      {"handle": "@realDonaldTrump", "priority": "low", "category": "Political", "note": "avoid political topics"},
+      {"handle": "@EricTrump", "priority": "low", "category": "Political", "note": "avoid political topics"},
+      {"handle": "@shu_bit_", "priority": "medium", "category": "KOL"},
+      {"handle": "@Tintinx2021", "priority": "medium", "category": "KOL"},
+      {"handle": "@LeePima", "priority": "medium", "category": "KOL"},
+      {"handle": "@keyahayek", "priority": "medium", "category": "KOL"},
+      {"handle": "@tyler", "priority": "high", "category": "Coinbase"},
+      {"handle": "@brian_armstrong", "priority": "high", "category": "Coinbase"},
+      {"handle": "@TrustlessState", "priority": "medium", "category": "Analytics"},
+      {"handle": "@ASvanevik", "priority": "high", "category": "Nansen"},
+      {"handle": "@haydenzadams", "priority": "high", "category": "Uniswap"},
+      {"handle": "@DangerWillRobin", "priority": "medium", "category": "KOL"},
+      {"handle": "@hosseeb", "priority": "medium", "category": "KOL"},
+      {"handle": "@ethereum", "priority": "high", "category": "Ethereum"},
+      {"handle": "@saylor", "priority": "medium", "category": "KOL"}
+    ]
+  },
+
+  "vcs": {
+    "note": "Venture capital firms",
+    "priority": "medium",
+    "total": 8,
+    "weekly_goal": "2-4 interactions",
+    "accounts": [
+      {"handle": "@Delphi_Digital", "priority": "highest"},
+      {"handle": "@yzilabs", "priority": "high"},
+      {"handle": "@a16zcrypto", "priority": "highest"},
+      {"handle": "@AutismCapital", "priority": "medium"},
+      {"handle": "@paradigm", "priority": "highest"},
+      {"handle": "@Bankless", "priority": "high"},
+      {"handle": "@alliance", "priority": "medium"},
+      {"handle": "@dragonfly_xyz", "priority": "high"}
+    ]
+  },
+
+  "onchain_analytics": {
+    "note": "On-chain data analytics",
+    "priority": "high",
+    "total": 1,
+    "accounts": [
+      {"handle": "@lookonchain", "priority": "high", "when_to_interact": "on-chain data insights, whale movements"}
+    ]
+  },
+
+  "crypto_news_media": {
+    "note": "Latest cryptocurrency news",
+    "priority": "medium",
+    "total": 4,
+    "weekly_goal": "3-5 interactions",
+    "accounts": [
+      {"handle": "@tier10k", "priority": "high"},
+      {"handle": "@crypto", "priority": "medium"},
+      {"handle": "@WatcherGuru", "priority": "medium"},
+      {"handle": "@DegenerateNews", "priority": "medium"}
+    ]
+  },
+
+  "partners": {
+    "note": "Partners, actively interact and support",
+    "priority": "highest",
+    "total": 6,
+    "accounts": [
+      {"handle": "@GoKiteAI", "priority": "highest", "style": "strong support, all updates"},
+      {"handle": "@bluwhaleai", "priority": "highest", "style": "strong support, all updates"},
+      {"handle": "@BinanceWallet", "priority": "highest", "style": "supportive, collaboration"},
+      {"handle": "@avax", "priority": "high", "style": "ecosystem partner"},
+      {"handle": "@BNBCHAIN", "priority": "high", "style": "ecosystem partner"},
+      {"handle": "@NEARProtocol", "priority": "high", "style": "ecosystem partner"}
+    ]
+  },
+
+  "base_ecosystem": {
+    "note": "Base ecosystem to focus on expanding",
+    "priority": "highest",
+    "time_allocation": "~15% of passive interaction",
+    "weekly_goal": "6-10 interactions",
+    "strategy": "Comment on Base ecosystem from data perspective, not posting Base content",
+    "total": 6,
+    "accounts": [
+      {"handle": "@buildonbase", "priority": "highest", "when_to_interact": "developer updates, ecosystem news"},
+      {"handle": "@base", "priority": "highest", "when_to_interact": "major updates, campaigns"},
+      {"handle": "@AIonBase_", "priority": "highest", "when_to_interact": "AI projects, data discussions"},
+      {"handle": "@MemesOnBase_", "priority": "medium", "when_to_interact": "meme moments"},
+      {"handle": "@BaseHubHB", "priority": "medium", "when_to_interact": "ecosystem updates"},
+      {"handle": "@baseapp", "priority": "medium", "when_to_interact": "product updates"}
+    ]
+  },
+
+  "ai_industry": {
+    "note": "AI-focused accounts",
+    "priority": "highest",
+    "time_allocation": "~10% of passive interaction",
+    "weekly_goal": "5-8 interactions",
+    "strategy": "Authentic user feedback, from data quality perspective, criticize unfairness",
+    "total": 18,
+    "accounts": [
+      {"handle": "@huggingface", "priority": "highest", "note": "Open source AI community, dataset hosting"},
+      {"handle": "@OpenAI", "priority": "highest", "when_to_interact": "model updates, RLHF"},
+      {"handle": "@drfeifei", "priority": "highest", "note": "Fei-Fei Li, AI education"},
+      {"handle": "@TheTuringPost", "priority": "high", "note": "AI research newsletter"},
+      {"handle": "@ai__pub", "priority": "high", "note": "AI publication"},
+      {"handle": "@AIatMeta", "priority": "high", "when_to_interact": "Open source AI"},
+      {"handle": "@GoogleDeepMind", "priority": "high", "when_to_interact": "research releases"},
+      {"handle": "@_akhaliq", "priority": "high", "note": "AI research aggregator"},
+      {"handle": "@nvidia", "priority": "medium", "note": "AI hardware"},
+      {"handle": "@GoogleAI", "priority": "medium"},
+      {"handle": "@MSFTResearch", "priority": "medium"},
+      {"handle": "@sama", "priority": "high", "note": "Sam Altman"},
+      {"handle": "@claudeai", "priority": "highest", "note": "Jessie uses Claude"},
+      {"handle": "@OpenAINewsroom", "priority": "medium"},
+      {"handle": "@Alibaba_Qwen", "priority": "medium"}
+    ]
+  },
+
+  "other_project_interns": {
+    "note": "Other projects' Intern accounts, peer solidarity",
+    "priority": "medium",
+    "total": 8,
+    "weekly_goal": "2-4 interactions",
+    "accounts": [
+      {"handle": "@ProofofIntern", "priority": "medium"},
+      {"handle": "@virtuals_intern", "priority": "medium"},
+      {"handle": "@infinex_intern", "priority": "medium"},
+      {"handle": "@PendleIntern", "priority": "medium"},
+      {"handle": "@CWKteam", "priority": "medium"},
+      {"handle": "@intern", "priority": "medium"},
+      {"handle": "@origin_intern", "priority": "medium"},
+      {"handle": "@theblockintern", "priority": "medium"}
+    ]
+  },
+
+  "ai_agents": {
+    "note": "AI Agent accounts",
+    "priority": "high",
+    "total": 2,
+    "accounts": [
+      {"handle": "@aixbt_agent", "priority": "high", "note": "AI agent"},
+      {"handle": "@grok", "priority": "high", "note": "Grok AI"}
+    ]
+  },
+
+  "milady_ecosystem": {
+    "note": "Milady is not a work focus, it's cultural DNA and style source",
+    "role": "cultural_dna",
+    "time_allocation": "~10% for cultural absorption",
+    "interaction_frequency": "low but quality",
+    "total": 9,
+    "accounts": [
+      {"handle": "@milady_memes", "priority": "medium", "interaction": "occasional"},
+      {"handle": "@MiladyMaker333", "priority": "medium", "interaction": "rare"},
+      {"handle": "@remiliacorp333", "priority": "medium", "interaction": "medium"},
+      {"handle": "@charlottefang77", "priority": "low", "interaction": "rare"},
+      {"handle": "@MiladyCult", "priority": "low", "interaction": "rare"},
+      {"handle": "@RemilioBaby", "priority": "low", "interaction": "rare"},
+      {"handle": "@Scearpo", "priority": "low", "interaction": "rare"},
+      {"handle": "@ongestalte", "priority": "low", "interaction": "rare"},
+      {"handle": "@neverbyte", "priority": "low", "interaction": "rare"}
+    ],
+    "platforms": {
+      "miladychan.org": {
+        "time": "30 minutes daily",
+        "purpose": "Absorb culture, learn debate style, find inspiration"
+      }
+    }
+  },
+
+  "x402_8004_ecosystem": {
+    "note": "8004 & x402 ecosystem",
+    "priority": "highest",
+    "time_allocation": "~15% of passive interaction",
+    "weekly_goal": "8-12 interactions",
+    "strategy": "Contribute data perspective, builder solidarity",
+    "why_important": "AI Agent builders = heavy data consumers = Codatta core users",
+    "total": 55,
+    "accounts": [
+      {"handle": "@DavideCrapis", "priority": "highest", "category": "Core"},
+      {"handle": "@yq_acc", "priority": "highest", "category": "Core"},
+      {"handle": "@VittoStack", "priority": "highest", "category": "Core"},
+      {"handle": "@yeak__", "priority": "highest", "category": "Core"},
+      {"handle": "@organ_danny", "priority": "high", "category": "Community"},
+      {"handle": "@lordOfAFew", "priority": "high", "category": "Community"},
+      {"handle": "@marco_derossi", "priority": "high", "category": "Community"},
+      {"handle": "@balakhonoff", "priority": "medium", "category": "Community"},
+      {"handle": "@Must_be_Ash", "priority": "medium", "category": "Community"},
+      {"handle": "@notorious_d_e_v", "priority": "medium", "category": "Developer"},
+      {"handle": "@ClassicScuba", "priority": "medium", "category": "Community"},
+      {"handle": "@austingriffith", "priority": "high", "category": "Developer"},
+      {"handle": "@Alias_labs", "priority": "medium", "category": "Builder"},
+      {"handle": "@tkstanczak", "priority": "medium", "category": "Developer"},
+      {"handle": "@ZyfAI_", "priority": "medium", "category": "AI Agent"},
+      {"handle": "@goatv_bk", "priority": "medium", "category": "Community"},
+      {"handle": "@lou3ee", "priority": "medium", "category": "Community"},
+      {"handle": "@13yearoldvc", "priority": "medium", "category": "Community"},
+      {"handle": "@0xsamgreen", "priority": "medium", "category": "Developer"},
+      {"handle": "@0xfishylosopher", "priority": "medium", "category": "Community"},
+      {"handle": "@HeyElsaAI", "priority": "highest", "category": "AI Agent"},
+      {"handle": "@_sumeetc", "priority": "medium", "category": "Developer"},
+      {"handle": "@dabit3", "priority": "high", "category": "Developer"},
+      {"handle": "@Marcello_AI", "priority": "highest", "category": "AI Agent"},
+      {"handle": "@OpenMid_", "priority": "medium", "category": "AI Agent"},
+      {"handle": "@0xKenk", "priority": "medium", "category": "Developer"},
+      {"handle": "@codywang999", "priority": "medium", "category": "Developer"},
+      {"handle": "@CoinbaseDev", "priority": "high", "category": "Developer"},
+      {"handle": "@browserbase", "priority": "high", "category": "Tools"},
+      {"handle": "@stagehanddev", "priority": "medium", "category": "Tools"},
+      {"handle": "@trydirector", "priority": "medium", "category": "Tools"},
+      {"handle": "@peytoncasper", "priority": "medium", "category": "Developer"},
+      {"handle": "@questflow", "priority": "medium", "category": "Tools"},
+      {"handle": "@0xbodu", "priority": "medium", "category": "Developer"},
+      {"handle": "@Filecoin", "priority": "medium", "category": "Infrastructure"},
+      {"handle": "@x402foundation", "priority": "highest", "category": "Foundation"},
+      {"handle": "@x402intern", "priority": "medium", "category": "Intern"},
+      {"handle": "@programmer", "priority": "medium", "category": "Developer"},
+      {"handle": "@LordSecretive", "priority": "medium", "category": "Community"},
+      {"handle": "@daydreamsagents", "priority": "medium", "category": "AI Agent"},
+      {"handle": "@lordr_eth", "priority": "medium", "category": "Community"},
+      {"handle": "@thirdweb", "priority": "high", "category": "Tools"},
+      {"handle": "@0xpili_", "priority": "medium", "category": "Developer"},
+      {"handle": "@CottenIO", "priority": "medium", "category": "Developer"},
+      {"handle": "@_mayurc", "priority": "medium", "category": "Developer"},
+      {"handle": "@b402ai", "priority": "medium", "category": "AI Agent"},
+      {"handle": "@zaara_ai", "priority": "highest", "category": "AI Agent"},
+      {"handle": "@0xdevair", "priority": "medium", "category": "Developer"},
+      {"handle": "@Praxis_Protocol", "priority": "medium", "category": "Protocol"},
+      {"handle": "@punk3700", "priority": "medium", "category": "Community"},
+      {"handle": "@MurrLincoln", "priority": "medium", "category": "Community"},
+      {"handle": "@binji_x", "priority": "medium", "category": "Developer"},
+      {"handle": "@sreeramkannan", "priority": "high", "category": "Developer"}
+    ]
+  },
+
+  "relevance_keywords": {
+    "note": "Keywords bot uses to judge tweet relevance",
+    "deep_engagement": [
+      "data ownership",
+      "AI training",
+      "labeling",
+      "fair compensation",
+      "contributors",
+      "Base",
+      "AI Agent",
+      "dataset",
+      "data quality",
+      "royalties",
+      "attribution",
+      "RLHF",
+      "training data"
+    ],
+    "gm_casual": [
+      "gm",
+      "good morning",
+      "gn",
+      "good night",
+      "happy monday",
+      "happy friday"
+    ],
+    "community_moments": [
+      "congrats",
+      "celebrating",
+      "milestone",
+      "launched",
+      "shipped",
+      "excited to announce"
+    ]
+  },
+
+  "rate_limits": {
+    "note": "Rate limits to prevent account suspension",
+    "reply": {
+      "per_hour": 10,
+      "per_day": 30
+    },
+    "original": {
+      "per_hour": 2,
+      "per_day": 10
+    },
+    "total": {
+      "per_hour": 15,
+      "per_day": 50
+    }
+  },
+
+  "forbidden": {
+    "note": "Things to never do",
+    "actions": [
+      "engage in political arguments",
+      "attack competitors publicly",
+      "share unverified information",
+      "over-engage with controversial figures",
+      "shill tokens irresponsibly",
+      "use Milady community purely for marketing",
+      "ignore @codatta_io, @drtwo101, @qiw posts",
+      "mechanically complete KPIs"
+    ]
+  }
+}

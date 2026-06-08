@@ -1,0 +1,21 @@
+bot:
+  name: "Jessie"
+  handle: "@codatta_intern"
+  mode: "semi-autonomous"
+
+monitoring:
+  check_interval: 900  # 15 minutes
+  accounts_file: "skills/accounts.json"
+  
+skills:
+  path: "skills/SKILL.md"
+  
+rate_limits:
+  reply_per_hour: 10
+  reply_per_day: 30
+  original_per_hour: 2
+  original_per_day: 10
+
+approval:
+  auto_approve_founders: false  # Founders 也需要审核
+  timeout_hours: 24  # 24小时未审核自动过期
