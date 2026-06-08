@@ -1,0 +1,14 @@
+{
+    "taskId": "7528474065300103578",
+    "templateId": "NFT_TPL_000001",
+    "data": {
+        "nft_image": [
+            {
+                "uid": "rc-upload-1747981686593-12",
+                "url": "https://file.b18a.io/6156810753500102141_454361_.png",
+                "name": "basic_text_to_image_dall-e-3_20250413_171002.png"
+            }
+        ],
+        "nft_description": "a cat"
+    }
+}

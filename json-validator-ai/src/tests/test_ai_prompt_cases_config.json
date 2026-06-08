@@ -1,0 +1,192 @@
+{
+  "test_cases": [
+    {
+      "case_name": "FoodDataPromptTest",
+      "description_for_prompt_generation": "Validate food item data. 'taskId' must be a non-empty string. 'templateId' must be a string starting with 'FOOD_TPL_'. 'data' must be an object containing 'images' (an array of image objects, each with 'uid', 'url' (HTTPS), and 'name' strings) and 'food_description' (a non-empty string).",
+      "example_data_for_prompt_generation": [
+        {
+          "taskId": "7528085182000103499",
+          "templateId": "FOOD_TPL_000001",
+          "data": {
+            "images": [
+              {
+                "uid": "rc-upload-1747981686593-28",
+                "url": "https://file.b18a.io/6156810753500102141_220828_.webp",
+                "name": "u=1354488648,1434448537&fm=253&fmt=auto&app=138&f=JPEG.webp"
+              }
+            ],
+            "food_description": "kinds of food"
+          }
+        }
+      ],
+      "valid_data_for_validation": {
+        "taskId": "7528085182000103499",
+        "templateId": "FOOD_TPL_000001",
+        "data": {
+          "images": [
+            {
+              "uid": "rc-upload-1747981686593-28",
+              "url": "https://file.b18a.io/6156810753500102141_220828_.webp",
+              "name": "u=1354488648,1434448537&fm=253&fmt=auto&app=138&f=JPEG.webp"
+            }
+          ],
+          "food_description": "kinds of food"
+        }
+      },
+      "invalid_data_for_validation": {
+        "taskId": "7528085182000103499",
+        "templateId": "INVALID_FOOD_TPL_001",
+        "data": {
+          "images": [
+            {
+              "uid": "rc-upload-1747981686593-28",
+              "url": "http://file.b18a.io/image.webp",
+              "name": "some_image.webp"
+            }
+          ],
+          "food_description": 12345
+        }
+      },
+      "expected_invalid_reason_keywords": ["templateId", "prefix", "url", "HTTPS", "food_description", "string", "number"]
+    },
+    {
+      "case_name": "NFTDataPromptTest",
+      "description_for_prompt_generation": "Validate NFT item data. 'taskId' must be a non-empty string. 'templateId' must be a string starting with 'NFT_TPL_'. 'data' must be an object containing 'nft_image' (an array of image objects, each with 'uid', 'url' (HTTPS), and 'name' strings) and 'nft_description' (a non-empty string).",
+      "example_data_for_prompt_generation": [
+        {
+          "taskId": "7528474065300103578",
+          "templateId": "NFT_TPL_000001",
+          "data": {
+            "nft_image": [
+              {
+                "uid": "rc-upload-1747981686593-12",
+                "url": "https://file.b18a.io/6156810753500102141_454361_.png",
+                "name": "basic_text_to_image_dall-e-3_20250413_171002.png"
+              }
+            ],
+            "nft_description": "a cat"
+          }
+        }
+      ],
+      "valid_data_for_validation": {
+        "taskId": "7528474065300103578",
+        "templateId": "NFT_TPL_000001",
+        "data": {
+          "nft_image": [
+            {
+              "uid": "rc-upload-1747981686593-12",
+              "url": "https://file.b18a.io/6156810753500102141_454361_.png",
+              "name": "basic_text_to_image_dall-e-3_20250413_171002.png"
+            }
+          ],
+          "nft_description": "a cat"
+        }
+      },
+      "invalid_data_for_validation": {
+        "taskId": "7528474065300103578",
+        "templateId": "NFT_TPL_000001",
+        "data": {
+          "nft_image": [
+            {
+              "uid": "rc-upload-1747981686593-12",
+              "url": "ftp://file.b18a.io/image.png",
+              "name": "invalid_nft.png"
+            }
+          ],
+          "nft_description": null
+        }
+      },
+      "expected_invalid_reason_keywords": ["url", "HTTPS", "ftp", "nft_description", "string", "null"]
+    },
+    {
+      "case_name": "OutfitDataPromptTest",
+      "description_for_prompt_generation": "Validate OOTD (Outfit of the Day) data. 'taskId' must be a non-empty string. 'templateId' must be a string starting with 'OOTD_TPL_'. 'data' must be an object containing 'top_image', 'bottom_image', and 'full_outfit_image'. Each of these must be an array of image objects (each with 'uid', 'url' (HTTPS), and 'name' strings).",
+      "example_data_for_prompt_generation": [
+        {
+          "taskId": "7528465136400103577",
+          "templateId": "OOTD_TPL_000001",
+          "data": {
+            "top_image": [
+              { "uid": "rc-upload-1747981686593-18", "url": "https://file.b18a.io/6156810753500102141_762935_.jpg", "name": "03284766712-e1.jpg" }
+            ],
+            "bottom_image": [
+              { "uid": "rc-upload-1747981686593-20", "url": "https://file.b18a.io/6156810753500102141_212297_.jpg", "name": "03284766712-e4.jpg" }
+            ],
+            "full_outfit_image": [
+              { "uid": "rc-upload-1747981686593-22", "url": "https://file.b18a.io/6156810753500102141_729352_.jpg", "name": "03284766712-p.jpg" }
+            ]
+          }
+        }
+      ],
+      "valid_data_for_validation": {
+        "taskId": "7528465136400103577",
+        "templateId": "OOTD_TPL_000001",
+        "data": {
+          "top_image": [
+            { "uid": "rc-upload-1747981686593-18", "url": "https://file.b18a.io/6156810753500102141_762935_.jpg", "name": "03284766712-e1.jpg" }
+          ],
+          "bottom_image": [
+            { "uid": "rc-upload-1747981686593-20", "url": "https://file.b18a.io/6156810753500102141_212297_.jpg", "name": "03284766712-e4.jpg" }
+          ],
+          "full_outfit_image": [
+            { "uid": "rc-upload-1747981686593-22", "url": "https://file.b18a.io/6156810753500102141_729352_.jpg", "name": "03284766712-p.jpg" }
+          ]
+        }
+      },
+      "invalid_data_for_validation": {
+        "taskId": "7528465136400103577",
+        "templateId": "OOTD_TPL_000001",
+        "data": {
+          "top_image": [
+            { "uid": "rc-upload-1747981686593-18", "url": "htp://file.b18a.io/invalid.jpg", "name": "invalid_top.jpg" }
+          ],
+          "bottom_image": [],
+          "full_outfit_image": [
+            { "uid": "rc-upload-1747981686593-22", "url": "https://file.b18a.io/6156810753500102141_729352_.jpg", "name": "03284766712-p.jpg" }
+          ]
+        }
+      },
+      "expected_invalid_reason_keywords": ["url", "HTTPS", "htp", "bottom_image", "array", "empty"]
+    },
+    {
+      "case_name": "SpeechDataPromptTest",
+      "description_for_prompt_generation": "Validate speech data. 'taskId' must be a non-empty string. 'templateId' must be a string starting with 'SPEECH_TPL_'. 'data' must be an object containing 'language' (a string like 'en'), 'speech_audio' (an array of audio objects, each with 'uid', 'url' (HTTPS), and 'name' strings), and 'speech_text' (a non-empty string).",
+      "example_data_for_prompt_generation": [
+        {
+          "taskId": "7528449925900103576",
+          "templateId": "SPEECH_TPL_000001",
+          "data": {
+            "language": "en",
+            "speech_audio": [
+              { "uid": "rc-upload-1747981686593-6", "url": "https://file.b18a.io/6156810753500102141_975192_.mp3", "name": "Enrollment_1.mp3" }
+            ],
+            "speech_text": "hello,hi"
+          }
+        }
+      ],
+      "valid_data_for_validation": {
+        "taskId": "7528449925900103576",
+        "templateId": "SPEECH_TPL_000001",
+        "data": {
+          "language": "en",
+          "speech_audio": [
+            { "uid": "rc-upload-1747981686593-6", "url": "https://file.b18a.io/6156810753500102141_975192_.mp3", "name": "Enrollment_1.mp3" }
+          ],
+          "speech_text": "hello,hi"
+        }
+      },
+      "invalid_data_for_validation": {
+        "taskId": "7528449925900103576",
+        "templateId": "SPEECH_TPL_000001",
+        "data": {
+          "language": 123,
+          "speech_audio": [
+            { "uid": "rc-upload-1747981686593-6", "url": "badprotocol://file.b18a.io/audio.mp3", "name": "invalid_audio.mp3" }
+          ],
+          "speech_text": true
+        }
+      },
+      "expected_invalid_reason_keywords": ["language", "string", "number", "url", "HTTPS", "badprotocol", "speech_text", "string", "boolean"]
+    }
+  ]
+}

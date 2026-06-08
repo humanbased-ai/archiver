@@ -1,0 +1,92 @@
+{
+  "case_name": "NFTDataTest",
+  "description": "Schema for NFT item. Keys: taskId, templateId (NFT_TPL_), data object with nft_image (array of image objects with uid, url (HTTPS), name) and nft_description (string).",
+  "generation_result": {
+    "success": true,
+    "artifact_type": "schema",
+    "artifact": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "properties": {
+        "taskId": {
+          "type": "string",
+          "description": "A unique identifier for the task."
+        },
+        "templateId": {
+          "type": "string",
+          "pattern": "^NFT_TPL_\\d{6}$",
+          "description": "The template ID for the NFT, must start with 'NFT_TPL_' followed by six digits."
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "nft_image": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "uid": {
+                    "type": "string",
+                    "description": "A unique identifier for the image."
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "pattern": "^https://",
+                    "description": "The HTTPS URL of the image."
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the image file."
+                  }
+                },
+                "required": [
+                  "uid",
+                  "url",
+                  "name"
+                ]
+              },
+              "minItems": 1,
+              "description": "An array of image objects associated with the NFT."
+            },
+            "nft_description": {
+              "type": "string",
+              "description": "A description of the NFT."
+            }
+          },
+          "required": [
+            "nft_image",
+            "nft_description"
+          ]
+        }
+      },
+      "required": [
+        "taskId",
+        "templateId",
+        "data"
+      ]
+    },
+    "error": null,
+    "artifact_documentation": "### Artifact Details: JSON Schema\n\n**Type:** JSON Schema (Draft 2020-12)\n\n**Purpose:**\nThis artifact is designed to validate data structures based on the provided description.\nIt was generated based on the following input description:\n> \"Schema for NFT item. Keys: taskId, templateId (NFT_TPL_), data object with nft_image (array of image objects with uid, url (HTTPS), name) and nft_desc...\"\n\n**Usage / Interpretation:**\nThis JSON Schema should be used with a compatible JSON Schema validator (e.g., `jsonschema` library in Python). It defines:\n- The expected overall structure of the JSON data (e.g., object, array).\n- Properties for objects, including their names and expected data types (string, number, boolean, etc.).\n- Required fields that must be present.\n- Constraints such as string patterns, numerical ranges, array item types, and minimum/maximum item counts.\n- Reusable definitions for complex types if applicable."
+  },
+  "valid_data_validation": {
+    "success": true,
+    "validation_type": "json_schema",
+    "message": "JSON data is valid against the schema.",
+    "details": null
+  },
+  "invalid_data_validation": {
+    "success": false,
+    "validation_type": "json_schema",
+    "message": "JSON data is invalid against the schema.",
+    "details": [
+      "Validation Error at `data->nft_image->0->url`: 'ftp://image.com/nft.png' does not match '^https://'"
+    ]
+  },
+  "paths": {
+    "original_data": "src/tests/test_outputs/NFTDataTest/original_data.json",
+    "generated_schema": "src/tests/test_outputs/NFTDataTest/generated_schema.json",
+    "invalid_data": "src/tests/test_outputs/NFTDataTest/invalid_data.json",
+    "report": "src/tests/test_outputs/NFTDataTest/validation_report.json"
+  }
+}

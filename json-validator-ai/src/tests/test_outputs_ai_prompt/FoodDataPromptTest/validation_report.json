@@ -1,0 +1,20 @@
+{
+  "case_name": "FoodDataPromptTest",
+  "status": "PASSED",
+  "generated_prompt": "\"Validate the provided JSON data for a food item. The data must adhere to the following rules: 1. 'taskId' must be a non-empty string. 2. 'templateId' must be a string starting with 'FOOD_TPL_'. 3. 'data' must be an object containing: a. 'images' which is an array of image objects. Each image object must include: i. 'uid' (string, non-empty), ii. 'url' (string, must be a valid HTTPS URL), iii. 'name' (string, non-empty). b. 'food_description' must be a non-empty string. Respond with a JSON object: {'is_valid': <boolean>, 'reason': '<explanation of validation checks and findings>'}.\"",
+  "valid_data_validation": {
+    "status": "PASSED",
+    "details": {
+      "is_valid": true,
+      "reason": "Data is valid: 'taskId' is a non-empty string, 'templateId' ('FOOD_TPL_000001') starts with 'FOOD_TPL_', 'data' contains an 'images' array with valid image objects (each having non-empty 'uid', valid HTTPS 'url', and non-empty 'name'), and 'food_description' is a non-empty string."
+    }
+  },
+  "invalid_data_validation": {
+    "status": "FAILED_AS_EXPECTED",
+    "details": {
+      "is_valid": false,
+      "reason": "Validation failed: 'templateId' ('INVALID_FOOD_TPL_001') does not start with 'FOOD_TPL_'. 'url' ('http://file.b18a.io/image.webp') is not a valid HTTPS URL. 'food_description' is not a string, expected a non-empty string but got a number (12345)."
+    },
+    "keyword_check": "Missing: ['prefix']"
+  }
+}

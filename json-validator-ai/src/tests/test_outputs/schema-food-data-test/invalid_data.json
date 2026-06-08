@@ -1,0 +1,14 @@
+{
+  "taskId": "7528085182000103499",
+  "templateId": "WRONG_PREFIX_TPL_001",
+  "data": {
+    "images": [
+      {
+        "uid": "rc-upload-1747981686593-28",
+        "url": "http://invalid-url.com/image.jpg",
+        "name": "u=1354488648,1434448537&fm=253&fmt=auto&app=138&f=JPEG.webp"
+      }
+    ],
+    "food_description": 12345
+  }
+}

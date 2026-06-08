@@ -1,0 +1,20 @@
+{
+    "taskId": "7528465136400103577_invalid",
+    "templateId": "OOTD_TPL_000001",
+    "data": {
+        "top_image": [
+            {
+                "uid": "rc-upload-1747981686593-18_invalid_uid",
+                "name": "03284766712-e1.jpg"
+            }
+        ],
+        "bottom_image": [],
+        "full_outfit_image": [
+            {
+                "uid": "rc-upload-1747981686593-22",
+                "url": "https://file.b18a.io/6156810753500102141_729352_.jpg",
+                "name": "03284766712-p.jpg"
+            }
+        ]
+    }
+}

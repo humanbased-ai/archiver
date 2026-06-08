@@ -1,0 +1,31 @@
+{
+  "case_name": "SpeechDataStarlarkTest",
+  "generation_result": {
+    "success": true,
+    "artifact_type": "starlark",
+    "artifact": "def validate_data(data):\n    reasons = []\n\n    if not (type(data.get('taskId')) == 'string' and data.get('taskId')):\n        reasons.append(\"'taskId' must be a non-empty string.\")\n    \n    if not (type(data.get('templateId')) == 'string' and data.get('templateId')):\n        reasons.append(\"'templateId' must be a non-empty string.\")\n    \n    if not (type(data.get('data')) == 'dict'):\n        reasons.append(\"'data' must be an object.\")\n    else:\n        data_obj = data.get('data')\n        \n        if not (type(data_obj.get('language')) == 'string' and data_obj.get('language')):\n            reasons.append(\"'language' must be a non-empty string.\")\n        \n        if not (type(data_obj.get('speech_audio')) == 'string' and data_obj.get('speech_audio')):\n            reasons.append(\"'speech_audio' must be a non-empty string.\")\n        \n        if not (type(data_obj.get('speech_text')) == 'string' and data_obj.get('speech_text')):\n            reasons.append(\"'speech_text' must be a non-empty string.\")\n    \n    if reasons:\n        return {\"is_valid\": False, \"reason\": \"; \".join(reasons)}\n    return {\"is_valid\": True, \"reason\": \"Data is valid.\"}",
+    "error": null
+  },
+  "generated_code_validation": {
+    "valid_case_from_example": {
+      "success": true,
+      "validation_type": "starlark_code",
+      "message": "Data is valid.",
+      "details": {
+        "is_valid": true,
+        "reason": "Data is valid."
+      }
+    },
+    "invalid_case_from_example": {
+      "success": false,
+      "validation_type": "starlark_code",
+      "message": "'taskId' must be a non-empty string.; 'language' must be a non-empty string.; 'speech_audio' must be a non-empty string.; 'speech_text' must be a non-empty string.",
+      "details": {
+        "is_valid": false,
+        "reason": "'taskId' must be a non-empty string.; 'language' must be a non-empty string.; 'speech_audio' must be a non-empty string.; 'speech_text' must be a non-empty string."
+      },
+      "reason_check": "Reason provided."
+    }
+  },
+  "status": "PASSED"
+}

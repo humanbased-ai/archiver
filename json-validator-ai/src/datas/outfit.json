@@ -1,0 +1,27 @@
+{
+    "taskId": "7528465136400103577",
+    "templateId": "OOTD_TPL_000001",
+    "data": {
+        "top_image": [
+            {
+                "uid": "rc-upload-1747981686593-18",
+                "url": "https://file.b18a.io/6156810753500102141_762935_.jpg",
+                "name": "03284766712-e1.jpg"
+            }
+        ],
+        "bottom_image": [
+            {
+                "uid": "rc-upload-1747981686593-20",
+                "url": "https://file.b18a.io/6156810753500102141_212297_.jpg",
+                "name": "03284766712-e4.jpg"
+            }
+        ],
+        "full_outfit_image": [
+            {
+                "uid": "rc-upload-1747981686593-22",
+                "url": "https://file.b18a.io/6156810753500102141_729352_.jpg",
+                "name": "03284766712-p.jpg"
+            }
+        ]
+    }
+}

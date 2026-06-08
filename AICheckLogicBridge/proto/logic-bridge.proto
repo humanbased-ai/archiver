@@ -1,0 +1,88 @@
+
+// proto 语法版本 proto3
+syntax = "proto3";
+
+// proto 包名
+package logic_bridge;
+
+import "google/api/annotations.proto";
+// 生成 golang 代码后的包名
+option go_package = "b18a/proto/logic_bridge";
+
+// 定义 EvidenceCheck 服务
+service AICheckLogicBridge {
+  // 主要业务接口, 支持批量提交submission进行校验
+  rpc checkEvidence(AIEvidenceCheckReq) returns (AIEvidenceCheckResp) {
+	  option (google.api.http) = {
+		post: "/api/submission/evidence/check",
+		      body: "*"
+	  };
+    }
+  rpc checkReason(AIReasonCheckReq) returns (AIReasonCheckResp) {
+	  option (google.api.http) = {
+		post: "/api/validation/reason/check",
+		      body: "*"
+	  };
+    }
+
+  // 用于 k8s 健康检查
+  rpc health(HealthCheckReq) returns (HealthCheckResp) {
+	  option (google.api.http) = {
+		get: "/v1/health",
+	  };
+  }
+}
+// 定义请求体
+message AIEvidenceCheckReq {
+    string  address = 1;
+    string  network = 2;
+    string  category=3;
+    string  entity = 4;
+    string  evidence = 5;
+    string  submissionid = 6;
+}
+// 定义响应体
+message RespCommonData {
+    string result = 1 ;
+    string reason = 2 ;
+    string output = 3;
+    string imageTags = 4;
+    int32 code = 5;
+}
+message AIEvidenceCheckResp {
+   int32 code = 1;
+   string message = 2;
+   RespCommonData data = 3;
+}
+
+message AIReasonCheckReq{
+    string address = 1;
+    string  network = 2;
+    string category=3;
+    string  entity = 4;
+    string submissionid = 5;
+    string decision = 6;
+    string reason = 7;
+    string share_id =8 ;
+}
+
+message AIReasonCheckResp{
+   int32 code = 1;
+   string message = 2;
+   RespCommonData data = 3;
+}
+
+
+// The HealthCheckRequest message contains no content.
+message HealthCheckReq {
+
+}
+
+// The HealthCheckResponse message includes status information about the service.
+message HealthCheckResp {
+  string service_name = 1;
+  string version = 2;
+  string status = 3;
+  int64 timestamp = 4;
+}
+

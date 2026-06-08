@@ -1,0 +1,92 @@
+{
+  "case_name": "FoodDataTest",
+  "description": "Schema for food item submission. Keys: taskId, templateId (FOOD_TPL_), data (images array, food_description string).",
+  "generation_result": {
+    "success": true,
+    "artifact_type": "schema",
+    "artifact": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "properties": {
+        "taskId": {
+          "type": "string",
+          "description": "A unique identifier for the task."
+        },
+        "templateId": {
+          "type": "string",
+          "pattern": "^FOOD_TPL_\\d+$",
+          "description": "A template identifier that must start with 'FOOD_TPL_' followed by digits."
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "images": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "uid": {
+                    "type": "string",
+                    "description": "A unique identifier for the image upload."
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "The URL where the image is stored."
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the image file."
+                  }
+                },
+                "required": [
+                  "uid",
+                  "url",
+                  "name"
+                ]
+              },
+              "minItems": 1,
+              "description": "An array of image objects, each containing uid, url, and name."
+            },
+            "food_description": {
+              "type": "string",
+              "description": "A description of the food."
+            }
+          },
+          "required": [
+            "images",
+            "food_description"
+          ]
+        }
+      },
+      "required": [
+        "taskId",
+        "templateId",
+        "data"
+      ]
+    },
+    "error": null,
+    "artifact_documentation": "### Artifact Details: JSON Schema\n\n**Type:** JSON Schema (Draft 2020-12)\n\n**Purpose:**\nThis artifact is designed to validate data structures based on the provided description.\nIt was generated based on the following input description:\n> \"Schema for food item submission. Keys: taskId, templateId (FOOD_TPL_), data (images array, food_description string).\"\n\n**Usage / Interpretation:**\nThis JSON Schema should be used with a compatible JSON Schema validator (e.g., `jsonschema` library in Python). It defines:\n- The expected overall structure of the JSON data (e.g., object, array).\n- Properties for objects, including their names and expected data types (string, number, boolean, etc.).\n- Required fields that must be present.\n- Constraints such as string patterns, numerical ranges, array item types, and minimum/maximum item counts.\n- Reusable definitions for complex types if applicable."
+  },
+  "valid_data_validation": {
+    "success": true,
+    "validation_type": "json_schema",
+    "message": "JSON data is valid against the schema.",
+    "details": null
+  },
+  "invalid_data_validation": {
+    "success": false,
+    "validation_type": "json_schema",
+    "message": "JSON data is invalid against the schema.",
+    "details": [
+      "Validation Error at `data->food_description`: 12345 is not of type 'string'",
+      "Validation Error at `templateId`: 'WRONG_PREFIX_TPL_001' does not match '^FOOD_TPL_\\\\d+$'"
+    ]
+  },
+  "paths": {
+    "original_data": "src/tests/test_outputs/FoodDataTest/original_data.json",
+    "generated_schema": "src/tests/test_outputs/FoodDataTest/generated_schema.json",
+    "invalid_data": "src/tests/test_outputs/FoodDataTest/invalid_data.json",
+    "report": "src/tests/test_outputs/FoodDataTest/validation_report.json"
+  }
+}

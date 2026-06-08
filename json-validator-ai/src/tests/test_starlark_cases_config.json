@@ -1,0 +1,36 @@
+{
+  "test_cases": [
+    {
+      "case_name": "FoodDataStarlarkTest",
+      "description": "Validate food data. 'taskId' and 'templateId' must be non-empty strings. 'data' must be an object. Inside 'data', 'images' must be a list of at least one non-empty string (URL/path), and 'food_description' must be a non-empty string. The validation function should check all conditions and report all reasons for failure if the data is invalid, joining them into a single reason string.",
+      "example_json_data": [
+        {"taskId": "food_task_example_valid", "templateId": "food_tpl_valid", "data": {"images": ["http://example.com/img1.jpg"], "food_description": "Delicious apple pie"}},
+        {"taskId": "", "templateId": "food_tpl_invalid", "data": {"images": [], "food_description": ""}}
+      ]
+    },
+    {
+      "case_name": "NFTDataStarlarkTest",
+      "description": "Validate NFT data. 'taskId' and 'templateId' must be non-empty strings. 'data' must be an object. Inside 'data', 'nft_image' (URL/path) and 'nft_description' must be non-empty strings. The validation function should check all conditions and report all reasons for failure if the data is invalid, joining them into a single reason string.",
+      "example_json_data": [
+        {"taskId": "nft_task_valid", "templateId": "nft_tpl_valid", "data": {"nft_image": "http://example.com/nft.png", "nft_description": "Unique NFT art"}},
+        {"taskId": "", "templateId": "nft_tpl_invalid", "data": {"nft_image": "", "nft_description": null}}
+      ]
+    },
+    {
+      "case_name": "OutfitDataStarlarkTest",
+      "description": "Validate outfit data. 'taskId' and 'templateId' must be non-empty strings. 'data' must be an object. Inside 'data', 'top_image', 'bottom_image', and 'full_outfit_image' (URLs/paths) must be non-empty strings. The validation function should check all conditions and report all reasons for failure if the data is invalid, joining them into a single reason string.",
+      "example_json_data": [
+        {"taskId": "outfit_valid", "templateId": "outfit_tpl_v", "data": {"top_image": "t.jpg", "bottom_image": "b.jpg", "full_outfit_image": "f.jpg"}},
+        {"taskId": "", "templateId": "outfit_tpl_i", "data": {"top_image": "", "bottom_image": null, "full_outfit_image": "f.jpg"}}
+      ]
+    },
+    {
+      "case_name": "SpeechDataStarlarkTest",
+      "description": "Validate speech data. 'taskId' and 'templateId' must be non-empty strings. 'data' must be an object. Inside 'data', 'language' must be a non-empty string (e.g., 'en-US'), 'speech_audio' (URL/path) must be a non-empty string, and 'speech_text' must be a non-empty string. The validation function should check all conditions and report all reasons for failure if the data is invalid, joining them into a single reason string.",
+      "example_json_data": [
+        {"taskId": "speech_valid", "templateId": "speech_tpl_v", "data": {"language": "en-US", "speech_audio": "audio.mp3", "speech_text": "Hello world."}},
+        {"taskId": "", "templateId": "speech_tpl_i", "data": {"language": "", "speech_audio": null, "speech_text": ""}}
+      ]
+    }
+  ]
+}

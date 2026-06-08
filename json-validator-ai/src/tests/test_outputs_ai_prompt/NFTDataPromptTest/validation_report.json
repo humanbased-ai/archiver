@@ -1,0 +1,20 @@
+{
+  "case_name": "NFTDataPromptTest",
+  "status": "PASSED",
+  "generated_prompt": "\"Validate the provided NFT item data according to the following rules: 1. 'taskId' must be a non-empty string. 2. 'templateId' must be a string starting with 'NFT_TPL_'. 3. 'data' must be an object containing: a) 'nft_image' which is an array of image objects. Each image object must include: i) 'uid' as a non-empty string, ii) 'url' as a string that must be a valid HTTPS URL, iii) 'name' as a non-empty string. b) 'nft_description' must be a non-empty string. Respond with a JSON object: {\\\"is_valid\\\": <boolean>, \\\"reason\\\": \\\"<explanation of validation checks and findings>\\\"}.\"",
+  "valid_data_validation": {
+    "status": "PASSED",
+    "details": {
+      "is_valid": true,
+      "reason": "Data is valid: 'taskId' is a non-empty string, 'templateId' starts with 'NFT_TPL_', 'nft_image' contains valid image objects with non-empty 'uid', valid HTTPS 'url', and non-empty 'name', and 'nft_description' is a non-empty string."
+    }
+  },
+  "invalid_data_validation": {
+    "status": "FAILED_AS_EXPECTED",
+    "details": {
+      "is_valid": false,
+      "reason": "Validation failed: 'url' in 'nft_image' must be a valid HTTPS URL, but got 'ftp://file.b18a.io/image.png'. 'nft_description' must be a non-empty string, but it is null."
+    },
+    "keyword_check": "All expected keywords found."
+  }
+}

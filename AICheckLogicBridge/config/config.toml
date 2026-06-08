@@ -1,0 +1,5 @@
+checkGrpcEndpoint = "evidence-check-server:50052"
+grpcEndpoint = ":50050"
+httpEndpoint = ":8080"
+logLevel = "debug"
+traceKey = "traceparent"

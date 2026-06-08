@@ -1,0 +1,31 @@
+{
+  "case_name": "NFTDataStarlarkTest",
+  "generation_result": {
+    "success": true,
+    "artifact_type": "starlark",
+    "artifact": "def validate_data(data):\n    reasons = []\n    \n    if not (type(data.get('taskId')) == 'string' and data.get('taskId')):\n        reasons.append(\"'taskId' must be a non-empty string.\")\n    \n    if not (type(data.get('templateId')) == 'string' and data.get('templateId')):\n        reasons.append(\"'templateId' must be a non-empty string.\")\n    \n    if not (type(data.get('data')) == 'dict'):\n        reasons.append(\"'data' must be an object.\")\n    else:\n        nft_data = data.get('data')\n        if not (type(nft_data.get('nft_image')) == 'string' and nft_data.get('nft_image')):\n            reasons.append(\"'nft_image' must be a non-empty string.\")\n        \n        if not (type(nft_data.get('nft_description')) == 'string' and nft_data.get('nft_description')):\n            reasons.append(\"'nft_description' must be a non-empty string.\")\n    \n    if reasons:\n        return {\"is_valid\": False, \"reason\": \" \".join(reasons)}\n    \n    return {\"is_valid\": True, \"reason\": \"Data is valid.\"}",
+    "error": null
+  },
+  "generated_code_validation": {
+    "valid_case_from_example": {
+      "success": true,
+      "validation_type": "starlark_code",
+      "message": "Data is valid.",
+      "details": {
+        "is_valid": true,
+        "reason": "Data is valid."
+      }
+    },
+    "invalid_case_from_example": {
+      "success": false,
+      "validation_type": "starlark_code",
+      "message": "'taskId' must be a non-empty string. 'nft_image' must be a non-empty string. 'nft_description' must be a non-empty string.",
+      "details": {
+        "is_valid": false,
+        "reason": "'taskId' must be a non-empty string. 'nft_image' must be a non-empty string. 'nft_description' must be a non-empty string."
+      },
+      "reason_check": "Reason provided."
+    }
+  },
+  "status": "PASSED"
+}

@@ -1,0 +1,1 @@
+Validate the outfit data: taskId (string), templateId (string, starts with 'OOTD_TPL_'). 'data' object must have 'top_image', 'bottom_image', 'full_outfit_image' arrays, each with at least one image object. Image objects need uid (string), url (valid https URL), name (string). All fields are mandatory.

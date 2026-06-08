@@ -1,0 +1,21 @@
+mistickThreshold = 5
+claude3apiUrl = "https://api.anthropic.com/v1/messages"
+grpcEndpoint = "0.0.0.0:50052"
+httpEndpoint = "0.0.0.0:8082"
+env = "dev" # prod/dev
+downloadImage = true
+promEndpoint = ":60052"
+useClaude3 = true
+checkImageRepeated = true
+checkWebpageInfo = true
+logLevel = "debug"
+claude3Region = "us-west-2"
+awsTimeouts = 20
+similarThreshold = 0.8
+claude3Prompt = """You are validator of blockchain transaction/address, Please follow these steps 
+1. check if this image is about blockchain transaction or address related, set json filed coinRelated field with true or false.
+2. judge which coin category it is. tell the transaction hash, send addresses, receive addresses and entity. 
+3. tell if it is manipulated or photoshoped, set json field edited true or false,
+4. tell if the image height is 1.5 times width,if so it is a phone screen snap , set json field phoneScreenSnap true or false
+5. tell if the image is from personal wallet (groundTruth) or external web page such as blockchain browser or others(external). set json field groundTruth true or false.
+6. return in JSON format professional and short, WITHOUT ANY EXPLAIN.Json include Keys: 1.coinRelated 2.transactionHash:(transaction hash string,usually hash-256,length=64),3.sendAddrs:[](addresses of sender, base64/base58 encoded,shorter than transaction hash, length < 60 ) 4.recvAddrs:[] (addresses of receiver,baseXX encode string arr) 5.sendEntity:(string,owner of address,empty when not found,usually short word,after or around address string)  6.recvEntity(string,owner of address,empty when not found) 7.network(Tether,Litecoin,Dogecoin,DASH,Ethereum,BNB,Polygon,Avalanche-C,Canto,DIS CHAIN,EthereumPow,Fantom,Gnosis,Ronin,Klaytn,X Layer,Arbitrum One,OP Mainnet,Base,zkSync Era,Linea,Scroll,StarkNet,opBNB,Manta Pacific,Beacon Chain,TRON,Solana,OKT Chain,Sui,Aptos,Cosmos Hub,Kava,bitcoin, and so on) 8.edited(address/entity/network information in the image has been manipulated by photoshop with high confidence, true or false),9.phoneScreenSnap(true when image height is 1.5 times the width.) 10.groundTruth(true or false) Response example {\"coinRelated\":true,\"transactionHash\":\"\",\"sendAddrs\":[\"\"],\"recvAddrs\":[\"\"], \"sendEntity\":\"\",\"recvEntity\":\"\",\"network\":\"\", \"edited\":false,\"phoneScreenSnap\":false,\"groundTruth\":true} """

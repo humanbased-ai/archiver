@@ -1,0 +1,14 @@
+{
+    "taskId": "7528085182000103499",
+    "templateId": "FOOD_TPL_000001",
+    "data": {
+        "images": [
+            {
+                "uid": "rc-upload-1747981686593-28",
+                "url": "https://file.b18a.io/6156810753500102141_220828_.webp",
+                "name": "u=1354488648,1434448537&fm=253&fmt=auto&app=138&f=JPEG.webp"
+            }
+        ],
+        "food_description": "kinds of food"
+    }
+}

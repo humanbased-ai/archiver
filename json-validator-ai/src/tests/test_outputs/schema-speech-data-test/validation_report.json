@@ -1,0 +1,97 @@
+{
+  "case_name": "SpeechDataTest",
+  "description": "Schema for speech segment. Keys: taskId, templateId (SPEECH_TPL_), data (audio_url, duration_seconds, transcript, language_code).",
+  "generation_result": {
+    "success": true,
+    "artifact_type": "schema",
+    "artifact": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "properties": {
+        "taskId": {
+          "type": "string",
+          "description": "Unique identifier for the task."
+        },
+        "templateId": {
+          "type": "string",
+          "pattern": "^SPEECH_TPL_\\d+$",
+          "description": "Identifier for the template, must start with 'SPEECH_TPL_'."
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "language": {
+              "type": "string",
+              "description": "Language code of the speech segment."
+            },
+            "speech_audio": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "uid": {
+                    "type": "string",
+                    "description": "Unique identifier for the audio file."
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "URL to the audio file."
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the audio file."
+                  }
+                },
+                "required": [
+                  "uid",
+                  "url",
+                  "name"
+                ]
+              },
+              "minItems": 1,
+              "description": "Array of audio files related to the speech segment."
+            },
+            "speech_text": {
+              "type": "string",
+              "description": "Transcript of the speech segment."
+            }
+          },
+          "required": [
+            "language",
+            "speech_audio",
+            "speech_text"
+          ]
+        }
+      },
+      "required": [
+        "taskId",
+        "templateId",
+        "data"
+      ]
+    },
+    "error": null,
+    "artifact_documentation": "### Artifact Details: JSON Schema\n\n**Type:** JSON Schema (Draft 2020-12)\n\n**Purpose:**\nThis artifact is designed to validate data structures based on the provided description.\nIt was generated based on the following input description:\n> \"Schema for speech segment. Keys: taskId, templateId (SPEECH_TPL_), data (audio_url, duration_seconds, transcript, language_code).\"\n\n**Usage / Interpretation:**\nThis JSON Schema should be used with a compatible JSON Schema validator (e.g., `jsonschema` library in Python). It defines:\n- The expected overall structure of the JSON data (e.g., object, array).\n- Properties for objects, including their names and expected data types (string, number, boolean, etc.).\n- Required fields that must be present.\n- Constraints such as string patterns, numerical ranges, array item types, and minimum/maximum item counts.\n- Reusable definitions for complex types if applicable."
+  },
+  "valid_data_validation": {
+    "success": true,
+    "validation_type": "json_schema",
+    "message": "JSON data is valid against the schema.",
+    "details": null
+  },
+  "invalid_data_validation": {
+    "success": false,
+    "validation_type": "json_schema",
+    "message": "JSON data is invalid against the schema.",
+    "details": [
+      "Validation Error at `data->language`: 123 is not of type 'string'",
+      "Validation Error at `data->speech_text`: 456 is not of type 'string'"
+    ]
+  },
+  "paths": {
+    "original_data": "src/tests/test_outputs/SpeechDataTest/original_data.json",
+    "generated_schema": "src/tests/test_outputs/SpeechDataTest/generated_schema.json",
+    "invalid_data": "src/tests/test_outputs/SpeechDataTest/invalid_data.json",
+    "report": "src/tests/test_outputs/SpeechDataTest/validation_report.json"
+  }
+}

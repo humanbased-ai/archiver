@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "taskId": {
+      "type": "string",
+      "description": "A unique identifier for the task."
+    },
+    "templateId": {
+      "type": "string",
+      "pattern": "^NFT_TPL_\\d{6}$",
+      "description": "The template ID for the NFT, must start with 'NFT_TPL_' followed by six digits."
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "nft_image": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "uid": {
+                "type": "string",
+                "description": "A unique identifier for the image."
+              },
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https://",
+                "description": "The HTTPS URL of the image."
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the image file."
+              }
+            },
+            "required": [
+              "uid",
+              "url",
+              "name"
+            ]
+          },
+          "minItems": 1,
+          "description": "An array of image objects associated with the NFT."
+        },
+        "nft_description": {
+          "type": "string",
+          "description": "A description of the NFT."
+        }
+      },
+      "required": [
+        "nft_image",
+        "nft_description"
+      ]
+    }
+  },
+  "required": [
+    "taskId",
+    "templateId",
+    "data"
+  ]
+}

@@ -1,0 +1,71 @@
+{
+    "type": "object",
+    "properties": {
+        "taskId": {
+            "type": "string"
+        },
+        "templateId": {
+            "type": "string",
+            "pattern": "^OOTD_TPL_"
+        },
+        "data": {
+            "type": "object",
+            "properties": {
+                "top_image": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "#/definitions/imageObject"
+                    }
+                },
+                "bottom_image": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "#/definitions/imageObject"
+                    }
+                },
+                "full_outfit_image": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "#/definitions/imageObject"
+                    }
+                }
+            },
+            "required": [
+                "top_image",
+                "bottom_image",
+                "full_outfit_image"
+            ]
+        }
+    },
+    "required": [
+        "taskId",
+        "templateId",
+        "data"
+    ],
+    "definitions": {
+        "imageObject": {
+            "type": "object",
+            "properties": {
+                "uid": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "pattern": "^https?:\\/\\/"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "uid",
+                "url",
+                "name"
+            ]
+        }
+    }
+}

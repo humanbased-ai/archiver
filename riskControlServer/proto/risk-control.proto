@@ -1,0 +1,120 @@
+
+
+syntax = "proto3";
+
+
+package riskcontrol;
+
+option java_multiple_files = true;
+option java_string_check_utf8 = true;
+option java_package = "com.example.grpc.models";
+option java_outer_classname = "RiskControlProto";
+option go_package="gateway/riskcontrol";
+
+import "google/api/annotations.proto";
+
+service RiskControlServer {
+  rpc LoginAuth(LoginAuthRequest) returns (LoginAuthResponse) {
+    option (google.api.http) = {
+      post: "/v1/loginAuth"
+      body: "*"
+    };
+  }
+
+  rpc WithDrawAuth(WithdrawAuthRequest) returns (WithdrawAuthResponse) {
+    option (google.api.http) = {
+      post: "/v1/withdrawAuth"
+      body: "*"
+    };
+  }
+
+  rpc ChangePasswdNotify(ChangePasswdNotifyRequest) returns (ChangePasswdNotifyResponse) {
+    option (google.api.http) = {
+      post: "/v1/changePasswdNotify"
+      body: "*"
+    };
+  }
+  rpc DeviceInfo(DeviceInfoRequest) returns (DeviceInfoResponse) {
+    option (google.api.http) = {
+      post: "/v1/deviceInfo"
+      body: "*"
+    };
+  }
+}
+
+
+enum AuthStatus {
+    OK = 0;
+    FORBIDDEN = 1;
+}
+
+//code in response
+enum HttpCode {
+    ACTION_OK = 0;
+    ACTION_FORBIDDEN = 1000;
+    INVALID_ARGS = 1100;
+    INTERNAL_ERROR = 1200;
+}
+
+message LoginAuthRequest {
+    enum Status {
+        SUCCEEDED = 0;
+        FAILED = 1;
+    }
+    string authorizeUUID= 1;
+    string userID= 2;
+    DeviceInfo deviceInfo = 3;
+    Status status = 4;
+    int64 expiredInSec = 5;
+}
+
+message DeviceInfo {
+    string deviceID = 1;
+    string deviceIP = 2;
+    string canvasFP=3;
+    string screenPixes=4;
+    string colorDepth=5;
+}
+message LoginAuthResponse {
+  int32 code = 1;
+  string message = 2;
+  int64 blockDuration = 3;
+  string blockDeviceID = 4;
+  string detail = 5;
+}
+message ChangePasswdNotifyRequest {
+    enum Status {
+        SUCCESS = 0;
+        FAILURE = 1;
+    }
+    string authorizeUUID= 1;
+    string userID= 2;
+    DeviceInfo deviceInfo=3;
+    Status status = 4;
+}
+
+message ChangePasswdNotifyResponse {
+}
+
+
+message WithdrawAuthRequest {
+    string authorizeUUID= 1;
+    string userID= 2;
+    DeviceInfo deviceInfo=3;
+}
+
+message WithdrawAuthResponse {
+    int32 code = 1;
+    string message = 2;
+    int64 blockDuration = 3;
+    string detail = 4;
+}
+
+message DeviceInfoRequest {
+    string authorizeUUID= 1;
+    string userID= 2;
+    DeviceInfo deviceInfo=3;
+}
+
+message DeviceInfoResponse {
+}

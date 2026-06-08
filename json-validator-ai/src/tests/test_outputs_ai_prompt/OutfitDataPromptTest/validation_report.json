@@ -1,0 +1,20 @@
+{
+  "case_name": "OutfitDataPromptTest",
+  "status": "PASSED",
+  "generated_prompt": "\"Validate the provided OOTD (Outfit of the Day) JSON data. Ensure the following conditions are met: 1. 'taskId' must be a non-empty string. 2. 'templateId' must be a string starting with 'OOTD_TPL_'. 3. 'data' must be an object containing 'top_image', 'bottom_image', and 'full_outfit_image'. Each of these keys must map to an array of image objects. 4. Each image object within these arrays must contain: a. 'uid' (string, non-empty), b. 'url' (string, must be a valid HTTPS URL), c. 'name' (string, non-empty). Respond with a JSON object: {'is_valid': <boolean>, 'reason': '<explanation of validation checks and findings>'}.\"",
+  "valid_data_validation": {
+    "status": "PASSED",
+    "details": {
+      "is_valid": true,
+      "reason": "Data is valid: 'taskId' is a non-empty string, 'templateId' ('OOTD_TPL_000001') starts with 'OOTD_TPL_', and 'data' contains required keys ('top_image', 'bottom_image', 'full_outfit_image') each with arrays of image objects. Each image object has a non-empty 'uid', a valid HTTPS 'url', and a non-empty 'name'."
+    }
+  },
+  "invalid_data_validation": {
+    "status": "FAILED_AS_EXPECTED",
+    "details": {
+      "is_valid": false,
+      "reason": "Validation failed: 'top_image' contains an image with an invalid URL format ('htp://file.b18a.io/invalid.jpg'), which must be a valid HTTPS URL. 'bottom_image' array is empty, but it must contain at least one image object with 'uid', 'url', and 'name'."
+    },
+    "keyword_check": "All expected keywords found."
+  }
+}

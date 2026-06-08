@@ -1,0 +1,31 @@
+{
+  "case_name": "FoodDataStarlarkTest",
+  "generation_result": {
+    "success": true,
+    "artifact_type": "starlark",
+    "artifact": "def validate_data(data):\n    reasons = []\n\n    if not (type(data.get('taskId')) == 'string' and data.get('taskId')):\n        reasons.append(\"'taskId' must be a non-empty string.\")\n    \n    if not (type(data.get('templateId')) == 'string' and data.get('templateId')):\n        reasons.append(\"'templateId' must be a non-empty string.\")\n    \n    if not type(data.get('data')) == 'dict':\n        reasons.append(\"'data' must be an object.\")\n    else:\n        images = data['data'].get('images')\n        if not (type(images) == 'list' and len(images) > 0 and all(type(img) == 'string' and img for img in images)):\n            reasons.append(\"'images' must be a list of at least one non-empty string.\")\n        \n        food_description = data['data'].get('food_description')\n        if not (type(food_description) == 'string' and food_description):\n            reasons.append(\"'food_description' must be a non-empty string.\")\n    \n    if reasons:\n        return {\"is_valid\": False, \"reason\": \"; \".join(reasons)}\n    \n    return {\"is_valid\": True, \"reason\": \"Data is valid.\"}",
+    "error": null
+  },
+  "generated_code_validation": {
+    "valid_case_from_example": {
+      "success": true,
+      "validation_type": "starlark_code",
+      "message": "Data is valid.",
+      "details": {
+        "is_valid": true,
+        "reason": "Data is valid."
+      }
+    },
+    "invalid_case_from_example": {
+      "success": false,
+      "validation_type": "starlark_code",
+      "message": "'taskId' must be a non-empty string.; 'images' must be a list of at least one non-empty string.; 'food_description' must be a non-empty string.",
+      "details": {
+        "is_valid": false,
+        "reason": "'taskId' must be a non-empty string.; 'images' must be a list of at least one non-empty string.; 'food_description' must be a non-empty string."
+      },
+      "reason_check": "Reason provided."
+    }
+  },
+  "status": "PASSED"
+}

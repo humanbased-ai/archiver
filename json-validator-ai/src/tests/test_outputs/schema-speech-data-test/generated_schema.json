@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "taskId": {
+      "type": "string",
+      "description": "Unique identifier for the task."
+    },
+    "templateId": {
+      "type": "string",
+      "pattern": "^SPEECH_TPL_\\d+$",
+      "description": "Identifier for the template, must start with 'SPEECH_TPL_'."
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "Language code of the speech segment."
+        },
+        "speech_audio": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "uid": {
+                "type": "string",
+                "description": "Unique identifier for the audio file."
+              },
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL to the audio file."
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the audio file."
+              }
+            },
+            "required": [
+              "uid",
+              "url",
+              "name"
+            ]
+          },
+          "minItems": 1,
+          "description": "Array of audio files related to the speech segment."
+        },
+        "speech_text": {
+          "type": "string",
+          "description": "Transcript of the speech segment."
+        }
+      },
+      "required": [
+        "language",
+        "speech_audio",
+        "speech_text"
+      ]
+    }
+  },
+  "required": [
+    "taskId",
+    "templateId",
+    "data"
+  ]
+}

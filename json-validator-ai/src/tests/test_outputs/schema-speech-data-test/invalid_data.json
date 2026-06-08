@@ -1,0 +1,15 @@
+{
+  "taskId": "7528449925900103576",
+  "templateId": "SPEECH_TPL_000001",
+  "data": {
+    "language": 123,
+    "speech_audio": [
+      {
+        "uid": "rc-upload-1747981686593-6",
+        "url": "badprotocol://audio.mp3",
+        "name": "Enrollment_1.mp3"
+      }
+    ],
+    "speech_text": 456
+  }
+}

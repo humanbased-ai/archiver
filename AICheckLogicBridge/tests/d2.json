@@ -1,0 +1,6 @@
+
+
+{"address":"0x28c6c06298d514db089934071355e5743bf21d60",
+"network":"Ethereum",
+"evidence": "[{\"link\":\"https://www.oklink.com/zh-hant/eth/tx/0x63baefbe4969c2b0ace6c359a3382ea0c42f3ac6ed927458d01f851f01d1dd65\",\"files\":[{\"path\":\"https://file.b18a.io/d0712971-046d-4ffb-8f81-3f4a365a25e0_238576_.png\"}],\"hash\":\"0xadaab61381cd2ca68d859cb816296681a24380f8fa29ea4e8a075c4f42ec623a\",\"text\":\"交易的是bitcoin\",\"date\":1714867994987}, {\"link\":\"https://www.oklink.com/zh-hant/eth/tx/0x63baefbe4969c2b0ace6c359a3382ea0c42f3ac6ed927458d01f851f01d1dd65\",\"files\":[],\"hash\":\"0xadaab61381cd2ca68d859cb816296681a24380f8fa29ea4e8a075c4f42ec623a\",\"text\":\"这个交易有问题\",\"date\":1714867994987},{\"link\":\"https://www.oklink.com/zh-hant/eth/tx/0x63baefbe4969c2b0ace6c359a3382ea0c42f3ac6ed927458d01f851f01d1dd65\",\"files\":[],\"hash\":\"0xadaab61381cd2ca68d859cb816296681a24380f8fa29ea4e8a075c4f42ec623a\",\"text\":\"交易是区块链得交易\",\"date\":1714867994987},{\"link\":\"https://www.oklink.com/zh-hant/eth/tx/0x63baefbe4969c2b0ace6c359a3382ea0c42f3ac6ed927458d01f851f01d1dd65\",\"files\":[],\"hash\":\"0xadaab61381cd2ca68d859cb816296681a24380f8fa29ea4e8a075c4f42ec623a\",\"text\":\"因为区块链网络波动 终止交易\",\"date\":1714867994987}]"
+}

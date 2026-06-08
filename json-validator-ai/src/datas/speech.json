@@ -1,0 +1,15 @@
+{
+    "taskId": "7528449925900103576",
+    "templateId": "SPEECH_TPL_000001",
+    "data": {
+        "language": "en",
+        "speech_audio": [
+            {
+                "uid": "rc-upload-1747981686593-6",
+                "url": "https://file.b18a.io/6156810753500102141_975192_.mp3",
+                "name": "Enrollment_1.mp3"
+            }
+        ],
+        "speech_text": "hello,hi"
+    }
+}

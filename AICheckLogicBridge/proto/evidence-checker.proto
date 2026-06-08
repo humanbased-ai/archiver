@@ -1,0 +1,141 @@
+
+// proto 语法版本 proto3
+syntax = "proto3";
+
+// proto 包名
+package evidence_checker;
+
+import "google/api/annotations.proto";
+// 生成 golang 代码后的包名
+option go_package = "b18a/proto/evidence_checker";
+
+// 定义 EvidenceCheck 服务
+service EvidenceCheck {
+  // 主要业务接口, 支持批量提交submission进行校验
+  rpc checkEvidence(EvidenceCheckReq) returns (EvidenceCheckResp) {
+	  option (google.api.http) = {
+		post: "/v1/checkEvidence",
+		      body: "*"
+	  };
+  }
+
+  // 用于 k8s 健康检查
+  rpc health(HealthCheckRequest) returns (HealthCheckResponse) {
+	  option (google.api.http) = {
+		get: "/v1/health",
+	  };
+  }
+  // 单独的检测接口, 可以不使用
+  rpc checkImageRepeated(EvidenceCheckReq) returns (EvidenceCheckResp) {
+	  option (google.api.http) = {
+		post: "/v1/checkImageRepeated",
+		      body: "*"
+	  };
+  }
+  // 单独的图片校验接口, 可以不使用
+  rpc checkImageInfo(EvidenceCheckReq) returns (EvidenceCheckResp) {
+	  option (google.api.http) = {
+		post: "/v1/checkImageInfo",
+		      body: "*"
+	  };
+  }
+  // 单独的伪图片检测接口, 可以不使用
+  rpc checkImageEdited(EvidenceCheckReq) returns (EvidenceCheckResp) {
+	  option (google.api.http) = {
+		post: "/v1/checkImageEdited",
+		      body: "*"
+	  };
+  }
+  // 单独的webpage校验接口, 可以不使用
+  rpc checkWebpageInfo(EvidenceCheckReq) returns (EvidenceCheckResp) {
+	  option (google.api.http) = {
+		post: "/v1/checkWebpageInfo",
+		      body: "*"
+	  };
+  }
+}
+
+message ImageTagReq {
+  repeated string images= 1;
+}
+
+enum ImageTag {
+  TagUnknown = 0;
+  TagRoundTruth=1;
+  TagExternal=2;
+}
+
+message ImageTagResp {
+  int32 code = 1;
+  repeated ImageTag tags = 2;
+}
+message TranslationReq {
+  repeated string txts = 1;
+}
+
+message TranslationResp {
+  int32 code = 1;
+  repeated string txts = 2;
+}
+
+message Submission {
+  string image = 1;
+  string address = 2;
+  string network = 3;
+  string entity = 4;
+  string webpage = 5;
+  string submissionid = 6;
+  string text = 7;
+  string imageBase64 = 8;
+}
+
+message SubmissionCheckResult {
+  enum Status {
+    OK = 0;
+    IMAGE_REPEATED = 1;
+    CLAUDE3_NOT_AVAILABLE = 2;
+    CLAUDE3_RESPONSE_UNEXPECTED_DATA = 3;
+    IMAGE_ADDRESS_NOT_MATCH = 4;
+    IMAGE_NETWORK_NOT_MATCH = 5;
+    IMAGE_ENTITY_NOT_MATCH = 6;
+    WEBPAGE_ADDRESS_NOT_MATCH = 7;
+    WEBPAGE_NETWORK_NOT_MATCH = 8;
+    WEBPAGE_ENTITY_NOT_MATCH = 9;
+    IMAGE_EDITED = 10;
+    IMAGE_DATA_NOT_VALID = 11;
+    WEBPAGE_URL_NOT_VALID_OR_UNREACHABLE = 12;
+    TEXT_WEB3_NOT_RELEATED = 13;
+  }
+  Status status = 1;
+  ImageTag tag = 2;
+  string  translation = 3;
+  string image = 4;
+}
+
+// 定义请求体
+message EvidenceCheckReq {
+  repeated Submission submissions = 1;
+}
+
+// 定义响应体
+message EvidenceCheckResp {
+  enum Status {
+    ALL_FAILED = 0;
+    SOME_FAILED = 1;
+    ALL_SUCCEED = 2;
+  }
+  Status status  = 1;
+  //int32 first_failed_index = 2;
+  repeated SubmissionCheckResult results = 3;
+}
+
+// The HealthCheckRequest message contains no content.
+message HealthCheckRequest {}
+
+// The HealthCheckResponse message includes status information about the service.
+message HealthCheckResponse {
+  string service_name = 1;
+  string version = 2;
+  string status = 3;
+  int64 timestamp = 4;
+}

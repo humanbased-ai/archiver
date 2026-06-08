@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "taskId": {
+      "type": "string",
+      "description": "A unique identifier for the task."
+    },
+    "templateId": {
+      "type": "string",
+      "pattern": "^FOOD_TPL_\\d+$",
+      "description": "A template identifier that must start with 'FOOD_TPL_' followed by digits."
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "uid": {
+                "type": "string",
+                "description": "A unique identifier for the image upload."
+              },
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "description": "The URL where the image is stored."
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the image file."
+              }
+            },
+            "required": [
+              "uid",
+              "url",
+              "name"
+            ]
+          },
+          "minItems": 1,
+          "description": "An array of image objects, each containing uid, url, and name."
+        },
+        "food_description": {
+          "type": "string",
+          "description": "A description of the food."
+        }
+      },
+      "required": [
+        "images",
+        "food_description"
+      ]
+    }
+  },
+  "required": [
+    "taskId",
+    "templateId",
+    "data"
+  ]
+}
