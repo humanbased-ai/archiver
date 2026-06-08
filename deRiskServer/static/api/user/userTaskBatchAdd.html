@@ -1,0 +1,482 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+<meta charset="UTF-8"/> 
+<title>任务配置</title> 
+<link rel="stylesheet" type="text/css" href="../css/bootstrap/3.3.7/css/bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="../css/project.css"/>
+<link rel="stylesheet" type="text/css" href="../js/jquery-tool/jquery-select2/3.4/select2.min.css"/>
+<script src="../js/jquery/jquery-1.10.2.js"></script>
+<script src="../js/jquery-tool/jquery-select2/3.4/select2.min.js"></script>
+<link href="../js/jquery-tool/jquery-jbox/2.3/Skins/Bootstrap/jbox.min.css" rel="stylesheet" />
+<script src="../js/jquery-tool/jquery-jbox/2.3/jquery.jBox-2.3.src.js" type="text/javascript"></script>
+<script src="../js/jquery-tool/xlsx/xlsx.full.min.js" type="text/javascript"></script>
+
+<script src="../js/common/common.js"></script>
+<script src="../js/common/model.js"></script>
+<script src="../js/common/project.js"></script>
+    
+   <style>
+   .btnSave{
+   	 width: 80px;height: 22px;
+   }
+   .btnMini{
+   	 width: 30px;height: 18px;
+   }
+   .btnCode{
+   	width: 80px;height: 18px;
+   }
+   .form-search input.inputHtml{
+    	width: 100px;height: 22px;
+   }
+   .form-search  textarea.inputHtmlTextArea{
+  	 width: 100px;height: 42px;
+   }
+   .dropzone{
+	   background-color: #ddd;
+	   width: 100%;height: 100px;
+	   border: 1px solid #dddddd;
+	   cursor: pointer;
+	   display: flex;justify-content: center;align-items: center
+   }
+   </style>
+</head> 
+<body> 
+<div style="margin: 0px;">
+   <div id="address_aread_div" class="breadcrumb form-search"  style="margin: 0px;background-color: #fff;border: 0px solid #ddd;width: 900px;">
+ 		<div style="text-align: left;margin: 10px;">
+	 		<span style="font-weight: bolder;font-size: 16px;">给定地址,爬标签</span>
+		</div>
+	   <div id="platformId_div">
+		   <div style="text-align: left;margin: 10px;">
+			   <span style="font-weight: bolder;font-size: 12px;">Platform</span>
+			   <div class="control-group" >
+				   <select id="platformId" name="platforms" class="input-large required" value=''>
+					   <option value="">--请选择--</option>
+				   </select>
+				   <input name="platformLinks" attrname="rowInput" class="inputHtmlTextArea" style="width:500px;" type="text" value="">
+				   <span style="margin-left: 10px;">
+					<input class="btnSave btn-primary btn" value="Add" onclick="addPlatforms(this)"/>
+				   </span>
+			   </div>
+		   </div>
+	   </div>
+
+	   <div style="text-align: left;margin: 10px;">
+
+		   <span style="font-weight: bolder;font-size: 12px;color: #979191;margin-left: 10px;">Bulk Address *</span>
+		   <div class="" >
+			   <div id="dropzone" class="dropzone" style=""> upload</div>
+			   <input type="file" name="file1" id="file1" style="display: none;">
+			   <div style="height: auto;width: 100%;margin-top: 10px;margin-bottom: 10px;" id="file1data"></div>
+			   <input id="network_address_data" name="network_address_data"  style="display: none" type="text" value="">
+			   <div><a href="/static/template/bulk_address_template.xlsx" download="Template.xlsx">Template.xlsx</a></div>
+
+		   </div>
+	   </div>
+	   <div class="" >
+		   <span style="text-align: left;display: block;margin-left: 630px;">
+				<input class="btnSave btn-primary btn" value="Submit" onclick="addAddress(this)"/>
+			</span>
+	   </div>
+
+	</div>
+
+	<div id="entity_aread_div" class="breadcrumb form-search"  style="margin: 0px;margin-top: 50px;background-color: #fff;border: 0px solid #ddd;width: 900px;">
+		<div style="text-align: left;margin: 10px;">
+			<span style="font-weight: bolder;font-size: 16px;">给定实体,爬地址</span>
+		</div>
+		<div id="platformId_div2">
+			<div style="text-align: left;margin: 10px;">
+				<span style="font-weight: bolder;font-size: 12px;">Platform</span>
+				<div class="control-group" >
+					<select id="platformId2" name="platforms" class="input-large required" value=''>
+						<option value="">--请选择--</option>
+					</select>
+					<input name="platformLinks" attrname="rowInput" class="inputHtmlTextArea" style="width:500px;" type="text" value="">
+					<span style="margin-left: 10px;">
+					<input class="btnSave btn-primary btn" value="Add" onclick="addPlatforms(this)"/>
+				   </span>
+				</div>
+			</div>
+		</div>
+
+		<div style="text-align: left;margin: 10px;">
+
+			<span style="font-weight: bolder;font-size: 12px;color: #979191;margin-left: 10px;">Bulk Entity *</span>
+			<div class="" >
+				<div id="dropzone2" class="dropzone"  style=""> upload</div>
+				<input type="file" name="file2" id="file2" style="display: none;">
+				<div style="height: auto;width: 100%;margin-top: 10px;margin-bottom: 10px;" id="file2data"></div>
+				<input id="network_entity_data" name="network_entity_data"  style="display: none" type="text" value="">
+				<div><a href="/static/template/bulk_entity_template.xlsx" download="Template.xlsx">Template.xlsx</a></div>
+
+			</div>
+		</div>
+		<div class="" >
+		   <span style="text-align: left;display: block;margin-left: 630px;">
+				<input class="btnSave btn-primary btn" value="Submit" onclick="addEntity(this)"/>
+			</span>
+		</div>
+
+	</div>
+
+</div>
+
+ 
+ <script type="text/javascript">
+ var urlSave = "/api/user/task/save";
+ var pageUrl = window.location.search;
+ var pageParams = new URLSearchParams(pageUrl.split('?')[1]);
+ var token = window.localStorage.token?window.localStorage.token:"";
+ if(token == '' || token == null){
+	 token = pageParams.get('token')
+ }
+ token = token == null?'':token
+ userId = pageParams.get('userId')
+ username = pageParams.get('username')
+var selectDataMap = {}
+ $(document).ready(function() {
+	 loadSelectInfo();
+	 loadUploadArea();
+ });
+
+ function loadSelectInfo(){
+	 var url = '/api/user/task/selects';
+	 var data = {};
+	 $.ajax({
+		 type: "GET",url: url,dataType: "json",data: data,
+		 beforeSend: function(xhr) {
+			 xhr.setRequestHeader("token", token);
+		 },
+		 success: function(respone){
+			 console.log(respone);
+			 if(respone.data!=null){
+				 var data1 = respone.data;
+				 addSelect(data1);
+			 }
+		 },
+		 error: function(data){ console.log(data);} ,
+	 });
+ }
+
+ function addSelect(selectData){
+	 if(selectData == null){
+		 console.info("datas is null");
+		 return ;
+	 }
+	 selectDataMap = selectData
+
+	 platforms = selectData['platforms']
+	 networks = selectData['networks']
+
+	 entity_platforms = selectData['entity_platforms']
+	 entitys = selectData['entitys']
+
+	 loadSelectData('platformId',platforms)
+	 loadSelectData('networkId',networks)
+
+	 loadSelectData('platformId2',entity_platforms)
+	 loadSelectData('networkId2',entitys)
+
+	 address_platforms_map = {}
+	 for(var i=0;i<platforms.length;i++) {
+		 var platform1 = platforms[i];
+		 address_platforms_map[platform1.id] = platform1
+	 }
+
+	 entity_platforms_map = {}
+	 for(var i=0;i<entity_platforms.length;i++) {
+		 var platform1 = entity_platforms[i];
+		 entity_platforms_map[platform1.id] = platform1
+	 }
+
+	 jQuery('[id="platformId"]').change(function() {
+		 var value = this.value
+		 var address_platform = address_platforms_map[value]
+		 jQuery(this).parent().find('[name="platformLinks"]').val(address_platform['url'])
+	 });
+	 jQuery('[id="platformId2"]').change(function() {
+		 var value = this.value
+		 var entity_platform = entity_platforms_map[value]
+		 jQuery(this).parent().find('[name="platformLinks"]').val(entity_platform['url'])
+	 });
+
+ }
+
+ function loadSelectData(selectId,selectDatas){
+	 if(selectDatas == null){
+		 console.info("datas is null");
+		 return ;
+	 }
+	 var html = '<option value="">--请选择--</option>';
+	 for(var i=0;i<selectDatas.length;i++){
+		 var data = selectDatas[i];
+		 html +='';
+		 html +='<option value="'+data.id+'">';
+		 html +=''+data.name+ '';
+		 html +='</option>';
+	 }
+	 jQuery("#"+selectId).html(html);
+	 jQuery("select").select2();
+
+ }
+
+ function addPlatforms(obj){
+     selectObj = jQuery(obj).parent().parent()
+	 selectObj.find('select').select2('destroy');
+	 newSelectObj = jQuery(selectObj[0]).clone()
+	 //newSelectObj.find('select').select2();
+	 //newSelectObj.find('select').attr('id','platformId_'+Math.pow(10,16)*Math.random())
+	 areaObj = jQuery(selectObj).parent()
+	 jQuery(areaObj).append(newSelectObj)
+
+	 jQuery('[id="platformId"]').change(function() {
+		 var value = this.value
+		 var address_platform = address_platforms_map[value]
+		 jQuery(this).parent().find('[name="platformLinks"]').val(address_platform['url'])
+	 });
+	 jQuery('[id="platformId2"]').change(function() {
+		 var value = this.value
+		 var entity_platform = entity_platforms_map[value]
+		 jQuery(this).parent().find('[name="platformLinks"]').val(entity_platform['url'])
+	 });
+
+ }
+
+ function addAddress(obj){
+
+	 var rows = jQuery('#platformId_div').find('.control-group')
+	 rowDatas = []
+	 for(var i = 0; i <rows.length; i++){
+		 row = rows[i]
+		 platform = jQuery(row).find('[name="platforms"]').val()
+		 platformLinks = jQuery(row).find('[name="platformLinks"]').val()
+		 rowData = {'platform':platform,'platformLinks': platformLinks}
+		 rowDatas.push(rowData)
+	 }
+
+	 network_address_data_str = jQuery('#address_aread_div').find('[name="network_address_data"]').val()
+
+	 network_address_datas = StringToJson(network_address_data_str);
+	 if(network_address_datas == null || network_address_datas.length == 0){
+		 alertx('请上传有效数据文件');
+		 return
+	 }
+	 config = {"platforms": rowDatas, "datas": network_address_datas}
+	 console.info('save address config = ',config)
+
+	 if(userId == null){
+		 userId = ''
+	 }
+	 if(username == null){
+		 username = ''
+	 }
+	 data = {'task_type':'address',"creator": userId,"creator_name": username,'config': JSON.stringify(config)}
+
+	 ajaxSave(data)
+
+ }
+
+ function addEntity(obj){
+
+	 var rows = jQuery('#platformId_div2').find('.control-group')
+	 rowDatas = []
+	 for(var i = 0; i <rows.length; i++){
+		 row = rows[i]
+		 platform = jQuery(row).find('[name="platforms"]').val()
+		 platformLinks = jQuery(row).find('[name="platformLinks"]').val()
+		 rowData = {'platform':platform,'platformLinks': platformLinks}
+		 rowDatas.push(rowData)
+	 }
+
+	 network_entity_data_str = jQuery('#entity_aread_div').find('[name="network_entity_data"]').val()
+
+	 network_entity_datas = StringToJson(network_entity_data_str);
+	 if(network_entity_datas == null || network_entity_datas.length == 0){
+		 alertx('请上传有效数据文件');
+		 return
+	 }
+	 config = {"platforms": rowDatas, "datas": network_entity_datas}
+	 console.info('save address config = ',config)
+	 if(userId == null){
+		 userId = ''
+	 }
+	 if(username == null){
+		 username = ''
+	 }
+	 data = {'task_type':'entity',"creator": userId,"creator_name": username,'config': JSON.stringify(config)}
+
+	 ajaxSave(data)
+
+ }
+
+ function ajaxSave(data){
+	 var url = urlSave + '?rk='+Math.random();
+	 jQuery("#messageId").html("");
+	 jQuery.ajax({
+		 url: url, async : false,type: "POST",
+		 data : JSON.stringify(data),
+		 headers: {'Content-Type': 'application/json'},
+		 dataType: "json",
+		 beforeSend: function(xhr) {
+			 xhr.setRequestHeader("token", token);
+		 },
+		 success: function(response) {
+			 info = response;
+
+			 if(info!=null){
+				 var retData = info.data;
+				 var message = retData;
+				 jQuery("#messageId").html(message);
+				 showTip(message);
+
+
+			 }
+		 },
+		 error: function(e){
+			 console.log(e);
+
+		 }
+	 });
+ }
+
+ function loadUploadArea(){
+	 var dropzone = document.getElementById('dropzone');
+	 loadDropzone(dropzone,'address')
+	 jQuery(dropzone).click(function(){
+		jQuery("#file1").click();
+	 });
+	 jQuery("#file1").change(function(){
+		 files = this.files
+		 handleFiles(files,'address')
+	 })
+
+	 const dropzone2 = document.getElementById('dropzone2');
+
+	 loadDropzone(dropzone2,'entity')
+	 jQuery(dropzone2).click(function(){
+		 jQuery("#file2").click();
+	 });
+	 jQuery("#file2").change(function(){
+		 files = this.files
+		 handleFiles(files,'entity')
+	 })
+
+
+ }
+
+ function loadDropzone(dropzone,task_type){
+
+	 dropzone.addEventListener('dragenter', dragEnterHandler);
+	 dropzone.addEventListener('dragover', dragOverHandler);
+	 dropzone.addEventListener('dragleave', dragLeaveHandler);
+	 dropzone.addEventListener('drop', dropHandler);
+
+	 function dragEnterHandler(e) {
+		 e.preventDefault();
+		 // 在拖动元素进入指定区域时，取消默认行为，并添加视觉效果（例如改变背景色）
+		 dropzone.style.backgroundColor = '#f2f2f2';
+	 }
+
+	 function dragOverHandler(e) {
+		 e.preventDefault();
+		 // 在拖动元素在指定区域内移动时，同样取消默认行为
+	 }
+
+	 function dragLeaveHandler(e) {
+		 // 在拖动元素离开指定区域时，移除视觉效果
+		 dropzone.style.backgroundColor = '';
+	 }
+
+	 function dropHandler(e) {
+		 e.preventDefault();
+		 // 在拖动元素释放时，取消默认行为，获取拖动的文件列表
+		 const files = e.dataTransfer.files;
+
+		 // 进行文件上传等后续操作
+		 handleFiles(files,task_type);
+
+		 // 恢复默认视觉效果
+		 dropzone.style.backgroundColor = '';
+	 }
+ }
+
+
+ function handleFiles(files,task_type) {
+	 // 在这里可以进行文件上传等后续操作
+	 // 遍历文件列表，处理每个文件
+	 for (let i = 0; i < files.length; i++) {
+		 const file = files[i];
+		 // 读取文件内容，上传到服务器等
+		 console.log('文件名：', file.name);
+		 console.log('文件大小：', file.size);
+		 console.log('文件类型：', file.type);
+	 }
+
+	 const file = files[0];
+	 const reader = new FileReader();
+	 reader.onload = function(e) {
+		 const data = new Uint8Array(e.target.result);
+		 const workbook = XLSX.read(data, {type: 'array'});
+
+		 // 读取第一个工作表
+		 const firstSheetName = workbook.SheetNames[0];
+		 const worksheet = workbook.Sheets[firstSheetName];
+		 const json = XLSX.utils.sheet_to_json(worksheet);
+		 var total = json.length;
+
+		 // 处理 JSON 数据
+		 console.log(task_type,'total',total,'datas = ',json);
+		 if(task_type == 'address'){
+			datas = []
+			 if(total > 0){
+				 for (let i = 0; i < json.length; i++) {
+
+					 var rowData = json[i]
+					 if (rowData['Network']!=null){
+						 rowData['network'] = rowData['Network']
+					 }
+					 if (rowData['Address']!=null){
+						 rowData['address'] = rowData['Address']
+					 }
+
+					 if(rowData['network'] == null || rowData['address'] == null){
+						continue;
+					 }
+					 datas.push( {'network':rowData['network'] ,'address':rowData['address']} )
+				 }
+
+			 }
+			 var filedataHtml = '文件名：'+ file.name+", 总数量："+datas.length+"行"
+
+			 jQuery("#network_address_data").val(JSON.stringify(datas))
+			 jQuery('#file1data').html(filedataHtml)
+		 }else if(task_type == 'entity'){
+			 datas = []
+			 if(total > 0){
+				 for (let i = 0; i < json.length; i++) {
+
+					 var rowData = json[i]
+					 if (rowData['Entity']!=null){
+						 rowData['entity'] = rowData['Entity']
+					 }
+
+					 if(rowData['entity'] == null){
+						 continue;
+					 }
+					 datas.push( {'entity':rowData['entity']} )
+				 }
+
+			 }
+			 var filedataHtml = '文件名：'+ file.name+", 总数量："+datas.length+"行"
+			 jQuery("#network_entity_data").val(JSON.stringify(json))
+			 jQuery('#file2data').html(filedataHtml)
+		 }
+
+	 };
+	 reader.readAsArrayBuffer(file);
+ }
+ </script>
+</body> 
+</html>

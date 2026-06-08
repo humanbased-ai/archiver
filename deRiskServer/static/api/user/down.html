@@ -1,0 +1,29 @@
+<html lang="zh">
+<head>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<input id="test_button" type="button" value="导出表格"></input>
+</body>
+<script>
+    function exportXlsx(data) {
+        const book = XLSX.utils.book_new();
+        const sheet = XLSX.utils.json_to_sheet(data);
+        XLSX.utils.book_append_sheet(book, sheet);
+        XLSX.writeFile(book, 'test.xlsx');
+    }
+    $("input[id='test_button']").click(function(){
+        var test_data = [
+            {
+                "id": "1",
+                "name": "张三",
+            },
+            {
+                "id": "2",
+                "name": "李四",
+            }
+        ]
+        exportXlsx(test_data);
+    });
+</script>
+</html>

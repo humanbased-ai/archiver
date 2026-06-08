@@ -1,0 +1,319 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+<meta charset="UTF-8"/> 
+<title>任务配置</title> 
+<link rel="stylesheet" type="text/css" href="../css/bootstrap/3.3.7/css/bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="../css/project.css"/>
+<link rel="stylesheet" type="text/css" href="../js/jquery-tool/jquery-select2/3.4/select2.min.css"/>
+<script src="../js/jquery/jquery-1.10.2.js"></script>
+<script src="../js/jquery-tool/jquery-select2/3.4/select2.min.js"></script>
+<link href="../js/jquery-tool/jquery-jbox/2.3/Skins/Bootstrap/jbox.min.css" rel="stylesheet" />
+<script src="../js/jquery-tool/jquery-jbox/2.3/jquery.jBox-2.3.src.js" type="text/javascript"></script>
+
+<script src="../js/common/common.js"></script>
+<script src="../js/common/model.js"></script>
+<script src="../js/common/project.js"></script>
+    
+   <style>
+   .btnSave{
+   	 width: 80px;height: 22px;
+   }
+   .btnMini{
+   	 width: 30px;height: 18px;
+   }
+   .btnCode{
+   	width: 80px;height: 18px;
+   }
+   .form-search input.inputHtml{
+    	width: 100px;height: 22px;
+   }
+   .form-search  textarea.inputHtmlTextArea{
+  	 width: 100px;height: 42px;
+   }
+   </style>
+</head> 
+<body> 
+<div style="margin: 0px;">
+   <div id="address_aread_div" class="breadcrumb form-search"  style="margin: 0px;background-color: #fff;border: 0px solid #ddd;width: 900px;">
+ 		<div style="text-align: left;margin: 10px;">
+	 		<span style="font-weight: bolder;font-size: 16px;">给定地址,爬标签</span>
+		</div>
+	   <div id="platformId_div">
+		   <div style="text-align: left;margin: 10px;">
+			   <span style="font-weight: bolder;font-size: 12px;">Platform</span>
+			   <div class="control-group" >
+				   <select id="platformId" name="platforms" class="input-large required" value=''>
+					   <option value="">--请选择--</option>
+				   </select>
+				   <input name="platformLinks" attrname="rowInput" class="inputHtmlTextArea" style="width:500px;" type="text" value="">
+				   <span style="margin-left: 10px;">
+					<input class="btnSave btn-primary btn" value="Add" onclick="addPlatforms(this)"/>
+				   </span>
+			   </div>
+		   </div>
+	   </div>
+
+	   <div style="text-align: left;margin: 10px;">
+		   <span style="font-weight: bolder;font-size: 12px;">Single Address *</span>
+
+		   <div class="control-group" >
+			   <select id="networkId" name="network" class="input-large required" value=''>
+				   <option value="">--请选择--</option>
+			   </select>
+			   <input name="networkAddress" attrname="rowInput" class="inputHtmlTextArea" style="width:500px;" type="text" value="">
+		   </div>
+	   </div>
+	   <div class="" >
+		   <span style="text-align: left;display: block;margin-left: 630px;">
+				<input class="btnSave btn-primary btn" value="Submit" onclick="addAddress(this)"/>
+			</span>
+	   </div>
+
+	</div>
+
+	<div id="entity_aread_div" class="breadcrumb form-search"  style="margin: 0px;margin-top: 50px;background-color: #fff;border: 0px solid #ddd;width: 900px;">
+		<div style="text-align: left;margin: 10px;">
+			<span style="font-weight: bolder;font-size: 16px;">给定实体,爬地址</span>
+		</div>
+		<div id="platformId_div2">
+			<div style="text-align: left;margin: 10px;">
+				<span style="font-weight: bolder;font-size: 12px;">Platform</span>
+				<div class="control-group" >
+					<select id="platformId2" name="platforms" class="input-large required" value=''>
+						<option value="">--请选择--</option>
+					</select>
+					<input name="platformLinks" attrname="rowInput" class="inputHtmlTextArea" style="width:500px;" type="text" value="">
+					<span style="margin-left: 10px;">
+					<input class="btnSave btn-primary btn" value="Add" onclick="addPlatforms(this)"/>
+				   </span>
+				</div>
+			</div>
+		</div>
+
+		<div style="text-align: left;margin: 10px;">
+			<span style="font-weight: bolder;font-size: 12px;">Single Entity *</span>
+
+			<div class="control-group" >
+				<select id="networkId2" name="entity" class="input-large required" value=''>
+					<option value="">--请选择--</option>
+				</select>
+
+			</div>
+		</div>
+		<div class="" >
+		   <span style="text-align: left;display: block;margin-left: 630px;">
+				<input class="btnSave btn-primary btn" value="Submit" onclick="addEntity(this)"/>
+			</span>
+		</div>
+
+	</div>
+
+</div>
+
+ 
+ <script type="text/javascript">
+ var urlSave = "/api/user/task/save";
+
+
+ var pageUrl = window.location.search;
+ var pageParams = new URLSearchParams(pageUrl.split('?')[1]);
+ var token = window.localStorage.token?window.localStorage.token:"";
+ if(token == '' || token == null){
+	 token = pageParams.get('token')
+ }
+ token = token == null?'':token
+ userId = pageParams.get('userId')
+ username = pageParams.get('username')
+ var selectDataMap = {}
+ $(document).ready(function() {
+	 loadSelectInfo();
+ });
+
+ function loadSelectInfo(){
+	 var url = '/api/user/task/selects';
+	 var data = {};
+	 $.ajax({
+		 type: "GET",url: url,dataType: "json",data: data,
+		 beforeSend: function(xhr) {
+			 xhr.setRequestHeader("token", token);
+		 },
+		 success: function(respone){
+			 console.log(respone);
+			 if(respone.data!=null){
+				 var data1 = respone.data;
+				 addSelect(data1);
+			 }
+		 },
+		 error: function(data){ console.log(data);} ,
+	 });
+ }
+
+ function addSelect(selectData){
+	 if(selectData == null){
+		 console.info("datas is null");
+		 return ;
+	 }
+	 platforms = selectData['platforms']
+	 networks = selectData['networks']
+
+	 entity_platforms = selectData['entity_platforms']
+	 entitys = selectData['entitys']
+
+	 loadSelectData('platformId',platforms)
+	 loadSelectData('networkId',networks)
+
+	 loadSelectData('platformId2',entity_platforms)
+	 loadSelectData('networkId2',entitys)
+
+
+	 address_platforms_map = {}
+	 for(var i=0;i<platforms.length;i++) {
+		 var platform1 = platforms[i];
+		 address_platforms_map[platform1.id] = platform1
+	 }
+
+	 entity_platforms_map = {}
+	 for(var i=0;i<entity_platforms.length;i++) {
+		 var platform1 = entity_platforms[i];
+		 entity_platforms_map[platform1.id] = platform1
+	 }
+
+	 jQuery('[id="platformId"]').change(function() {
+		 var value = this.value
+		 var address_platform = address_platforms_map[value]
+		 jQuery(this).parent().find('[name="platformLinks"]').val(address_platform['url'])
+	 });
+	 jQuery('[id="platformId2"]').change(function() {
+		 var value = this.value
+		 var entity_platform = entity_platforms_map[value]
+		 jQuery(this).parent().find('[name="platformLinks"]').val(entity_platform['url'])
+	 });
+ }
+
+ function loadSelectData(selectId,selectDatas){
+	 if(selectDatas == null){
+		 console.info("datas is null");
+		 return ;
+	 }
+	 var html = '<option value="">--请选择--</option>';
+	 for(var i=0;i<selectDatas.length;i++){
+		 var data = selectDatas[i];
+		 html +='';
+		 html +='<option value="'+data.id+'">';
+		 html +=''+data.name+ '';
+		 html +='</option>';
+	 }
+	 jQuery("#"+selectId).html(html);
+	 jQuery("select").select2();
+ }
+
+ function addPlatforms(obj){
+     selectObj = jQuery(obj).parent().parent()
+	 selectObj.find('select').select2('destroy');
+	 newSelectObj = jQuery(selectObj[0]).clone()
+	 //newSelectObj.find('select').select2();
+	 //newSelectObj.find('select').attr('id','platformId_'+Math.pow(10,16)*Math.random())
+	 areaObj = jQuery(selectObj).parent()
+	 jQuery(areaObj).append(newSelectObj)
+
+	 jQuery('[id="platformId"]').change(function() {
+		 var value = this.value
+		 var address_platform = address_platforms_map[value]
+		 jQuery(this).parent().find('[name="platformLinks"]').val(address_platform['url'])
+	 });
+	 jQuery('[id="platformId2"]').change(function() {
+		 var value = this.value
+		 var entity_platform = entity_platforms_map[value]
+		 jQuery(this).parent().find('[name="platformLinks"]').val(entity_platform['url'])
+	 });
+ }
+
+ function addAddress(obj){
+
+	 var rows = jQuery('#platformId_div').find('.control-group')
+	 rowDatas = []
+	 for(var i = 0; i <rows.length; i++){
+		 row = rows[i]
+		 platform = jQuery(row).find('[name="platforms"]').val()
+		 platformLinks = jQuery(row).find('[name="platformLinks"]').val()
+		 rowData = {'platform':platform,'platformLinks': platformLinks}
+		 rowDatas.push(rowData)
+	 }
+
+	 network = jQuery('#address_aread_div').find('[name="network"]').val()
+	 address = jQuery('#address_aread_div').find('[name="networkAddress"]').val()
+	 config = {"platforms": rowDatas, "datas":[{"network": network, "address": address}]}
+	 console.info('save address config = ',config)
+	 if(userId == null){
+		 userId = ''
+	 }
+	 if(username == null){
+		 username = ''
+	 }
+	 data = {'task_type':'address',"creator": userId,"creator_name": username,'config': JSON.stringify(config)}
+
+	 ajaxSave(data)
+
+ }
+
+ function addEntity(obj){
+
+	 var rows = jQuery('#platformId_div2').find('.control-group')
+	 rowDatas = []
+	 for(var i = 0; i <rows.length; i++){
+		 row = rows[i]
+		 platform = jQuery(row).find('[name="platforms"]').val()
+		 platformLinks = jQuery(row).find('[name="platformLinks"]').val()
+		 rowData = {'platform':platform,'platformLinks': platformLinks}
+		 rowDatas.push(rowData)
+	 }
+
+	 entity = jQuery('#entity_aread_div').find('[name="entity"]').val()
+
+	 config = {"platforms": rowDatas, "datas":[{"entity": entity}]}
+	 console.info('save address config = ',config)
+	 if(userId == null){
+		 userId = ''
+	 }
+	 if(username == null){
+		 username = ''
+	 }
+	 data = {'task_type':'entity',"creator": userId,"creator_name": username,'config': JSON.stringify(config)}
+
+	 ajaxSave(data)
+
+ }
+
+ function ajaxSave(data){
+	 var url = urlSave + '?rk='+Math.random();
+	 jQuery("#messageId").html("");
+	 jQuery.ajax({
+		 url: url, async : false,type: "POST",
+		 data : JSON.stringify(data),
+		 headers: {'Content-Type': 'application/json'},
+		 dataType: "json",
+		 beforeSend: function(xhr) {
+			 xhr.setRequestHeader("token", token);
+		 },
+		 success: function(response) {
+			 info = response;
+
+			 if(info!=null){
+				 var retData = info.data;
+				 var message = retData;
+				 jQuery("#messageId").html(message);
+				 showTip(message);
+
+
+			 }
+		 },
+		 error: function(e){
+			 console.log(e);
+
+		 }
+	 });
+ }
+ </script>
+</body> 
+</html>

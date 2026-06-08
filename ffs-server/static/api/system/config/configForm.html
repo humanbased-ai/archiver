@@ -1,0 +1,58 @@
+
+<div style="margin: 0px;">
+    <div id="detail_area_id" class="breadcrumb form-search"
+         style="margin: 0px;background-color: #fff;border: 0px solid #ddd;width: 97%;height: auto;">
+		<input type="hidden" id="formId" name="id">
+        <div id="platformId_detail_div" style="margin: 30px;">
+            <div class="control-group" >
+
+				<span >
+	                <label class="control-label">名称:</label>
+	                <input id="name" name="name" attrname="rowInput"  style="width:200px;" type="text" value="">
+
+				</span>
+				<span style="margin-left: 5px;">
+	                <label class="control-label">type:</label>
+	                <input id="type" name="type" attrname="rowInput"  style="width:200px;" type="text" value="">
+				</span>
+			</div>
+			<div class="control-group" >
+
+				<span >
+	                <label class="control-label">状态:</label>
+	                <select id="status" name="status" attrname="rowInput" class="input-large required" value=''>
+
+	                	<option value="1">启用</option>
+	                	<option value="0">停用</option>
+	                </select>
+				</span>
+
+				<span style="margin-left: 5px;">
+	                <label class="control-label">DataType:</label>
+					<select id="data_type" name="data_type" attrname="rowInput" class="input-large required" value=''>
+	                	<option value="str">str</option>
+	                	<option value="int">int</option>
+	                	<option value="float">float</option>
+	                </select>
+				</span>
+			</div>
+			<div class="control-group" >
+				<span>
+	                <label class="control-label">备注:</label>
+	                <textarea id="remarks" name="remarks" attrname="rowInput" class="form-control" rows="2" style="width: 600px;" placeholder="请输入备注"></textarea>
+				</span>
+			</div>
+			<div class="control-group" >
+				<span>
+	                <label class="control-label">内容:</label>
+
+					<textarea id="value" name="value" attrname="rowInput" class="form-control" rows="7" style="width: 600px;"  placeholder="请输入value"></textarea>
+				</span>
+			</div>
+
+
+			
+        </div>
+   
+
+    </div>

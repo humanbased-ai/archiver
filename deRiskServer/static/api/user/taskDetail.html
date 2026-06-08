@@ -1,0 +1,81 @@
+
+<div style="margin: 0px;">
+    <div id="detail_area_id" class="breadcrumb form-search"
+         style="margin: 0px;background-color: #fff;border: 0px solid #ddd;width: 97%;height: 500px">
+
+        <div id="platformId_detail_div">
+            <div id="platform_item_div" style="text-align: left;margin: 10px;">
+                <span style="font-weight: bolder;font-size: 12px;">Platform</span>
+                <div class="control-group" >
+                    <span name="platform"></span>
+                    | <span name="platformLinks"></span>
+                </div>
+            </div>
+        </div>
+
+        <div id="address_div" style="text-align: left;margin: 10px;">
+            <span style="font-weight: bolder;font-size: 12px;">Address</span>
+            <div class="control-group" >
+                <span name="network"></span>  <span name="address"></span>
+
+            </div>
+        </div>
+        <div id="entity_div" style="text-align: left;margin: 10px;">
+            <span style="font-weight: bolder;font-size: 12px;">Entity</span>
+
+            <div class="" >
+                <span name="network_entity_data"></span>
+            </div>
+        </div>
+
+        <div id="downFileId">
+            <div>Bulk upload file</div>
+            <div >
+                <span id="downloadDataId" style="color: #2fa4e7;cursor: pointer" href="" data_id="" onclick="downloadFile(this)">Template.xlsx</span>
+            </div>
+        </div>
+        <div id="address_tags_id">
+            <div style="margin-bottom: 5px;"><span>有效地址总数量：</span><span id="total_count_id" style="color: red"></span> 条,
+            <span>前200条记录如下表：</span>
+            </div>
+            <table id="addessTable" class="table table-striped table-bordered table-condensed" style="">
+                <thead><tr class="tableHead" style="font-weight: bolder;text-align: center;">
+                    <td style="width: 35px;">序号</td>
+                    <td>Platform</td>
+                    <td>Network</td>
+                    <td>Address</td>
+                    <td>status</td>
+                    <td>tags</td>
+                    <td>remarks</td>
+                </tr></thead>
+                <tbody id="addressTbody">
+
+                </tbody>
+            </table>
+
+
+
+        </div>
+        <div id="entity_tags_id">
+            <div style="margin-bottom: 5px;"><span>有效地址总数量：</span><span id="total_count_id2" style="color: red"></span> 条,
+
+            <table id="entityTable" class="table table-striped table-bordered table-condensed" style="display: none">
+                <thead><tr class="tableHead" style="font-weight: bolder;text-align: center;">
+                    <td style="width: 35px;">序号</td>
+                    <td>Platform</td>
+                    <td>Entity</td>
+                    <td>Address</td>
+                    <td>status</td>
+                    <td>tags</td>
+                    <td>remarks</td>
+                </tr></thead>
+                <tbody id="entityTbody">
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+</div>

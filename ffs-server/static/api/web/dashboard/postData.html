@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECharts 多折线图</title>
+
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap/3.3.7/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/project.css"/>
+    <link rel="stylesheet" type="text/css" href="../../js/jquery-tool/jquery-select2/3.4/select2.min.css"/>
+    <script src="../../js/jquery/jquery-1.10.2.js"></script>
+
+    <script src="../../js/chart/echarts.min.js"></script>
+</head>
+<body>
+<table>
+    <tr>
+        <td><span id="main" style="width: 600px;height:400px;"></span></td>
+        <td><span id="main2" style="width: 600px;height:400px;"></span></td>
+    </tr>
+
+</table>
+
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'));
+    var myChart2 = echarts.init(document.getElementById('main2'));
+    var pre_path = '/ifsci'
+    var dataUrl = pre_path+"/api/admin/dashboard/post/get";
+    var dataTaskUrl = pre_path+"/api/admin/dashboard/post/getUserTask";
+
+    $(document).ready(function() {
+        loadPage();
+    });
+    function loadPage(){
+        loadChart();
+        //loadTaskChart();
+    }
+
+    function loadChart(){
+
+        var option = {
+            title: {
+                text: '推特数据'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: ['推送帖子数量', '完成博主数量', '帖子任务', '博主任务', '帖子任务失败数', '博主任务失败数', '参与用户数量']
+            },
+            xAxis: {
+                type: 'category',
+                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    name: '数据系列 1',
+                    data: [120, 200, 150, 80, 70, 110, 130],
+                    type: 'line',
+                    // 设置光滑程度为 0.8
+                    smooth: 0.8
+                },
+                {
+                    name: '数据系列 2',
+                    data: [80, 120, 100, 150, 180, 130, 90],
+                    type: 'line',
+                    // 设置光滑程度为 0.8
+                    smooth: 0.8
+                }
+            ]
+        };
+
+        var param = {  };
+        var url = dataUrl;
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: param,
+            success: function(respone){
+                console.log(respone);
+                var retData = respone.data;
+                option.series = retData.series;
+                option.xAxis = retData.xAxis;
+                option.legend = retData.legend;
+                myChart.setOption(option);
+            },
+            error: function(data){ console.log(data);} ,
+        });
+
+    }
+
+    function loadTaskChart(){
+        var option = {
+            title: {
+                text: '参与用户'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: ['推送帖子数量', '完成博主数量', '帖子任务', '博主任务', '帖子任务失败数', '博主任务失败数', '参与用户数量']
+            },
+            xAxis: {
+                type: 'category',
+                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+
+            ]
+        };
+        var param2 = { id : 0 };
+        var url2 = dataTaskUrl;
+        $.ajax({
+            type: "GET",
+            url: url2,
+            data: param2,
+            success: function(respone){
+                console.log(respone);
+                var retData = respone.data;
+                option.series = retData.series;
+                option.xAxis = retData.xAxis;
+                option.legend = retData.legend;
+                myChart2.setOption(option);
+            },
+            error: function(data){ console.log(data);} ,
+        });
+
+    }
+
+
+</script>
+</body>
+</html>
