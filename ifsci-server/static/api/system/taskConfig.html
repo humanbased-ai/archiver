@@ -1,0 +1,466 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+<meta charset="UTF-8"/> 
+<title>Task Config</title>
+<link rel="stylesheet" type="text/css" href="../css/bootstrap/3.3.7/css/bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="../css/project.css"/>
+<link rel="stylesheet" type="text/css" href="../js/jquery-tool/jquery-select2/3.4/select2.min.css"/>
+<script src="../js/jquery/jquery-1.10.2.js"></script>
+<script src="../js/jquery-tool/jquery-select2/3.4/select2.min.js"></script>
+<link href="../js/jquery-tool/jquery-jbox/2.3/Skins/Bootstrap/jbox.min.css" rel="stylesheet" />
+<script src="../js/jquery-tool/jquery-jbox/2.3/jquery.jBox-2.3.src.js" type="text/javascript"></script>
+
+<script src="../js/common/common.js"></script>
+<script src="../js/common/model.js"></script>
+<script src="../js/common/project.js"></script>
+    
+   <style>
+   .btnSave{
+   	 width: 80px;height: 22px;
+   }
+   .btnMini{
+   	 width: 30px;height: 18px;
+   }
+   .btnCode{
+   	width: 80px;height: 18px;
+   }
+   .form-search input.inputHtml{
+    	width: 100px;height: 22px;
+   }
+   .form-search  textarea.inputHtmlTextArea{
+  	 width: 100px;height: 42px;
+   }
+   </style>
+</head> 
+<body> 
+<div style="margin: 0px;">
+   <div class="breadcrumb form-search"  style="margin: 0px;">
+ 		<div style="text-align: left;margin: 30px;">
+	 		<span>Task Config message:</span>
+			<span id="messageId" style="color: green;margin-left: 10px;">
+			</span>
+		</div>
+		<div class="control-group" >
+			<label class="control-label">Status:</label>
+			<select id="selectId" name="selectId" class="input-xlarge required" value=''>
+				<option value="">--select--</option>
+				<option value="1">--active--</option>
+				<option value="0">--close-</option>
+			</select>
+			<span style="margin-left: 10px;">
+				<input class="btnSave btn-primary btn"  value="ADD" onclick="add(this)"/>
+				<input class="btnSaveVideo btn-primary btn"  value="fresh" onclick="freshConfig()"/>
+				<input class="btnSave btn-primary btn" value="query" onclick="query(this)"/>
+				
+			</span>
+			
+		</div>
+		<span class="help-inline"><font color="red" id="selectValueId" style="display:none;">
+				student_course_package 
+				</font> </span>
+		<table id="contentTable" class="table table-striped table-bordered table-condensed" style="">
+	 		<thead><tr class="tableHead">
+				<td style="width: 30px;text-align: center;" onclick="toggleCheckBox('checkboxName',this)">
+ 				<input type="checkbox" checkboxName="sort" name="table_form_checkbox_all" value="">
+ 				<td style="width: 50px;">序号</td>
+                <!--<td>ID</td>-->
+                <td>name</td>
+                <td>server</td>
+                <td>cron</td>
+                <td>status</td>
+                <td>remarks</td>
+                <td>create time</td>
+	 			<td style="width: 250px;">opt</td>
+	 		</tr></thead>
+	 		<tbody id="lessonTbody">
+	 		
+	 		</tbody>
+	 	</table>
+        <div style="height: 150px;width: 100%;"></div>
+	</div>
+</div>
+
+ 
+ <script type="text/javascript">
+	 var pre_path = '/ffs'
+ var urlSave = pre_path+"/api/task/config/save";
+ var urlFindList = pre_path+"/api/task/config/list";
+ var freshUri = pre_path+"/api/task/config/fresh";
+ var runUri = pre_path+"/api/task/config/run";
+
+ var pageUrl = window.location.search;
+ var pageParams = new URLSearchParams(pageUrl.split('?')[1]);
+ var token = window.localStorage.token?window.localStorage.token:"";
+ if(token == '' || token == null){
+	 token = pageParams.get('token')
+ }
+ token = token == null?'':token
+
+ userId = pageParams.get('userId')
+ username = pageParams.get('username')
+
+ $(document).ready(function() {
+	 //loadSelectInfo();
+	 jQuery("select").select2();
+	 $("#selectId").change(function(){
+		 //query();
+		 
+		 jQuery("#selectValueId").html(this.value);
+	});
+	 query();
+ });
+ 
+function runConfig(obj,status){
+		var ids = [];
+		if (obj != null) { //单个删除
+			var curentTr = jQuery(obj).parents('tr')[0];
+			//var id = jQuery('[name="id"]', curentTr).val();
+			var id = jQuery(jQuery('[attrname="id"]',curentTr)[0]).val();
+			var param = { id : id };
+			var url = runUri+'?id='+id;
+			// url = runUri;
+			 $.ajax({
+					type: "POST",
+					url: url,
+					//dataType: "json",
+					data: param,
+					beforeSend: function(xhr) {
+				       xhr.setRequestHeader("token", token);
+				    },
+					success: function(respone){ 
+						console.log(respone); 
+						var retData = respone.data;
+
+						var message = retData;
+						if (retData == null){
+							message = respone.message
+						}
+
+						jQuery("#messageId").html(message);
+						showTip(message);
+						query();
+						
+					},
+					error: function(data){ console.log(data);} ,
+				});
+		} 
+	}
+ 
+function freshConfig(obj,status){
+	var ids = [];
+	if (obj != null) { //Single opt
+		var curentTr = jQuery(obj).parents('tr')[0];
+		var id = jQuery(jQuery('[attrname="id"]',curentTr)[0]).val();
+		ids.push(id);
+	} else { //Batch opt
+		var table = jQuery("#contentTable");
+		var checkboxs = jQuery('input[attrname="sort"]:checked', table);
+		if (checkboxs.length == 0) {
+			showTip("Please select at least one row of data!！");
+			return;
+		}
+		var ids = [];
+		for (var i = 0; i < checkboxs.length; i++) {
+			var curentTr = jQuery(checkboxs[i]).parents('tr')[0];
+			var id = jQuery(jQuery('[attrname="id"]',curentTr)[0]).val();
+			ids.push(id);
+		}
+	}
+	var param = { ids : ids.join(','),status: status };
+	ajaxPOSTData(param);
+}
+function ajaxPOSTData(data){
+	 var url = freshUri;
+	 url += '?ids='+data.ids+'&datastatus='+data.status
+	 $.ajax({
+			type: "POST",
+			url: url,
+			//dataType: "json",
+			data: data,
+			beforeSend: function(xhr) {
+		       xhr.setRequestHeader("token", token);
+		    },
+			success: function(respone){ 
+				console.log(respone); 
+				var retData = respone.data;
+				var message = retData;
+				if (retData == null){
+					message = respone.message
+				}
+				jQuery("#messageId").html(message);
+				showTip(message);
+				query();
+				
+			},
+			error: function(data){ console.log(data);} ,
+		});
+}
+
+ function query(){
+	var selectValue = jQuery("#selectId").val();
+	loadConfigInfo(selectValue);
+	jQuery("#selectValueId").html(selectValue);
+ }
+
+ function add(obj){
+	 var html = "";
+	var  datas = [{}];
+	var opt = 'add';
+	 for(var i=0;i<datas.length;i++){
+		var data = datas[i];
+		html+=createRowHtml(data,opt,i);
+	 }
+	 jQuery("#lessonTbody").append(html);
+ }
+
+ function copy(obj){
+	 var curentTr = jQuery(obj).parents('tr')[0];
+	 var inputs = jQuery('[attrname="rowInput"]',curentTr);
+	 var data = {};
+	 var len = 0;
+	 if(inputs!=null){
+		 for(var i=0;i<inputs.length;i++){
+			 var d = inputs[i];
+			 var name = jQuery(d).attr("name");
+			 var value = jQuery(d).val();
+			 data[name] = value;
+			 len ++;
+		 }
+	}
+	if(len >0){
+		data.id = null;
+		data.createTime = null;
+		//data.name = null;
+		var html = "";
+		var  datas = [data];
+		var opt = 'copy';
+		 for(var i=0;i<datas.length;i++){
+			var data = datas[i];
+			html+=createRowHtml(data,opt,i);
+		 }
+		 jQuery("#lessonTbody").append(html);
+	}
+	
+ }
+ 
+ 
+ function del(obj){
+	 var curentTr = jQuery(obj).parents('tr')[0];
+	 jQuery(curentTr).remove();
+ }
+
+ function save(obj){
+	 var curentTr = jQuery(obj).parents('tr')[0];
+	 var inputs = jQuery('[attrname="rowInput"]',curentTr);
+	 var data = {};
+	 var len = 0;
+	 var id = jQuery(jQuery('[attrname="id"]',curentTr)[0]).val();
+	 if(inputs!=null){
+		 for(var i=0;i<inputs.length;i++){
+			 var d = inputs[i];
+			 var name = jQuery(d).attr("name");
+			 var value = jQuery(d).val();
+			 var valueStr = value;
+			 if(valueStr !=null){
+				 valueStr = valueStr+'';
+			 }
+			 if(valueStr!=null && valueStr.includes('{\'')){
+				 try{
+					 var json = StringToJson(valueStr);
+					 value = JsonToString(json);
+				 }catch(e){
+					 console.log(e);
+				 }
+			 }
+			 data[name] = value;
+			 len ++;
+		 }
+	 }
+	 if(len >0){
+		 if(id!=null){
+			 data.id = id
+		 }
+
+		 ajaxSave(data);
+	 }
+ }
+ 
+ function ajaxSave(data){
+		var url = urlSave + '?rk='+Math.random();
+		jQuery("#messageId").html("");
+	    jQuery.ajax({  
+			url: url, async : false,type: "POST",
+			data : JSON.stringify(data),
+			headers: {'Content-Type': 'application/json'},
+			dataType: "json",
+			beforeSend: function(xhr) {
+		       xhr.setRequestHeader("token", token);
+		    },
+			success: function(response) {
+				info = response;
+				
+				if(info!=null){
+					var retData = info.data;
+					var message = retData;
+					jQuery("#messageId").html(message);
+					showTip(message);
+					query();
+					
+				}
+			},
+			error: function(e){
+				console.log(e);
+				
+			}
+		});
+	}
+ 
+ function loadConfigInfo(selectValue){
+	 var url = urlFindList;
+	 var data = {status : selectValue};
+	 $.ajax({
+			type: "GET",
+			url: url,
+			dataType: "json",
+			data: data,
+		    beforeSend: function(xhr) {
+		       xhr.setRequestHeader("token", token);
+		    },
+			success: function(respone){ 
+				console.log(respone); 
+				if(respone.data!=null){
+					var data1 = respone.data;
+					showLessonInfo(data1);
+				}
+			},
+			error: function(data){ console.log(data);} ,
+		});
+ }
+ 
+ function showLessonInfo(datas){
+	 if(datas == null){
+		 console.info("datas is null");
+		 return ;
+	 }
+	 var html = "";
+	 for(var i=0;i<datas.length;i++){
+		var data = datas[i];
+		html+=createRowHtml(data,'',i);
+	 }
+	 jQuery("#lessonTbody").html(html);
+ }
+ 
+ function createRowHtml(data,opt,index){
+	var html = "";
+	if(data!=null){
+		var createTimeStr = "";
+		if(data.gmtCreate!=null){
+			createTimeStr =new Date(data.gmtCreate).Format("yyyy-MM-dd HH:mm:ss");
+		}
+		html +='<tr id="tr_'+data.id+'">';
+		html +='<td style="text-align:center;">';
+		html +='<input type="checkbox" name="sort" attrname="sort" value="">';
+		html +='<input type="hidden" attrname="id" value="'+data.id+'"/>';
+		html +='</td>';
+		html +='<td style="text-align:center;">'+(index+1)+'</td>';
+
+		//html +='<td>'+getInputHtml('id',data.id,'width:30px;')+'</td>';
+        html +='<td>'+getInputHtml('name',data.name,'width:200px;')+'</td>';
+        
+        html +='<td>'+getInputHtml('service',data.service,'width:250px;')+'</td>';
+        html +='<td>'+getInputHtml('cron',data.cron,'width:80px;')+'</td>';
+        
+        html +='<td>'+(data.status==1?"Running":"Stop")+'</td>';
+        html +='<td>'+getInputHtml('remarks',data.remarks,'width:80px;')+'</td>';
+        html +='<td>'+createTimeStr+'</td>';
+		
+		html +='<td>';
+		html +='<input class="btnMini btn-primary btn"  value="save" onclick="save(this)"/> ';
+		html +='<input class="btnMini btn-primary btn"  value="copy" onclick="copy(this)"/> ';
+		if(opt!=null && (opt == 'add' || opt == 'copy')){
+			html +='<input class="btnMini btn-primary btn"  value="del" onclick="del(this)"/>';
+		}
+		if(data.status == 1){
+			html +='<input class="btnMini btn-primary btn"  value="disable" onclick="freshConfig(this,0)"/> ';
+		}else{
+			html +='<input class="btnMini btn-primary btn"  value="enable" onclick="freshConfig(this,1)"/> ';
+		}
+		
+		html +='<input class="btnMini btn-primary btn"  value="run" onclick="runConfig(this,1)"/> ';
+		
+		html +='</td>';
+		html +='</tr>';
+	}
+	return html;
+ }
+ 
+ 
+ function getInputHtml(name,value,styleName,type){
+	 var readonly = '';
+	 var className = "";
+	if(name == 'id'){
+		readonly = 'readonly=true';
+		className = "idClassInput";
+	 }
+	if(styleName == null){
+		styleName = '';
+	}
+	 var html = "";
+	 var valueStr =''+( value==null?"":value);
+	 if(valueStr!=null && valueStr.includes('{"')){
+		 valueStr = (valueStr+'').replace(new RegExp('"', "gm"), '\'');
+	 }
+	 if('input' == type || type == null){
+		 html +='<input name="'+name+'" '+readonly+' attrname="rowInput"'
+		 +' class="inputHtmlTextArea'+className+'" '
+		 +'style="'+styleName+'" '
+		 +'type="text" value="'+valueStr+'">';
+		 
+	 }else if('textarea' == type){
+		 var maxRownum = 5;
+		 var rownum = 2;
+		 rownum = maxRownum;
+		 html +='<textarea name="'+name+'" '+readonly+'+ attrname="rowInput"'
+		 +' class="inputHtml '+className+'" '
+		 +'rows="'+rownum+'"'
+		 +'style="'+styleName+'">'
+		 +valueStr+'</textarea>';
+	 }else if('text' == type){
+		 html = valueStr;
+	 }
+	 
+	 return html;
+ }
+ function getQueryVariable(variable){
+     var query = window.location.search.substring(1);
+     var vars = query.split("&");
+     for (var i=0;i<vars.length;i++) {
+             var pair = vars[i].split("=");
+             if(pair[0] == variable){return pair[1];}
+     }
+     return(false);
+}
+String.prototype.replaceAll = function(s1, s2) {
+    return this.replace(new RegExp(s1, "gm"), s2);
+}
+
+ Date.prototype.Format = function (fmt) {  
+     var o = {  
+         "M+": this.getMonth() + 1,
+         "d+": this.getDate(),
+         "H+": this.getHours(),
+         "m+": this.getMinutes(),
+         "s+": this.getSeconds(),
+         "q+": Math.floor((this.getMonth() + 3) / 3),
+         "S": this.getMilliseconds() //毫秒   
+     };  
+     if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));  
+     for (var k in o)  
+     if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));  
+     return fmt;  
+ }
+ 
+ </script>
+</body> 
+</html>

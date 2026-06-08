@@ -18,6 +18,7 @@ Graveyard for deprecated Codatta GitHub repositories. Every directory here is a 
 | 6 | [`codatta/rootdata-codatta-deck`](https://github.com/codatta/rootdata-codatta-deck) | RootData × Codatta 合作方案 · 29-page strategic partnership proposal deck. | HTML | 2026-04-28 | 2026-04-28 | 2026-05-28 | Max | Max — 1 (sole) | RootData partnership de-prioritized after CipherOwl Frontier pivot (2026-05-14); deck no longer in active use. |
 | 7 | [`codatta/task-audit`](https://github.com/codatta/task-audit) | 任务的审核逻辑 — audit pipelines for Knob, OTC, cex_hot_wallet, home_activity_video, robotics_audit submissions. | Python | 2026-01-22 | 2026-05-29 | 2026-05-29 | Rain | KetteyMan — 26 · rain2004-rr — 6 | 审核代码迁移 |
 | 8 | [`humanbased-ai/claudeAgentTeams`](https://github.com/humanbased-ai/claudeAgentTeams) | Claude Code 多 Agent 协作开发工作流（Lead/PM/UI/Dev/QA 五角色协作完成需求澄清到代码实现）。 | Markdown | 2026-04-24 | 2026-04-24 | 2026-06-07 | Trump-One | Trump-One — 4 (sole) | 整理仓库 |
+| 9 | [`codatta/ifsci-server`](https://github.com/codatta/ifsci-server) | Twitter bot backend with cron schedulers (fresh_comment, twitter_reply, fresh_notice) and OpenAI integration. README documented as IFS (Intermittent Fasting Science) platform; actual code is Twitter automation. | Python | 2024-12-25 | 2025-01-08 | 2026-06-08 | Qinghua Zou | zouqone — 3 · paulhandle — 1 | Dormant 17 months; sole-maintainer Twitter prototype with no downstream consumers. |
 
 ---
 

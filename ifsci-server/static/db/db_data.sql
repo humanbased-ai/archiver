@@ -1,0 +1,3 @@
+INSERT INTO `scheduler_config` (`name`, `service`, `method`, `cron`, `status`, `remarks`, `config`, `gmt_create`, `gmt_modified`) VALUES ( 'Twitter get comments task', 'scheduler.bot:fresh_comment', NULL, '0 */25 * * * *', '1', '', NULL, now(), now());
+INSERT INTO `scheduler_config` (`name`, `service`, `method`, `cron`, `status`, `remarks`, `config`, `gmt_create`, `gmt_modified`) VALUES ( 'Get the latest @user post information', 'scheduler.bot:fresh_notice', NULL, '20 */25 * * * *', '1', '', NULL, now(), now());
+INSERT INTO `scheduler_config` (`name`, `service`, `method`, `cron`, `status`, `remarks`, `config`, `gmt_create`, `gmt_modified`) VALUES ( 'Reply and Retweet', 'scheduler.bot:twitter_reply', NULL, '50 */35 * * * *', '1', '', NULL, now(), now());
