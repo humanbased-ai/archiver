@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #131314;
+  color: #e5e2e3;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+}
+
+.glass-panel {
+  background: rgba(53, 52, 54, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(176, 71, 211, 0.12);
+}
+
+@keyframes flow-down {
+  0%   { background-position: 0 0%; }
+  100% { background-position: 0 100%; }
+}
+
+.timeline-connector {
+  background: linear-gradient(to bottom, #b047d3, #d0bcff, #b047d3);
+  background-size: 100% 300%;
+  animation: flow-down 3s linear infinite;
+}
+
+.btn-gradient {
+  background: linear-gradient(135deg, #b047d3, #862a9c);
+  box-shadow: 0 8px 20px rgba(176, 71, 211, 0.28);
+}
+
+.btn-gradient:hover {
+  box-shadow: 0 8px 28px rgba(176, 71, 211, 0.48);
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

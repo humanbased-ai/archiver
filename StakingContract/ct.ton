@@ -1,0 +1,79 @@
+pragma ton-solidity >= 0.40.0;
+
+contract StakingContract {
+
+    struct User {
+        uint256 balance; // 本金
+        uint256 interest; // 利息
+        bool isMarked; // 是否能领取利息
+    }
+
+    mapping(address => User) public users;
+    address public owner; // 合约拥有者地址
+    uint256 public totalDeposited; // 合约总存款
+
+    constructor() public {
+        owner = msg.sender;
+    }
+
+    // 用户质押本金
+    function stake() public payable {
+        require(msg.value > 0, "You must stake a positive amount");
+
+        User storage user = users[msg.sender];
+        user.balance += msg.value; // 增加用户本金
+        totalDeposited += msg.value; // 更新合约总存款
+    }
+
+    // 补充利息
+    function deposit() public payable {
+        require(msg.sender == owner, "Only owner can deposit");
+        require(msg.value > 0, "You must deposit a positive amount");
+
+        totalDeposited += msg.value; // 更新合约总存款
+    }
+
+    // 结束后提取所有剩余资金 ！！！ 注意，如果有用户没有提取本金利息，则用户的钱也会被提走
+    function withdraw(uint256 amount) public {
+        require(msg.sender == owner, "Only owner can withdraw");
+        require(amount <= totalDeposited, "Insufficient funds");
+
+        totalDeposited -= amount; // 更新合约总存款
+        msg.sender.transfer(amount); // 提取资金
+    }
+
+    // 更新用户利息
+    function updateInterest(address userAddress, uint256 interestAmount) public {
+        require(msg.sender == owner, "Only owner can update interest");
+
+        User storage user = users[userAddress];
+        user.interest = interestAmount; // 更新用户利息
+        user.isMarked = true; // 标记可以领取利息
+    }
+
+    // 用户提取本金和利息
+    function withdrawFunds() public {
+        User storage user = users[msg.sender];
+
+        uint256 payout = user.balance; // 用户本金
+        if (user.isMarked) {
+            payout += user.interest; // 如果被标记，加上利息
+        }
+
+        require(payout > 0, "No funds to withdraw");
+
+        // 清除用户信息
+        user.balance = 0;
+        user.interest = 0; // 清空利息
+        user.isMarked = false; // 重置标记
+
+        totalDeposited -= payout; // 更新合约总存款
+        msg.sender.transfer(payout); // 提取资金
+    }
+
+    // 查询用户信息
+    function getUserInfo(address userAddress) public view returns (uint256, uint256, bool) {
+        User storage user = users[userAddress];
+        return (user.balance, user.interest, user.isMarked);
+    }
+}

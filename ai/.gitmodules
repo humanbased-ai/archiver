@@ -1,0 +1,6 @@
+[submodule "ai-tools-evidently"]
+	path = ai-tools-evidently
+	url = git@github-ryjiangx:codatta/ai-tools-evidently.git
+[submodule "ai-tools-llama-factory"]
+	path = ai-tools-llama-factory
+	url = git@github-ryjiangx:codatta/ai-tools-llama-factory.git
