@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Codatta Tweet Agent</title>
+  <link rel="stylesheet" id="main-css" href="/style.css" />
+</head>
+<body>
+
+  <!-- ═══ SIDEBAR ═══════════════════════════════════════════════════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-icon">◈</span>
+      <span class="logo-text">Codatta</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-group">
+        <div class="nav-item nav-group-toggle" id="nav-group-main">
+          <span class="nav-icon">⚡</span>
+          <span class="nav-label">发推管理</span>
+          <span class="nav-chevron">▾</span>
+        </div>
+        <div class="nav-sub" id="nav-sub-main">
+          <a class="nav-item sub" data-page="compose" href="#">
+            <span class="nav-icon">✏️</span>
+            <span class="nav-label">内容编辑</span>
+          </a>
+          <a class="nav-item sub" data-page="history" href="#">
+            <span class="nav-icon">📋</span>
+            <span class="nav-label">发布历史</span>
+          </a>
+          <a class="nav-item sub" data-page="accounts" href="#">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-label">账号配置</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div id="sidebar-health"></div>
+    </div>
+  </aside>
+
+  <!-- ═══ MAIN ══════════════════════════════════════════════════════════════ -->
+  <div class="app-layout">
+    <main class="main-content" id="main-content">
+      <div class="page-loading">加载中…</div>
+    </main>
+  </div>
+
+  <!-- ═══ MODAL ════════════════════════════════════════════════════════════ -->
+  <div class="modal-overlay hidden" id="modal-overlay">
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <span class="modal-title" id="modal-title">Modal</span>
+        <button class="modal-close" id="modal-close">✕</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <script>
+    const _v = Date.now();
+    document.getElementById('main-css').href = '/style.css?v=' + _v;
+    fetch('/app.js?v=' + _v, {cache: 'no-store'})
+      .then(r => r.text()).then(t => { (0, eval)(t); });
+  </script>
+</body>
+</html>

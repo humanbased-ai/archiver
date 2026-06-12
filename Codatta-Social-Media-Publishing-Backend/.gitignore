@@ -1,0 +1,19 @@
+.env
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.DS_Store
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.env
+data/
+__pycache__/
+*.pyc
+
+# Claude Code 项目配置（含本地权限和 token，不应入 repo）
+.claude/
+
