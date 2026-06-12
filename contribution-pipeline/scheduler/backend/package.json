@@ -1,0 +1,42 @@
+{
+  "name": "scheduler-backend",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --env-file=.env src/server.ts",
+    "start": "tsx --env-file=.env src/server.ts",
+    "start:test": "tsx watch --env-file=.env.test src/server.ts",
+    "migrate": "node --env-file=.env node_modules/node-pg-migrate/bin/node-pg-migrate up -m migrations --migration-file-language sql",
+    "migrate:down": "node --env-file=.env node_modules/node-pg-migrate/bin/node-pg-migrate down -m migrations --migration-file-language sql",
+    "migrate:status": "node --env-file=.env node_modules/node-pg-migrate/bin/node-pg-migrate status -m migrations",
+    "migrate:legacy": "tsx --env-file=.env src/migrate.ts",
+    "migrate:test": "node --env-file=.env.test node_modules/node-pg-migrate/bin/node-pg-migrate up -m migrations --migration-file-language sql",
+    "keys:create": "tsx --env-file=.env src/keys-create.ts",
+    "tenants:create": "tsx --env-file=.env src/tenants-create.ts",
+    "seed": "tsx --env-file=.env src/seed.ts",
+    "seed:test": "SEED_DEMO=false tsx --env-file=.env.test src/seed.ts",
+    "sandbox-worker": "tsx --env-file=.env src/sandbox-worker-main.ts",
+    "sandbox-worker:watch": "tsx watch --env-file=.env src/sandbox-worker-main.ts",
+    "test": "tsx --env-file=.env.test --test --test-concurrency=1 test/api.e2e.test.ts test/auth.test.ts test/drivers.test.ts test/multitenant.test.ts test/env-check.test.ts test/version-pinning.test.ts test/batch-lifecycle.test.ts test/e2e-mixed.test.ts test/idempotency.test.ts test/replay-request.test.ts test/recall.test.ts test/quota-review.test.ts test/events.test.ts test/business-routes.test.ts",
+    "test:reporter": "tsx --env-file=.env.test --test --test-concurrency=1 --test-reporter=spec test/api.e2e.test.ts test/auth.test.ts test/drivers.test.ts test/multitenant.test.ts test/env-check.test.ts test/version-pinning.test.ts test/batch-lifecycle.test.ts test/e2e-mixed.test.ts test/idempotency.test.ts test/replay-request.test.ts test/recall.test.ts test/quota-review.test.ts test/events.test.ts test/business-routes.test.ts"
+  },
+  "dependencies": {
+    "@fastify/cors": "^10.0.1",
+    "@fastify/request-context": "^6.2.1",
+    "ajv": "^8.20.0",
+    "fastify": "^5.1.0",
+    "node-cron": "^3.0.3",
+    "node-pg-migrate": "^8.0.4",
+    "pg": "^8.20.0",
+    "postgres": "^3.4.5",
+    "uuid": "^11.0.3",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/node-cron": "^3.0.11",
+    "@types/uuid": "^10.0.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

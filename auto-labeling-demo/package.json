@@ -1,0 +1,19 @@
+{
+  "name": "auto-labeling-demo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "./dev.sh",
+    "start": "./dev.sh start",
+    "stop": "./dev.sh stop",
+    "restart": "./dev.sh restart",
+    "dev:fe": "./dev.sh fe",
+    "dev:api": "./dev.sh api",
+    "dev:engine": "./dev.sh engine",
+    "frontend": "cd frontend && npm run dev",
+    "api": "cd labeling-api && python main.py",
+    "engine": "cd vision-engine && python main.py",
+    "build": "cd frontend && npm run build",
+    "install:all": "cd frontend && npm install"
+  }
+}

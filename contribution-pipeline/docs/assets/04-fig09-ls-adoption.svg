@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 320" width="100%" style="max-width:880px;height:auto;background:transparent" font-family='-apple-system,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif'>
+  <text x="440" y="24" text-anchor="middle" fill="#0f172a" font-size="14" font-weight="600">怎么用 Label Studio · 用 + 借 + 自建</text>
+  <text x="440" y="44" text-anchor="middle" fill="#64748B" font-size="11">三个层面分别取舍 · 既不重复造轮子，也不被它的边界限制</text>
+
+  <!-- Card 1: 用 (indigo) -->
+  <rect x="20" y="64" width="270" height="240" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <rect x="20" y="64" width="270" height="6" rx="3" fill="#6366F1"/>
+  <rect x="34" y="84" width="80" height="22" rx="11" fill="#EEF2FF"/>
+  <text x="74" y="100" text-anchor="middle" fill="#3730A3" font-size="11" font-weight="700">✓ 直接用</text>
+  <text x="34" y="134" fill="#0f172a" font-size="15" font-weight="700">采用现成模块</text>
+  <text x="34" y="154" fill="#64748B" font-size="11">嵌入即用 · 不重复造轮子</text>
+
+  <line x1="34" y1="172" x2="276" y2="172" stroke="#F1F5F9"/>
+
+  <g font-size="12" fill="#334155">
+    <circle cx="46" cy="194" r="2.8" fill="#6366F1"/>
+    <text x="58" y="198" font-weight="600">Labeling Editor</text>
+    <text x="58" y="214" fill="#64748B" font-size="10.5">画布标注 · 解析 XML / 渲染组件</text>
+
+    <circle cx="46" cy="240" r="2.8" fill="#6366F1"/>
+    <text x="58" y="244" font-weight="600">ML Backend</text>
+    <text x="58" y="260" fill="#64748B" font-size="10.5">/predict + /train · 接 YOLO/Whisper/LLM</text>
+
+    <text x="46" y="290" fill="#94A3B8" font-size="10.5">▷ 解决标准标注动作 + 模型预标</text>
+  </g>
+
+  <!-- Card 2: 借 (amber) -->
+  <rect x="305" y="64" width="270" height="240" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <rect x="305" y="64" width="270" height="6" rx="3" fill="#F59E0B"/>
+  <rect x="319" y="84" width="80" height="22" rx="11" fill="#FEF3C7"/>
+  <text x="359" y="100" text-anchor="middle" fill="#B45309" font-size="11" font-weight="700">✦ 借鉴设计</text>
+  <text x="319" y="134" fill="#0f172a" font-size="15" font-weight="700">借结构化思想</text>
+  <text x="319" y="154" fill="#64748B" font-size="11">用同一套思路造自研工具</text>
+
+  <line x1="319" y1="172" x2="561" y2="172" stroke="#F1F5F9"/>
+
+  <g font-size="12" fill="#334155">
+    <circle cx="331" cy="190" r="2.8" fill="#F59E0B"/>
+    <text x="343" y="194" font-weight="600">配置驱动 UI</text>
+    <text x="343" y="210" fill="#64748B" font-size="10.5">XML / JSON 描述界面 · 不写新页面</text>
+
+    <circle cx="331" cy="232" r="2.8" fill="#F59E0B"/>
+    <text x="343" y="236" font-weight="600">统一结果格式</text>
+    <text x="343" y="252" fill="#64748B" font-size="10.5">{ from_name, to_name, type, value }</text>
+
+    <circle cx="331" cy="276" r="2.8" fill="#F59E0B"/>
+    <text x="343" y="280" font-weight="600">/predict · /train 范式</text>
+  </g>
+
+  <!-- Card 3: 自建 (emerald) -->
+  <rect x="590" y="64" width="270" height="240" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <rect x="590" y="64" width="270" height="6" rx="3" fill="#10B981"/>
+  <rect x="604" y="84" width="80" height="22" rx="11" fill="#ECFDF5"/>
+  <text x="644" y="100" text-anchor="middle" fill="#065F46" font-size="11" font-weight="700">✺ 自研补齐</text>
+  <text x="604" y="134" fill="#0f172a" font-size="15" font-weight="700">自建关键能力</text>
+  <text x="604" y="154" fill="#64748B" font-size="11">补 LS 不擅长的部分</text>
+
+  <line x1="604" y1="172" x2="846" y2="172" stroke="#F1F5F9"/>
+
+  <g font-size="12" fill="#334155">
+    <circle cx="616" cy="190" r="2.8" fill="#10B981"/>
+    <text x="628" y="194" font-weight="600">Pipeline Manager</text>
+    <text x="628" y="210" fill="#64748B" font-size="10.5">调度 · 多任务 DAG 编排</text>
+
+    <circle cx="616" cy="232" r="2.8" fill="#10B981"/>
+    <text x="628" y="236" font-weight="600">自研表单工具</text>
+    <text x="628" y="252" fill="#64748B" font-size="10.5">复杂业务表单 / 校验 / 上传</text>
+
+    <circle cx="616" cy="274" r="2.8" fill="#10B981"/>
+    <text x="628" y="278" font-weight="600">采集 / 审核 / 导出</text>
+    <text x="628" y="294" fill="#64748B" font-size="10.5">全链路元能力 + 自动化</text>
+  </g>
+</svg>

@@ -1,0 +1,47 @@
+@import '@/styles/tailwind.scss';
+@import '@/styles/vant.scss';
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif, Mona Sans;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  background-color: #010101;
+
+  * {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  // theme for telegram
+}
+
+html {
+  --tg-theme-bg-color: #010101;
+  --tg-theme-buttong-color: #D355FF;
+
+}
+
+html, body {
+  height: 100vh;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch; /* 保持触摸平滑滚动 */
+  scroll-behavior: smooth; /* 平滑滚动 */
+}
+
+body {
+  // height: calc(100vh + 1px);
+  overflow-y: auto;
+}
+
+
+
+
+

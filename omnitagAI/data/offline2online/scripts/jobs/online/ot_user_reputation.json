@@ -1,0 +1,52 @@
+{
+   "job_list": [
+      {
+         "job_type": "insert",
+         "bigquery_table": "chaintool-etl.omnitags_etl.adm_user_reputation_latest",
+         "mysql_table": "ot_user_reputation",
+         "bigquery_columns": ["user_id","reputation","influence","score_staking","score_identify","score_active","score_skill","score_contribution","score_validation","score_consume","score_be_consumed","score_receive_feedback","'ACTIVE' as status"],
+         "columns": ["user_id","reputation","influence","score_staking","score_identify","score_active","score_skill","score_contribution","score_validation","score_consume","score_be_consumed","score_receive_feedback","status"],
+         "columns_info": {
+            "user_id":"string"
+            ,"reputation":"float"
+            ,"influence":"float"
+            ,"score_staking":"float"
+            ,"score_identify":"float"
+            ,"score_active":"float"
+            ,"score_skill":"float"
+            ,"score_contribution":"float"
+            ,"score_validation":"float"
+            ,"score_consume":"float"
+            ,"score_be_consumed":"float"
+            ,"score_receive_feedback":"float"
+            ,"status":"string"
+         }
+         ,"condition": "is_exists_reputation < 1"
+      },
+      {
+         "job_type": "update",
+         "bigquery_table": "chaintool-etl.omnitags_test_etl.adm_user_reputation_latest",
+         "mysql_table": "ot_user_reputation",
+         "bigquery_columns": ["user_id","reputation","influence","score_staking","score_identify","score_active","score_skill","score_contribution","score_validation","score_consume","score_be_consumed","score_receive_feedback","'ACTIVE' as status"],
+         "columns": ["user_id","reputation","influence","score_staking","score_identify","score_active","score_skill","score_contribution","score_validation","score_consume","score_be_consumed","score_receive_feedback","status"],
+         "columns_info": {
+            "user_id":"string"
+            ,"reputation":"float"
+            ,"influence":"float"
+            ,"score_staking":"float"
+            ,"score_identify":"float"
+            ,"score_active":"float"
+            ,"score_skill":"float"
+            ,"score_contribution":"float"
+            ,"score_validation":"float"
+            ,"score_consume":"float"
+            ,"score_be_consumed":"float"
+            ,"score_receive_feedback":"float"
+            ,"status":"string"
+         }
+         ,"condition": "is_exists_reputation > 0",
+         "bigquery_table_key":0,
+         "mysql_table_key":0
+      }
+   ]
+}

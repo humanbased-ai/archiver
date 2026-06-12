@@ -1,0 +1,21 @@
+{
+   "job_list": [
+      {
+         "job_type": "insert",
+         "bigquery_table": "chaintool-etl.omnitags_test_etl.adm_s3_validate_result_latest",
+         "mysql_table": "ot_s3_validate_result",
+         "bigquery_columns": ["submission_id","user_id","address","network","validation_result","contribution_result","bonus_result","status"],
+         "columns": ["submission_id","user_id","address","network","validation_result","contribution_result","bonus_result","status"],
+         "columns_info": {
+            "submission_id":"string"
+            , "user_id":"string"
+            , "address":"string"
+            , "network":"string"
+            , "validation_result":"int"
+            , "contribution_result":"json"
+            , "bonus_result":"json"
+            , "status":"string"
+         }
+      }
+   ]
+}

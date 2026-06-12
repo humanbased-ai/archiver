@@ -1,0 +1,14 @@
+<!--
+  视频帧级目标检测标注模板
+  视频被抽帧为图片后, 每帧作为独立的图片标注任务
+  配合 import_data.py --video 使用
+-->
+<View>
+  <Header value="视频帧标注 - 请标注画面中的目标"/>
+  <Image name="image" value="$image" zoom="true" zoomControl="true"/>
+  <RectangleLabels name="label" toName="image" strokeWidth="2" smart="true">
+    <Label value="person" background="#FF0000"/>
+    <Label value="car" background="#00FF00"/>
+    <Label value="truck" background="#0000FF"/>
+  </RectangleLabels>
+</View>

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 280" width="100%" style="max-width:880px;height:auto;background:transparent" font-family='-apple-system,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif'>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <text x="440" y="26" text-anchor="middle" fill="#0f172a" font-size="14" font-weight="600">三层组合：积木 → 任务 → 项目</text>
+
+  <!-- L1: 元能力 -->
+  <rect x="20" y="50" width="290" height="210" rx="14" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <text x="165" y="78" text-anchor="middle" fill="#475569" font-size="12" font-weight="600">01 · 元能力 / 积木</text>
+
+  <g font-size="12" fill="#4338CA">
+    <rect x="33"  y="100" width="48" height="30" rx="8" fill="#EEF2FF" stroke="#C7D2FE"/><text x="57"  y="120" text-anchor="middle">采集</text>
+    <rect x="87"  y="100" width="48" height="30" rx="8" fill="#EEF2FF" stroke="#C7D2FE"/><text x="111" y="120" text-anchor="middle">清洗</text>
+    <rect x="141" y="100" width="48" height="30" rx="8" fill="#EEF2FF" stroke="#C7D2FE"/><text x="165" y="120" text-anchor="middle">转换</text>
+    <rect x="195" y="100" width="48" height="30" rx="8" fill="#EEF2FF" stroke="#C7D2FE"/><text x="219" y="120" text-anchor="middle">模型</text>
+    <rect x="249" y="100" width="48" height="30" rx="8" fill="#EEF2FF" stroke="#C7D2FE"/><text x="273" y="120" text-anchor="middle">分流</text>
+
+    <rect x="33"  y="138" width="48" height="30" rx="8" fill="#EEF2FF" stroke="#C7D2FE"/><text x="57"  y="158" text-anchor="middle">标注</text>
+    <rect x="87"  y="138" width="48" height="30" rx="8" fill="#EEF2FF" stroke="#C7D2FE"/><text x="111" y="158" text-anchor="middle">审核</text>
+    <rect x="141" y="138" width="48" height="30" rx="8" fill="#EEF2FF" stroke="#C7D2FE"/><text x="165" y="158" text-anchor="middle">合并</text>
+    <rect x="195" y="138" width="48" height="30" rx="8" fill="#EEF2FF" stroke="#C7D2FE"/><text x="219" y="158" text-anchor="middle">导出</text>
+    <rect x="249" y="138" width="48" height="30" rx="8" fill="#EEF2FF" stroke="#C7D2FE"/><text x="273" y="158" text-anchor="middle">通知</text>
+  </g>
+  <text x="165" y="200" text-anchor="middle" fill="#94A3B8" font-size="11">最小可复用动作</text>
+  <text x="165" y="218" text-anchor="middle" fill="#94A3B8" font-size="11">独立可用 · 自由组合</text>
+
+  <!-- arrow 1 -->
+  <line x1="316" y1="155" x2="342" y2="155" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- L2: 任务 -->
+  <rect x="350" y="50" width="240" height="210" rx="14" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <text x="470" y="78" text-anchor="middle" fill="#475569" font-size="12" font-weight="600">02 · 任务 = 元能力组合</text>
+
+  <rect x="362" y="98"  width="216" height="62" rx="10" fill="#ECFDF5" stroke="#A7F3D0"/>
+  <text x="470" y="120" text-anchor="middle" fill="#065F46" font-size="12" font-weight="600">简单任务</text>
+  <text x="470" y="142" text-anchor="middle" fill="#047857" font-size="11">采集 → 标注 → 导出</text>
+
+  <rect x="362" y="172" width="216" height="76" rx="10" fill="#ECFDF5" stroke="#A7F3D0"/>
+  <text x="470" y="194" text-anchor="middle" fill="#065F46" font-size="12" font-weight="600">复杂任务</text>
+  <text x="470" y="214" text-anchor="middle" fill="#047857" font-size="11">采集 → 预标 → 分流</text>
+  <text x="470" y="232" text-anchor="middle" fill="#047857" font-size="11">→ 标注 → 审核 → 导出</text>
+
+  <!-- arrow 2 -->
+  <line x1="596" y1="155" x2="622" y2="155" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- L3: 项目 -->
+  <rect x="630" y="50" width="230" height="210" rx="14" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <text x="745" y="78" text-anchor="middle" fill="#475569" font-size="12" font-weight="600">03 · 项目 = 多任务编排</text>
+
+  <rect x="642" y="98" width="206" height="150" rx="10" fill="#FEF3C7" stroke="#FCD34D"/>
+  <text x="745" y="124" text-anchor="middle" fill="#92400E" font-size="12" font-weight="600">完整项目 DAG</text>
+
+  <!-- mini DAG -->
+  <g font-size="10" fill="#92400E">
+    <rect x="660" y="142" width="56" height="24" rx="6" fill="#FFFFFF" stroke="#FCD34D"/><text x="688" y="158" text-anchor="middle">粗标</text>
+    <rect x="730" y="142" width="56" height="24" rx="6" fill="#FFFFFF" stroke="#FCD34D"/><text x="758" y="158" text-anchor="middle">精标</text>
+    <line x1="716" y1="154" x2="728" y2="154" stroke="#D97706" stroke-width="1.2" marker-end="url(#arr)"/>
+    <rect x="695" y="190" width="86" height="24" rx="6" fill="#FFFFFF" stroke="#FCD34D"/><text x="738" y="206" text-anchor="middle">交叉审核</text>
+    <line x1="688" y1="166" x2="720" y2="188" stroke="#D97706" stroke-width="1.2" marker-end="url(#arr)"/>
+    <line x1="758" y1="166" x2="748" y2="188" stroke="#D97706" stroke-width="1.2" marker-end="url(#arr)"/>
+  </g>
+  <text x="745" y="234" text-anchor="middle" fill="#A16207" font-size="11">多任务协同 · 完整业务场景</text>
+</svg>

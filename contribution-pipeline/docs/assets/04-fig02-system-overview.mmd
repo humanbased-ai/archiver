@@ -1,0 +1,14 @@
+flowchart TB
+  U[业务方 / 运营] --> CFG[任务配置]
+  CFG --> PM[Pipeline Manager\n调度中心]
+
+  PM --> LS[Label Studio\n画布车间]
+  PM --> FORM[自研表单工具\n定制车间]
+  PM <--> ML[AI 模型服务\n外援机器人]
+
+  LS --> Q[统一标注队列]
+  FORM --> Q
+  Q --> A[标注员]
+
+  PM --> REV[审核\n自动 + 人工]
+  REV --> OUT[数据仓库 / 导出]

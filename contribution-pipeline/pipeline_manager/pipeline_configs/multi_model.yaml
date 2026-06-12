@@ -1,0 +1,35 @@
+name: multi_model
+description: "Filter → detect + segment + pose → upload with all prediction layers"
+
+steps:
+  - name: ingest
+    type: ingest
+
+  - name: filter
+    type: filter
+    params:
+      model: yolo26n.pt
+      target_classes: [person]
+      confidence: 0.5
+      batch_size: 32
+
+  - name: preannotate
+    type: preannotate
+    params:
+      models:
+        - model: yolo26n.pt
+          task_type: detect
+          confidence: 0.5
+        - model: yolo26n-seg.pt
+          task_type: segment
+          confidence: 0.5
+          label_override: other
+        - model: yolo26n-pose.pt
+          task_type: pose
+          confidence: 0.5
+
+  - name: upload
+    type: upload
+
+  - name: aggregate
+    type: aggregate

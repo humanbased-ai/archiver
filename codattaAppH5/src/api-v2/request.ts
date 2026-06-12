@@ -1,0 +1,61 @@
+import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
+import { authStoreActions } from '@/store/auth.store'
+
+const request = axios.create({
+  baseURL: '/api/v2',
+  timeout: 60000,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
+
+function authRequestInterceptor(config: InternalAxiosRequestConfig) {
+  const authInfo = authStoreActions.getAuthStore()
+  config.headers['token'] = authInfo.auth
+  return config
+}
+
+function baseResponseInterceptor(res: AxiosResponse) {
+  if (res.data?.success !== true) {
+    const error = new AxiosError(res.data?.errorMessage, res.data?.errorCode, res.config, res.request, res)
+    return Promise.reject(error)
+  } else {
+    return res
+  }
+}
+
+function errorResponseInterceptor(err: AxiosError) {
+  if (err.status === 401) {
+    authStoreActions.logout()
+  }
+  return Promise.reject(err)
+}
+
+request.interceptors.request.use(authRequestInterceptor)
+request.interceptors.response.use(baseResponseInterceptor, errorResponseInterceptor)
+
+export default request
+
+export interface Response<T> {
+  data: T
+  success: true
+  errorCode: 0
+  errorMessage: string
+}
+
+export interface PaginationParam {
+  page: number
+  page_size: number
+}
+
+export interface PaginationResponse<T> extends Response<T> {
+  data: T
+  total_count: number
+  total_page: number
+  page: number
+}
+
+export interface TPagination {
+  page_size: number
+  page_num: number
+}

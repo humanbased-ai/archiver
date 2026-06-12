@@ -1,0 +1,12 @@
+<svg width="166" height="100" viewBox="0 0 166 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="45" height="45" transform="translate(7.30005 8)" fill="black"/>
+<path d="M23.7167 37.25L28.1987 30.248L28.2347 30.554L24.0947 24.11H27.3347L29.8907 28.214H30.3047L32.8247 24.11H35.9747L31.8167 30.59L31.7627 30.302L36.3887 37.25H33.1307L30.1427 32.606H29.7107L26.8667 37.25H23.7167Z" fill="white"/>
+<rect width="45" height="45" transform="translate(60.3 8)" fill="white"/>
+<path d="M81.3448 32.264L77.5108 24.11H80.5348L83.2888 30.212L82.7668 30.05H84.2788L83.7208 30.212L86.2048 24.11H89.0668L85.5388 32.264H81.3448ZM81.9928 37.25V31.85H84.8908V37.25H81.9928Z" fill="black"/>
+<rect x="60.3" y="61" width="45" height="12" fill="black"/>
+<rect width="45" height="45" transform="translate(113.3 8)" fill="white"/>
+<path d="M134.345 32.264L130.511 24.11H133.535L136.289 30.212L135.767 30.05H137.279L136.721 30.212L139.205 24.11H142.067L138.539 32.264H134.345ZM134.993 37.25V31.85H137.891V37.25H134.993Z" fill="black"/>
+<rect x="113.3" y="61" width="45" height="12" fill="#FCC800"/>
+<rect x="113.3" y="61" width="45" height="12" fill="#FCA800"/>
+<rect x="113.3" y="81" width="45" height="12" fill="black"/>
+</svg>

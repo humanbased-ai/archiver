@@ -1,0 +1,36 @@
+{
+   "job_list": [
+      {
+         "job_type": "insert",
+         "bigquery_table": "chaintool-etl.omnitags_test_etl.adm_s2_validation_reflow_result_latest",
+         "mysql_table": "ot_validation_reflow_result",
+         "bigquery_columns": ["user_id", "validation_id", "submission_id", "decision", "adopt", "send_points", "status"],
+         "columns": ["user_id", "validation_id", "submission_id", "decision", "adopt", "send_points", "status"],
+         "columns_info": {
+            "user_id": "string"
+            , "validation_id": "string"
+            , "submission_id": "string"
+            , "decision": "string"
+            , "adopt": "int"
+            , "send_points": "int"
+            , "status": "string"
+         }
+      },
+      {
+         "job_type": "insert",
+         "bigquery_table": "chaintool-etl.omnitags_test_etl.adm_s3_validation_reflow_result_latest",
+         "mysql_table": "ot_validation_reflow_result",
+         "bigquery_columns": ["user_id", "validation_id", "submission_id", "decision", "adopt","send_points", "status"],
+         "columns": ["user_id", "validation_id", "submission_id", "decision", "adopt","send_points", "status"],
+         "columns_info": {
+            "user_id": "string"
+            , "validation_id": "string"
+            , "submission_id": "string"
+            , "decision": "string"
+            , "adopt": "int"
+            , "send_points": "int"
+            , "status": "string"
+         }
+      }
+   ]
+}

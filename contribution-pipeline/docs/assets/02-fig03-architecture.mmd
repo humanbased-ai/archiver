@@ -1,0 +1,5 @@
+flowchart LR
+  U[浏览器] --> F[前端标注界面]
+  F --> API[后端 API]
+  API --> DB[(数据库 / 文件存储)]
+  API <--> ML[ML Backend\n模型预标注]

@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 400" width="100%" style="max-width:880px;height:auto;background:transparent" font-family='-apple-system,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif'>
+  <defs>
+    <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#94A3B8"/>
+    </marker>
+  </defs>
+
+  <text x="440" y="26" text-anchor="middle" fill="#0f172a" font-size="14" font-weight="600">系统总览</text>
+
+  <!-- Pipeline Manager (central hub) -->
+  <rect x="300" y="56" width="240" height="64" rx="12" fill="#EEF2FF" stroke="#6366F1" stroke-width="1.5"/>
+  <text x="420" y="84" text-anchor="middle" fill="#3730A3" font-size="14" font-weight="600">Pipeline Manager</text>
+  <text x="420" y="104" text-anchor="middle" fill="#6366F1" font-size="11">调度中心 · 谁干什么 / 何时干 / 下一步</text>
+
+  <!-- AI 模型 (external partner) -->
+  <rect x="600" y="68" width="170" height="40" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="685" y="86" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="600">AI 模型服务</text>
+  <text x="685" y="100" text-anchor="middle" fill="#64748B" font-size="10">外援机器人</text>
+  <line x1="540" y1="88" x2="598" y2="88" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <line x1="600" y1="92" x2="542" y2="92" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+  <!-- 业务方 (input) -->
+  <rect x="60" y="68" width="170" height="40" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="145" y="86" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="600">业务方 / 运营</text>
+  <text x="145" y="100" text-anchor="middle" fill="#64748B" font-size="10">提交任务配置</text>
+  <line x1="232" y1="88" x2="298" y2="88" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+  <!-- arrows down to workshops -->
+  <line x1="360" y1="120" x2="280" y2="170" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <line x1="480" y1="120" x2="560" y2="170" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+  <!-- Label Studio 画布 -->
+  <rect x="160" y="170" width="220" height="60" rx="12" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <rect x="160" y="170" width="6" height="60" rx="3" fill="#0EA5E9"/>
+  <text x="270" y="194" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="600">Label Studio · 画布车间</text>
+  <text x="270" y="214" text-anchor="middle" fill="#64748B" font-size="11">画框 / 圈词 / 打标签 · 标准动作</text>
+
+  <!-- 自研表单 -->
+  <rect x="460" y="170" width="220" height="60" rx="12" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <rect x="460" y="170" width="6" height="60" rx="3" fill="#10B981"/>
+  <text x="570" y="194" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="600">自研表单 · 定制车间</text>
+  <text x="570" y="214" text-anchor="middle" fill="#64748B" font-size="11">复杂填表 / 校验 / 上传 · 非标件</text>
+
+  <!-- arrows down to queue -->
+  <line x1="270" y1="230" x2="320" y2="280" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <line x1="570" y1="230" x2="520" y2="280" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+  <!-- 统一标注队列 -->
+  <rect x="220" y="280" width="400" height="46" rx="12" fill="#F8FAFC" stroke="#CBD5E1"/>
+  <text x="420" y="299" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="600">统一标注队列</text>
+  <text x="420" y="316" text-anchor="middle" fill="#64748B" font-size="11">工位叫号系统 · 标注员从单一入口领活</text>
+
+  <!-- 标注员 -->
+  <rect x="660" y="280" width="120" height="46" rx="12" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="720" y="299" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="600">标注员</text>
+  <text x="720" y="316" text-anchor="middle" fill="#64748B" font-size="11">领取 → 提交</text>
+  <line x1="622" y1="303" x2="658" y2="303" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+  <!-- arrows to bottom row -->
+  <line x1="420" y1="326" x2="320" y2="356" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <line x1="720" y1="326" x2="620" y2="356" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+  <!-- 审核 -->
+  <rect x="240" y="356" width="160" height="36" rx="10" fill="#FEF3C7" stroke="#FCD34D"/>
+  <text x="320" y="379" text-anchor="middle" fill="#92400E" font-size="12" font-weight="600">审核 · 自动 + 人工</text>
+
+  <!-- 数据仓库 -->
+  <rect x="440" y="356" width="200" height="36" rx="10" fill="#ECFDF5" stroke="#A7F3D0"/>
+  <text x="540" y="379" text-anchor="middle" fill="#065F46" font-size="12" font-weight="600">数据仓库 / 导出</text>
+  <line x1="402" y1="374" x2="438" y2="374" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr2)"/>
+</svg>

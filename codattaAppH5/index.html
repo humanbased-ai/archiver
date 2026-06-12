@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>codatta</title>
+    <meta name="keywords" content="codatta,hunting,rewards,tag,bounty,tasks,platform,data,value" />
+    <meta property="og:title" content="codatta" />
+    <meta
+      property="og:description"
+      content="Codatta is a universal annotation and labeling platform that turns your intelligence into AI."
+    />
+    <meta property="og:image" content="https://static.codatta.io/static/codatta-share-logo.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="codatta" />
+    <meta
+      name="twitter:description"
+      content="Codatta is a universal annotation and labeling platform that turns your intelligence into AI."
+    />
+    <meta name="twitter:image" content="https://static.codatta.io/static/codatta-share-logo.png" />
+    <link rel="icon" type="image/svg+xml" href="https://static.codatta.io/static/favicon.svg" />
+    <!-- 阻止浏览器请求默认的 favicon.ico -->
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+    <!-- 预解析 DNS -->
+    <link rel="dns-prefetch" href="https://static.codatta.io" />
+    <script type="text/javascript">
+      if (/\?debug=1/.test(location.href)) {
+        // if (true) {
+        const script = document.createElement('script')
+        script.onload = function () {
+          window.eruda.init()
+        }
+        script.setAttribute('async', '')
+        script.src = 'https://cdn.jsdelivr.net/npm/eruda'
+        document.head.appendChild(script)
+      }
+    </script>
+  </head>
+  <body class="relative">
+    <div id="root" class="h-full"></div>
+    <!-- tg fix弹窗里改为absolute -->
+    <div id="popup" class="pointer-events-none absolute bottom-0 left-0 right-0 top-0"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>

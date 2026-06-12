@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 260" width="100%" style="max-width:880px;height:auto;background:transparent" font-family='-apple-system,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif'>
+  <defs>
+    <marker id="arrM" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#94A3B8"/>
+    </marker>
+  </defs>
+
+  <text x="440" y="24" text-anchor="middle" fill="#0f172a" font-size="14" font-weight="600">ML Backend 插件化 · 模型即外接服务</text>
+
+  <!-- LS main system (coral) -->
+  <rect x="60" y="100" width="260" height="90" rx="14" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1.2"/>
+  <text x="190" y="130" text-anchor="middle" fill="#B91C1C" font-size="14" font-weight="700">Label Studio</text>
+  <text x="190" y="152" text-anchor="middle" fill="#EF4444" font-size="11">Backend · Machine Learning 模块</text>
+  <text x="190" y="172" text-anchor="middle" fill="#EF4444" font-size="10.5">仅依赖两个 HTTP 接口 · 不耦合任何具体模型</text>
+
+  <!-- 3 model cards on right -->
+  <g>
+    <rect x="540" y="68" width="280" height="50" rx="12" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <rect x="540" y="68" width="6" height="50" rx="3" fill="#0EA5E9"/>
+    <text x="558" y="90" fill="#0f172a" font-size="13" font-weight="700">YOLO</text>
+    <text x="558" y="108" fill="#64748B" font-size="11">图片检测 · 画框预标注</text>
+    <text x="810" y="100" text-anchor="end" fill="#94A3B8" font-size="10.5">vision</text>
+
+    <rect x="540" y="128" width="280" height="50" rx="12" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <rect x="540" y="128" width="6" height="50" rx="3" fill="#F59E0B"/>
+    <text x="558" y="150" fill="#0f172a" font-size="13" font-weight="700">Whisper</text>
+    <text x="558" y="168" fill="#64748B" font-size="11">音频转写 · 语音预标注</text>
+    <text x="810" y="160" text-anchor="end" fill="#94A3B8" font-size="10.5">audio</text>
+
+    <rect x="540" y="188" width="280" height="50" rx="12" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <rect x="540" y="188" width="6" height="50" rx="3" fill="#6366F1"/>
+    <text x="558" y="210" fill="#0f172a" font-size="13" font-weight="700">LLM</text>
+    <text x="558" y="228" fill="#64748B" font-size="11">文本分类 / 评分 / RAG 评估</text>
+    <text x="810" y="220" text-anchor="end" fill="#94A3B8" font-size="10.5">text</text>
+  </g>
+
+  <!-- HTTP arrows bidirectional -->
+  <g stroke="#94A3B8" stroke-width="1.5" fill="none">
+    <path d="M 320 130 L 538 92" marker-end="url(#arrM)"/>
+    <path d="M 538 100 L 320 140" marker-end="url(#arrM)"/>
+    <path d="M 320 145 L 538 152" marker-end="url(#arrM)"/>
+    <path d="M 538 160 L 320 155" marker-end="url(#arrM)"/>
+    <path d="M 320 160 L 538 212" marker-end="url(#arrM)"/>
+    <path d="M 538 220 L 320 170" marker-end="url(#arrM)"/>
+  </g>
+
+  <text x="430" y="116" text-anchor="middle" fill="#94A3B8" font-size="10" font-weight="600">HTTP</text>
+  <text x="430" y="158" text-anchor="middle" fill="#94A3B8" font-size="10" font-weight="600">HTTP</text>
+  <text x="430" y="196" text-anchor="middle" fill="#94A3B8" font-size="10" font-weight="600">HTTP</text>
+
+  <text x="440" y="252" text-anchor="middle" fill="#94A3B8" font-size="11">实现 /predict + /train 即可 · 换 YOLO / Whisper / LLM 主系统一行不改</text>
+</svg>

@@ -1,0 +1,28 @@
+<!--
+  图像目标检测 + 审核标注模板
+  标注者画框, 审核者在同一界面选择审核结果
+  适合需要在 UI 内完成审核的场景
+-->
+<View>
+  <Image name="image" value="$image" zoom="true" zoomControl="true" rotateControl="true"/>
+
+  <RectangleLabels name="label" toName="image" strokeWidth="2" smart="true">
+    <Label value="person" background="#FF0000"/>
+    <Label value="car" background="#00FF00"/>
+    <Label value="truck" background="#0000FF"/>
+    <Label value="bus" background="#FFFF00"/>
+    <Label value="motorcycle" background="#FF00FF"/>
+    <Label value="bicycle" background="#00FFFF"/>
+  </RectangleLabels>
+
+  <View style="margin-top:16px; padding:12px; background:#f5f5f5; border-radius:4px">
+    <Header value="审核意见"/>
+    <Choices name="review_result" toName="image" choice="single">
+      <Choice value="通过" alias="approved"/>
+      <Choice value="需修改" alias="needs_revision"/>
+      <Choice value="驳回" alias="rejected"/>
+    </Choices>
+    <TextArea name="review_comment" toName="image"
+              rows="2" placeholder="审核备注 (可选)" maxSubmissions="1"/>
+  </View>
+</View>

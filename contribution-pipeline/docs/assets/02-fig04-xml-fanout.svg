@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 320" width="100%" style="max-width:880px;height:auto;background:transparent" font-family='-apple-system,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif'>
+  <defs>
+    <marker id="arrX" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#94A3B8"/>
+    </marker>
+  </defs>
+
+  <text x="440" y="24" text-anchor="middle" fill="#0f172a" font-size="14" font-weight="600">一份 XML 配置 · 生成不同标注界面</text>
+
+  <!-- Left: XML config card -->
+  <rect x="30" y="62" width="320" height="190" rx="14" fill="#0F172A"/>
+  <rect x="30" y="62" width="320" height="26" rx="14" fill="#1E293B"/>
+  <circle cx="46" cy="75" r="4" fill="#EF4444"/>
+  <circle cx="60" cy="75" r="4" fill="#F59E0B"/>
+  <circle cx="74" cy="75" r="4" fill="#10B981"/>
+  <text x="338" y="80" text-anchor="end" fill="#94A3B8" font-size="10" font-family="ui-monospace,Menlo,monospace">label-config.xml</text>
+
+  <g font-family="ui-monospace,Menlo,SFMono-Regular,monospace" font-size="11.5">
+    <text x="46" y="112" fill="#7DD3FC">&lt;View&gt;</text>
+    <text x="60" y="132" fill="#94A3B8">&lt;</text>
+    <text x="68" y="132" fill="#FCD34D">Image</text>
+    <text x="100" y="132" fill="#A7F3D0"> name=</text>
+    <text x="138" y="132" fill="#FCA5A5">"img"</text>
+    <text x="166" y="132" fill="#A7F3D0"> value=</text>
+    <text x="208" y="132" fill="#FCA5A5">"$image"</text>
+    <text x="252" y="132" fill="#94A3B8">/&gt;</text>
+
+    <text x="60" y="152" fill="#94A3B8">&lt;</text>
+    <text x="68" y="152" fill="#FCD34D">RectangleLabels</text>
+    <text x="160" y="152" fill="#A7F3D0"> toName=</text>
+    <text x="208" y="152" fill="#FCA5A5">"img"</text>
+    <text x="236" y="152" fill="#94A3B8">&gt;</text>
+
+    <text x="76" y="172" fill="#94A3B8">&lt;</text>
+    <text x="84" y="172" fill="#FCD34D">Label</text>
+    <text x="116" y="172" fill="#A7F3D0"> value=</text>
+    <text x="156" y="172" fill="#FCA5A5">"Person"</text>
+    <text x="200" y="172" fill="#94A3B8">/&gt;</text>
+
+    <text x="76" y="192" fill="#94A3B8">&lt;</text>
+    <text x="84" y="192" fill="#FCD34D">Label</text>
+    <text x="116" y="192" fill="#A7F3D0"> value=</text>
+    <text x="156" y="192" fill="#FCA5A5">"Car"</text>
+    <text x="186" y="192" fill="#94A3B8">/&gt;</text>
+
+    <text x="60" y="212" fill="#94A3B8">&lt;/</text>
+    <text x="74" y="212" fill="#FCD34D">RectangleLabels</text>
+    <text x="166" y="212" fill="#94A3B8">&gt;</text>
+
+    <text x="46" y="232" fill="#7DD3FC">&lt;/View&gt;</text>
+  </g>
+
+  <!-- 4 fan-out arrows from XML right edge -->
+  <g stroke="#94A3B8" stroke-width="1.5" fill="none">
+    <path d="M 350 100 C 400 100, 410 88, 458 88" marker-end="url(#arrX)"/>
+    <path d="M 350 140 C 400 140, 410 152, 458 152" marker-end="url(#arrX)"/>
+    <path d="M 350 180 C 400 180, 410 216, 458 216" marker-end="url(#arrX)"/>
+    <path d="M 350 220 C 400 220, 410 280, 458 280" marker-end="url(#arrX)"/>
+  </g>
+
+  <!-- 4 right cards -->
+  <g font-size="12">
+    <rect x="460" y="68" width="380" height="44" rx="10" fill="#E0F2FE" stroke="#BAE6FD"/>
+    <text x="476" y="86" fill="#075985" font-weight="700">Choices</text>
+    <text x="476" y="102" fill="#0EA5E9" font-size="11">→ 图片 / 文本 分类</text>
+    <text x="828" y="93" text-anchor="end" fill="#0284C7" font-size="11">单选 / 多选</text>
+
+    <rect x="460" y="132" width="380" height="44" rx="10" fill="#ECFDF5" stroke="#A7F3D0"/>
+    <text x="476" y="150" fill="#065F46" font-weight="700">RectangleLabels</text>
+    <text x="476" y="166" fill="#10B981" font-size="11">→ 目标检测 · 画框</text>
+    <text x="828" y="157" text-anchor="end" fill="#059669" font-size="11">bounding box</text>
+
+    <rect x="460" y="196" width="380" height="44" rx="10" fill="#FEF3C7" stroke="#FCD34D"/>
+    <text x="476" y="214" fill="#92400E" font-weight="700">PolygonLabels</text>
+    <text x="476" y="230" fill="#B45309" font-size="11">→ 实例分割 · 多边形</text>
+    <text x="828" y="221" text-anchor="end" fill="#A16207" font-size="11">polygon mask</text>
+
+    <rect x="460" y="260" width="380" height="44" rx="10" fill="#FFE4E6" stroke="#FDA4AF"/>
+    <text x="476" y="278" fill="#9F1239" font-weight="700">Labels + Text</text>
+    <text x="476" y="294" fill="#BE123C" font-size="11">→ 文本 NER · 实体识别</text>
+    <text x="828" y="285" text-anchor="end" fill="#BE185D" font-size="11">entity span</text>
+  </g>
+</svg>

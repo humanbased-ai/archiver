@@ -1,0 +1,127 @@
+name: structured_data_extraction
+description: "结构化数据: 采集 → 清洗 → LLM提取 → 按类型路由 → 混合标注 → 审核 → 导出"
+
+variables:
+  llm_backend: "gpt4o"
+  completion_threshold: 0.85
+
+steps:
+  - name: collect
+    type: collect
+    params:
+      source_type: file
+      source_config:
+        path: "${source_path}"
+        file_type: jsonl
+      output_slot: records
+
+  - name: clean
+    type: clean
+    params:
+      input_slot: records
+      output_slot: records
+      rules:
+        - type: dedup
+          fields: ["content"]
+        - type: filter
+          condition: "exists(record.content)"
+
+  - name: llm_extract
+    type: llm_invoke
+    params:
+      backend: "${llm_backend}"
+      input_slot: records
+      output_slot: records
+      prompt_template: |
+        从以下数据中提取结构化属性:
+        ${record.content}
+
+        请提取: brand, color, material, size, weight
+        返回 JSON 格式
+      response_format: json
+      output_field: "predictions.attributes"
+
+  - name: route_by_type
+    type: route
+    params:
+      input_slot: records
+      conditions:
+        - name: has_image
+          condition: "exists(record.metadata.image_url)"
+          output_slot: with_image
+        - name: text_only
+          condition: "not exists(record.metadata.image_url)"
+          output_slot: text_only
+      default_slot: text_only
+
+  - name: annotate_with_image
+    type: annotate
+    params:
+      backend: "label-studio"
+      input_slot: with_image
+      project_config:
+        title: "商品属性标注 (图文)"
+        ui_config: |
+          <View style="display: flex">
+            <View style="flex: 1">
+              <Image name="image" value="$image_url"/>
+            </View>
+            <View style="flex: 1; padding: 0 1em">
+              <Header value="商品信息"/>
+              <Text name="title" value="$title"/>
+              <TextArea name="brand" toName="title" placeholder="品牌"/>
+              <TextArea name="color" toName="title" placeholder="颜色"/>
+              <Choices name="material" toName="title" choice="single">
+                <Choice value="棉"/>
+                <Choice value="涤纶"/>
+                <Choice value="皮革"/>
+                <Choice value="金属"/>
+                <Choice value="其他"/>
+              </Choices>
+            </View>
+          </View>
+
+  - name: annotate_text
+    type: annotate
+    params:
+      backend: "custom-form-tool"
+      input_slot: text_only
+      project_config:
+        title: "商品属性标注 (纯文本)"
+        ui_config:
+          layout: side-by-side
+          left_panel:
+            - { field: "title", display: "heading" }
+            - { field: "description", display: "text" }
+          right_panel:
+            - { field: "brand", type: "text", label: "品牌" }
+            - { field: "color", type: "text", label: "颜色" }
+            - { field: "material", type: "select", label: "材质",
+                options: ["棉", "涤纶", "皮革", "金属", "其他"] }
+
+  # --- post-annotation ---
+
+  - name: merge_all
+    type: merge
+    params:
+      input_slots: [with_image, text_only]
+      output_slot: all_annotated
+
+  - name: review
+    type: review
+    params:
+      input_slot: all_annotated
+      output_slot: reviewed
+      rules:
+        - type: spot_check
+          sample_rate: 0.15
+        - type: auto_check
+          checks:
+            - "exists(record.annotations)"
+
+  - name: export
+    type: export
+    params:
+      input_slot: reviewed
+      format: jsonl
+      output_path: "./exports/products_${run.id}.jsonl"

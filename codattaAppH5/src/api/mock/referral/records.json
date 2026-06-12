@@ -1,0 +1,46 @@
+{
+  "data": {
+    "total_count": 5,
+    "total_reward": 500,
+    "result": [
+      {
+        "id": "168182244937728",
+        "email": "wen********s@gmail.com",
+        "date": "2024-07-11T15:54:15",
+        "reward": 100,
+        "address": null
+      },
+      {
+        "id": "066981735342080",
+        "email": null,
+        "date": "2024-07-08T06:29:22",
+        "reward": 100,
+        "address": "0:eab37***2c83c"
+      },
+      {
+        "id": "066430018293760",
+        "email": null,
+        "date": "2024-07-06T17:04:26",
+        "reward": 100,
+        "address": "0:d95c2***62efb"
+      },
+      {
+        "id": "066934065778688",
+        "email": null,
+        "date": "2024-07-08T03:15:24",
+        "reward": 100,
+        "address": "0:e6a59***38bca"
+      },
+      {
+        "id": "066938681176064",
+        "email": null,
+        "date": "2024-07-08T03:34:11",
+        "reward": 100,
+        "address": "0:38063***e5c8d"
+      }
+    ]
+  },
+  "success": true,
+  "errorCode": 0,
+  "errorMessage": "SUCCESS"
+}

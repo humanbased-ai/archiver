@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 460" width="100%" style="max-width:880px;height:auto;background:transparent" font-family='-apple-system,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif'>
+  <defs>
+    <marker id="arrA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#94A3B8"/>
+    </marker>
+  </defs>
+
+  <text x="440" y="24" text-anchor="middle" fill="#0f172a" font-size="14" font-weight="600">Label Studio 整体架构</text>
+
+  <!-- ============== Label Studio Backend ============== -->
+  <rect x="20" y="46" width="460" height="180" rx="14" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1.2"/>
+  <text x="250" y="68" text-anchor="middle" fill="#B91C1C" font-size="13" font-weight="700">Label Studio Backend</text>
+  <text x="250" y="83" text-anchor="middle" fill="#EF4444" font-size="10">Python · Django · 主应用</text>
+
+  <g font-size="12" font-weight="600">
+    <rect x="40"  y="92" width="200" height="34" rx="9" fill="#FFFFFF" stroke="#FCA5A5"/>
+    <text x="140" y="114" text-anchor="middle" fill="#B91C1C">Project Setup</text>
+
+    <rect x="260" y="92" width="200" height="34" rx="9" fill="#FFFFFF" stroke="#FCA5A5"/>
+    <text x="360" y="114" text-anchor="middle" fill="#B91C1C">Data Import</text>
+
+    <rect x="40"  y="134" width="200" height="34" rx="9" fill="#FFFFFF" stroke="#FCA5A5"/>
+    <text x="140" y="156" text-anchor="middle" fill="#B91C1C">Task Management</text>
+
+    <rect x="260" y="134" width="200" height="34" rx="9" fill="#FFFFFF" stroke="#FCA5A5"/>
+    <text x="360" y="156" text-anchor="middle" fill="#B91C1C">Task Export</text>
+
+    <rect x="40"  y="176" width="420" height="40" rx="9" fill="#FFFFFF" stroke="#FCA5A5"/>
+    <text x="250" y="201" text-anchor="middle" fill="#B91C1C">Machine Learning</text>
+  </g>
+  <text x="380" y="201" fill="#EF4444" font-size="10" font-weight="400">桥接层 → ML Backend</text>
+
+  <!-- ============== Label Studio Frontend ============== -->
+  <rect x="20" y="240" width="460" height="180" rx="14" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1.2"/>
+  <text x="250" y="262" text-anchor="middle" fill="#B91C1C" font-size="13" font-weight="700">Label Studio Frontend</text>
+  <text x="250" y="277" text-anchor="middle" fill="#EF4444" font-size="10">JavaScript · React + MST</text>
+
+  <rect x="40" y="288" width="420" height="36" rx="9" fill="#FFFFFF" stroke="#FCA5A5"/>
+  <text x="56" y="305" fill="#B91C1C" font-size="12" font-weight="600">Project Shell</text>
+  <text x="56" y="318" fill="#EF4444" font-size="10">web/apps/labelstudio · 主壳 / 项目管理 / 设置</text>
+
+  <rect x="40" y="332" width="200" height="76" rx="9" fill="#FFFFFF" stroke="#FCA5A5"/>
+  <text x="56" y="352" fill="#B91C1C" font-size="12" font-weight="600">Data Manager</text>
+  <text x="56" y="368" fill="#EF4444" font-size="10">web/libs/datamanager</text>
+  <text x="56" y="384" fill="#EF4444" font-size="10">任务列表 / 筛选 / 批量操作</text>
+  <rect x="186" y="340" width="46" height="18" rx="9" fill="#FEE2E2"/>
+  <text x="209" y="353" text-anchor="middle" fill="#B91C1C" font-size="9.5" font-weight="700">独立 lib</text>
+
+  <rect x="260" y="332" width="200" height="76" rx="9" fill="#FFFFFF" stroke="#FCA5A5"/>
+  <text x="276" y="352" fill="#B91C1C" font-size="12" font-weight="600">Labeling Editor</text>
+  <text x="276" y="368" fill="#EF4444" font-size="10">web/libs/editor</text>
+  <text x="276" y="384" fill="#EF4444" font-size="10">解析 XML / 渲染组件 / 产出结果</text>
+  <rect x="406" y="340" width="46" height="18" rx="9" fill="#FEE2E2"/>
+  <text x="429" y="353" text-anchor="middle" fill="#B91C1C" font-size="9.5" font-weight="700">独立 lib</text>
+
+  <!-- ============== ML Backends (right column) ============== -->
+  <text x="700" y="100" text-anchor="middle" fill="#475569" font-size="12" font-weight="600">Machine Learning Backends</text>
+  <text x="700" y="115" text-anchor="middle" fill="#94A3B8" font-size="10">独立部署 · 通过 HTTP 接入 N 个</text>
+
+  <rect x="540" y="128" width="320" height="40" rx="10" fill="#EEF2FF" stroke="#C7D2FE"/>
+  <text x="700" y="153" text-anchor="middle" fill="#3730A3" font-size="12" font-weight="700">ML Backend 1</text>
+
+  <rect x="540" y="178" width="320" height="40" rx="10" fill="#EEF2FF" stroke="#C7D2FE"/>
+  <text x="700" y="203" text-anchor="middle" fill="#6366F1" font-size="14" font-weight="700">···</text>
+
+  <rect x="540" y="228" width="320" height="40" rx="10" fill="#EEF2FF" stroke="#C7D2FE"/>
+  <text x="700" y="253" text-anchor="middle" fill="#3730A3" font-size="12" font-weight="700">ML Backend N</text>
+
+  <!-- HTTP arrows from backend's "Machine Learning" bridge to each ML Backend -->
+  <g stroke="#94A3B8" stroke-width="1.5" fill="none">
+    <line x1="460" y1="196" x2="510" y2="196"/>
+    <path d="M 510 196 L 510 148 L 538 148" marker-end="url(#arrA)"/>
+    <path d="M 510 196 L 538 196" marker-end="url(#arrA)"/>
+    <path d="M 510 196 L 510 248 L 538 248" marker-end="url(#arrA)"/>
+  </g>
+  <rect x="490" y="180" width="40" height="16" rx="8" fill="#FFFFFF" stroke="#CBD5E1"/>
+  <text x="510" y="192" text-anchor="middle" fill="#475569" font-size="10" font-weight="600">HTTP</text>
+
+  <text x="440" y="446" text-anchor="middle" fill="#94A3B8" font-size="11">Backend 5 个内部模块 · Frontend 含 2 个独立 lib · ML Backends 通过 HTTP 多实例接入</text>
+</svg>

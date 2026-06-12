@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 280" width="100%" style="max-width:880px;height:auto;background:transparent" font-family='-apple-system,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif'>
+  <defs>
+    <marker id="arrO" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#94A3B8"/>
+    </marker>
+  </defs>
+
+  <text x="440" y="24" text-anchor="middle" fill="#0f172a" font-size="14" font-weight="600">多项目链式编排 · 必须靠外部串</text>
+
+  <!-- 3 LS Projects -->
+  <g>
+    <rect x="40" y="60" width="200" height="70" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <rect x="40" y="60" width="6" height="70" rx="3" fill="#0EA5E9"/>
+    <text x="140" y="86" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="700">项目 A · 粗标</text>
+    <text x="140" y="106" text-anchor="middle" fill="#64748B" font-size="11">检测画框 · YOLO 预标</text>
+    <text x="140" y="122" text-anchor="middle" fill="#94A3B8" font-size="10">LS Project</text>
+
+    <rect x="340" y="60" width="200" height="70" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <rect x="340" y="60" width="6" height="70" rx="3" fill="#10B981"/>
+    <text x="440" y="86" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="700">项目 B · 精标</text>
+    <text x="440" y="106" text-anchor="middle" fill="#64748B" font-size="11">每个框补属性 / 关键点</text>
+    <text x="440" y="122" text-anchor="middle" fill="#94A3B8" font-size="10">LS Project</text>
+
+    <rect x="640" y="60" width="200" height="70" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <rect x="640" y="60" width="6" height="70" rx="3" fill="#F43F5E"/>
+    <text x="740" y="86" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="700">项目 C · 审核</text>
+    <text x="740" y="106" text-anchor="middle" fill="#64748B" font-size="11">交叉一致性 / 抽检</text>
+    <text x="740" y="122" text-anchor="middle" fill="#94A3B8" font-size="10">LS Project</text>
+  </g>
+
+  <!-- Orchestrator (neutral) -->
+  <rect x="40" y="180" width="800" height="64" rx="14" fill="#F8FAFC" stroke="#CBD5E1" stroke-dasharray="4 3"/>
+  <text x="60" y="206" fill="#475569" font-size="13" font-weight="700">外部编排器</text>
+  <text x="60" y="226" fill="#64748B" font-size="11">Webhook 监听完成事件 · SDK / REST 创建下游任务 · 串起多个 LS Project 形成 DAG</text>
+  <text x="828" y="218" text-anchor="end" fill="#94A3B8" font-size="10.5">例：Airflow / 自建调度</text>
+
+  <!-- arrows -->
+  <g stroke="#94A3B8" stroke-width="1.5" fill="none">
+    <path d="M 120 130 L 120 178" marker-end="url(#arrO)"/>
+    <path d="M 200 178 L 200 132" marker-end="url(#arrO)"/>
+
+    <path d="M 420 130 L 420 178" marker-end="url(#arrO)"/>
+    <path d="M 500 178 L 500 132" marker-end="url(#arrO)"/>
+
+    <path d="M 720 130 L 720 178" marker-end="url(#arrO)"/>
+    <path d="M 800 178 L 800 132" marker-end="url(#arrO)"/>
+  </g>
+
+  <text x="100" y="158" fill="#64748B" font-size="10">Webhook</text>
+  <text x="206" y="158" fill="#64748B" font-size="10">SDK / REST</text>
+  <text x="400" y="158" fill="#64748B" font-size="10">Webhook</text>
+  <text x="506" y="158" fill="#64748B" font-size="10">SDK / REST</text>
+  <text x="700" y="158" fill="#64748B" font-size="10">Webhook</text>
+  <text x="806" y="158" fill="#64748B" font-size="10">SDK / REST</text>
+
+  <text x="440" y="266" text-anchor="middle" fill="#94A3B8" font-size="11">LS 一个 Project = 一种标注配置 · 没有 DAG / 流水线概念</text>
+</svg>

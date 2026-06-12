@@ -1,0 +1,97 @@
+{
+  "data": {
+    "sub_cate_id": "SUBCATE005",
+    "sub_cate_name": "Complete cyclic quests to receive substantial daily rewards.",
+    "sub_cate_description": "The main goal of Cyclic quests is to help users become familiar with the codatta project. As data contributors, we don't want to impose any extra burden on you. Instead, we periodically encourage you to engage in core data activities, such as submission and validation.",
+    "help_info": [
+      {
+        "icon": "xxx.jpg",
+        "link": "https://help.codatta.io/docs",
+        "name": "What is codatta?"
+      }
+    ],
+    "tasks": [
+      {
+        "task_id": "CHECK-IN-CYCLE",
+        "name": "Complete the daily check-in on the homepage",
+        "description": "Check in on the homepage every day when you log in and then claim your reward. Each daily check-in adds to your time record, marking your journey with the codatta project. ",
+        "type": "AUTO",
+        "schema": "app://?target=check-in",
+        "rewards": [
+          {
+            "reward_icon": "https://file.b18a.io/ee6ce56e-6080-411d-9ccf-62c5899e9052_810879_.png",
+            "reward_type": "points",
+            "reward_value": "5"
+          }
+        ],
+        "locked": false,
+        "how_to_unlock": null,
+        "refresh_time": 1721862000.0,
+        "duration": 86400,
+        "status": "PENDING"
+      },
+      {
+        "task_id": "POINT-QUEST-VALIDATION",
+        "name": "Complete one validation within three days.",
+        "description": "Every three days, you can receive bonus points for the first validation completed. Give it a try! Validation involves checking tags submitted by other users on the platform. ",
+        "type": "AUTO",
+        "schema": "app://validation",
+        "rewards": [
+          {
+            "reward_icon": "https://file.b18a.io/ee6ce56e-6080-411d-9ccf-62c5899e9052_810879_.png",
+            "reward_type": "points",
+            "reward_value": "20"
+          }
+        ],
+        "locked": false,
+        "how_to_unlock": "FINISH【quest·New user validation quest】",
+        "refresh_time": 1721865600.0,
+        "duration": 259200,
+        "instance_id": "TSK202407240352181816",
+        "status": "FINISHED"
+      },
+      {
+        "task_id": "POINT-QUEST-SUBMISSION",
+        "name": "Submit one submission within three days.",
+        "description": "Every three days, you can receive a bonus reward for the first submission completed. Try it out by using metadata tags from actual transactions or trusted third parties. ",
+        "type": "AUTO",
+        "schema": "app://submission",
+        "rewards": [
+          {
+            "reward_icon": "https://file.b18a.io/ee6ce56e-6080-411d-9ccf-62c5899e9052_810879_.png",
+            "reward_type": "points",
+            "reward_value": "25"
+          }
+        ],
+        "locked": false,
+        "how_to_unlock": "FINISH【quest·New user validation quest】",
+        "refresh_time": 1721865600.0,
+        "duration": 259200,
+        "instance_id": "TSK202407240355271819",
+        "status": "FINISHED"
+      },
+      {
+        "task_id": "POINT-QUEST-SUBMISSION-REVIEW",
+        "name": "Every seven days, one submission passes Human Intelligence Validation.",
+        "description": "Each piece of metadata goes through the following validation stages after submission: AI Validation、Human Intelligence、Public Voting、Domain Expert Voting、Public Review、Tags Validation Completed Ensuring that within each seven-day quest cycle, one submission passes Human Intelligence Validation.",
+        "type": "MANUAL",
+        "schema": "app://submission",
+        "rewards": [
+          {
+            "reward_icon": "https://file.b18a.io/ee6ce56e-6080-411d-9ccf-62c5899e9052_810879_.png",
+            "reward_type": "points",
+            "reward_value": "60"
+          }
+        ],
+        "locked": false,
+        "how_to_unlock": "FINISH【quest·New user validation quest】",
+        "refresh_time": 1722211200.0,
+        "duration": 604800,
+        "status": "PENDING"
+      }
+    ]
+  },
+  "success": true,
+  "errorCode": 0,
+  "errorMessage": "SUCCESS"
+}

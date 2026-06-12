@@ -1,0 +1,25 @@
+name: video_timeline
+description: "Filter frames → synthesize video → timeline segment annotation"
+
+steps:
+  - name: ingest
+    type: ingest
+
+  - name: filter
+    type: filter
+    params:
+      model: yolo26n.pt
+      target_classes: [person]
+      confidence: 0.5
+      batch_size: 32
+
+  - name: video_synth
+    type: video_synth
+
+  - name: upload
+    type: upload
+    params:
+      config_template: video_timeline
+
+  - name: aggregate
+    type: aggregate

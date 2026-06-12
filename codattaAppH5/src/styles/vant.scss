@@ -1,0 +1,35 @@
+:root {
+    --rv-toast-max-width: 100%;
+    --rv-toast-default-width: 200px;
+
+    --rv-toast-background-color: rgba(0, 0, 0, 0.85);
+
+    --rv-dialog-background-color: #252532;
+    --rv-dialog-confirm-button-text-color: #fff;
+    --rv-button-default-background-color: transparent;
+    --rv-dialog-has-title-message-text-color: #fff;
+    --rv-picker-option-text-color: #808080;
+    --rv-picker-mask-background-image: none;
+    --rv-picker-confirm-action-color: white;
+
+    --rv-gray-1: #010101;
+    --rv-gray-2: #1A1A1A;
+    --rv-gray-3: #343434;
+    --rv-gray-4: #4D4D4D;
+    --rv-gray-5: #676767;
+    --rv-gray-6: #808080;
+    --rv-gray-7: #D1D1D1;
+    --rv-gray-8: #E7E7E7;
+
+    .rv-dialog__header {
+        color: #fff;
+    }
+
+    .toast-fail > .rv-toast__icon {
+        color: #ef4444;
+    }
+
+    .toast-success > .rv-toast__icon {
+        color: #10b981;
+    }
+}

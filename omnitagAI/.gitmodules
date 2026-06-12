@@ -1,0 +1,6 @@
+[submodule "eigenlayer/voting-digest-avs"]
+	path = eigenlayer/hello-world-avs
+	url = https://github.com/Layr-Labs/hello-world-avs.git
+[submodule "eigenlayer/my-foundry-helloworld/lib/forge-std"]
+	path = eigenlayer/my-foundry-helloworld/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std

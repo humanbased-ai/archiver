@@ -1,0 +1,9 @@
+flowchart LR
+  RAW[原始数据] --> IMP[导入 Task]
+  IMP --> PRED[ML Backend\n模型预标注]
+  PRED --> ANN[人工标注/修正]
+  ANN --> REV{审核}
+  REV -->|模型| MR[ML 打分/校验]
+  REV -->|人工| HR[Reviewer 复核]
+  MR --> EXP[导出]
+  HR --> EXP

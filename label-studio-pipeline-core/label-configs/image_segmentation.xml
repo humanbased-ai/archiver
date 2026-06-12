@@ -1,0 +1,13 @@
+<!--
+  图像语义分割标注模板
+  使用 PolygonLabels 画多边形 + BrushLabels 画刷
+-->
+<View>
+  <Image name="image" value="$image" zoom="true" zoomControl="true"/>
+  <PolygonLabels name="polygon" toName="image" strokeWidth="2" pointSize="small">
+    <Label value="person" background="#FF0000"/>
+    <Label value="car" background="#00FF00"/>
+    <Label value="road" background="#0000FF"/>
+    <Label value="building" background="#FFFF00"/>
+  </PolygonLabels>
+</View>

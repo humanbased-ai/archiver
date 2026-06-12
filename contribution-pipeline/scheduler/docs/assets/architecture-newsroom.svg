@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 880" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#444"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/>
+    </marker>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f1f5f9"/>
+      <stop offset="100%" stop-color="#fafafa"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="880" fill="url(#bg)"/>
+
+  <!-- 标题 -->
+  <text x="640" y="48" text-anchor="middle" font-size="30" font-weight="700" fill="#1e293b">
+    调度中心 = 一家"报社编辑部"
+  </text>
+  <text x="640" y="78" text-anchor="middle" font-size="16" fill="#475569">
+    立选题 → 记者采写 → 查重 → 编辑审稿 → 归档入库
+  </text>
+
+  <!-- ========================= 选题方 ========================= -->
+  <g transform="translate(60, 120)">
+    <rect width="180" height="120" rx="14" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="90" y="40" text-anchor="middle" font-size="40">📋</text>
+    <text x="90" y="74" text-anchor="middle" font-size="16" font-weight="600" fill="#1e3a8a">选题方 / 标注员</text>
+    <text x="90" y="96" text-anchor="middle" font-size="13" fill="#1e40af">在前端报选题</text>
+    <text x="90" y="114" text-anchor="middle" font-size="13" fill="#1e40af">(React 网页)</text>
+  </g>
+
+  <!-- ========================= 编辑部主任 ========================= -->
+  <g transform="translate(310, 100)">
+    <rect width="540" height="180" rx="16" fill="#f5f3ff" stroke="#7c3aed" stroke-width="3"/>
+    <text x="270" y="36" text-anchor="middle" font-size="20" font-weight="700" fill="#5b21b6">
+      🏢 编辑部主任（Fastify 后端）
+    </text>
+
+    <!-- 受理处 -->
+    <g transform="translate(20, 55)">
+      <rect width="155" height="105" rx="10" fill="#ddd6fe" stroke="#7c3aed"/>
+      <text x="77" y="30" text-anchor="middle" font-size="22">📨</text>
+      <text x="77" y="58" text-anchor="middle" font-size="14" font-weight="600" fill="#4c1d95">选题受理</text>
+      <text x="77" y="76" text-anchor="middle" font-size="11" fill="#4c1d95">收选题, 立项</text>
+      <text x="77" y="93" text-anchor="middle" font-size="11" fill="#4c1d95">(API 入口)</text>
+    </g>
+
+    <!-- 选题板 -->
+    <g transform="translate(192, 55)">
+      <rect width="155" height="105" rx="10" fill="#c4b5fd" stroke="#6d28d9"/>
+      <text x="77" y="30" text-anchor="middle" font-size="22">📌</text>
+      <text x="77" y="58" text-anchor="middle" font-size="14" font-weight="600" fill="#4c1d95">选题板</text>
+      <text x="77" y="76" text-anchor="middle" font-size="11" fill="#4c1d95">所有待处理稿件</text>
+      <text x="77" y="93" text-anchor="middle" font-size="11" fill="#4c1d95">(outbox 队列)</text>
+    </g>
+
+    <!-- 派稿台 -->
+    <g transform="translate(364, 55)">
+      <rect width="155" height="105" rx="10" fill="#a78bfa" stroke="#5b21b6"/>
+      <text x="77" y="30" text-anchor="middle" font-size="22">🎯</text>
+      <text x="77" y="58" text-anchor="middle" font-size="14" font-weight="600" fill="#fff">派稿台</text>
+      <text x="77" y="76" text-anchor="middle" font-size="11" fill="#fff">把稿子派到下一站</text>
+      <text x="77" y="93" text-anchor="middle" font-size="11" fill="#fff">(路由 / 流转)</text>
+    </g>
+  </g>
+
+  <!-- 督导员 -->
+  <g transform="translate(900, 100)">
+    <rect width="320" height="180" rx="16" fill="#fef2f2" stroke="#dc2626" stroke-width="3"/>
+    <text x="160" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#7f1d1d">
+      ⏰ 编辑部督导（Reconciler）
+    </text>
+    <text x="160" y="68" text-anchor="middle" font-size="13" fill="#991b1b">每隔 30 秒查一遍选题板</text>
+    <text x="160" y="92" text-anchor="middle" font-size="13" fill="#991b1b">看哪个稿子被领走太久没交</text>
+    <text x="160" y="120" text-anchor="middle" font-size="13" font-weight="600" fill="#7f1d1d">→ 把稿子收回, 找别人接手</text>
+    <text x="160" y="142" text-anchor="middle" font-size="13" font-weight="600" fill="#7f1d1d">→ 怎么都做不完? 进死信堆</text>
+    <text x="160" y="166" text-anchor="middle" font-size="11" fill="#991b1b" font-style="italic">"防止稿子被人领走拖死"</text>
+  </g>
+
+  <!-- ========================= 编辑部各工位 ========================= -->
+  <g transform="translate(60, 320)">
+    <rect width="1160" height="280" rx="16" fill="#f0fdfa" stroke="#0d9488" stroke-width="2" stroke-dasharray="6 3"/>
+    <text x="580" y="32" text-anchor="middle" font-size="20" font-weight="700" fill="#134e4a">
+      ✍️ 编辑部各工位（节点 / Steps）
+    </text>
+
+    <!-- 工位 1: 记者采写 (人工) -->
+    <g transform="translate(40, 60)">
+      <rect width="200" height="190" rx="12" fill="#fff" stroke="#0d9488" stroke-width="2"/>
+      <text x="100" y="42" text-anchor="middle" font-size="36">🧑‍💼</text>
+      <text x="100" y="74" text-anchor="middle" font-size="15" font-weight="700" fill="#134e4a">记者采写 (collect)</text>
+      <text x="100" y="96" text-anchor="middle" font-size="12" fill="#0f766e">真人记者上岗</text>
+      <text x="100" y="116" text-anchor="middle" font-size="11" fill="#475569">─────────────</text>
+      <text x="100" y="136" text-anchor="middle" font-size="12" fill="#334155">在前端表单里写稿</text>
+      <text x="100" y="154" text-anchor="middle" font-size="12" fill="#334155">写好点"交稿"</text>
+      <text x="100" y="178" text-anchor="middle" font-size="11" fill="#0d9488" font-style="italic">manual = true</text>
+    </g>
+
+    <!-- 工位 2: 查重 (机器人) -->
+    <g transform="translate(265, 60)">
+      <rect width="200" height="190" rx="12" fill="#fff" stroke="#7c3aed" stroke-width="2"/>
+      <text x="100" y="42" text-anchor="middle" font-size="36">🔎</text>
+      <text x="100" y="74" text-anchor="middle" font-size="15" font-weight="700" fill="#5b21b6">查重系统 (dedup)</text>
+      <text x="100" y="96" text-anchor="middle" font-size="12" fill="#6d28d9">每 2 秒自动扫稿</text>
+      <text x="100" y="116" text-anchor="middle" font-size="11" fill="#475569">─────────────</text>
+      <text x="100" y="136" text-anchor="middle" font-size="12" fill="#334155">看这稿子以前发过没</text>
+      <text x="100" y="154" text-anchor="middle" font-size="12" fill="#334155">重复就标记"撞稿"</text>
+      <text x="100" y="178" text-anchor="middle" font-size="11" fill="#7c3aed" font-style="italic">AutoWorker</text>
+    </g>
+
+    <!-- 工位 3: 编辑审稿 (人工) -->
+    <g transform="translate(490, 60)">
+      <rect width="200" height="190" rx="12" fill="#fff" stroke="#0d9488" stroke-width="2"/>
+      <text x="100" y="42" text-anchor="middle" font-size="36">📝</text>
+      <text x="100" y="74" text-anchor="middle" font-size="15" font-weight="700" fill="#134e4a">编辑审稿 (review)</text>
+      <text x="100" y="96" text-anchor="middle" font-size="12" fill="#0f766e">真人编辑把关</text>
+      <text x="100" y="116" text-anchor="middle" font-size="11" fill="#475569">─────────────</text>
+      <text x="100" y="136" text-anchor="middle" font-size="12" fill="#334155">通过 → 进归档</text>
+      <text x="100" y="154" text-anchor="middle" font-size="12" fill="#dc2626">不通过 → 退回重写</text>
+      <text x="100" y="178" text-anchor="middle" font-size="11" fill="#0d9488" font-style="italic">manual = true</text>
+    </g>
+
+    <!-- 工位 4: 归档 (机器人) -->
+    <g transform="translate(715, 60)">
+      <rect width="200" height="190" rx="12" fill="#fff" stroke="#7c3aed" stroke-width="2"/>
+      <text x="100" y="42" text-anchor="middle" font-size="36">🗄️</text>
+      <text x="100" y="74" text-anchor="middle" font-size="15" font-weight="700" fill="#5b21b6">归档系统 (export)</text>
+      <text x="100" y="96" text-anchor="middle" font-size="12" fill="#6d28d9">每 2 秒自动归档</text>
+      <text x="100" y="116" text-anchor="middle" font-size="11" fill="#475569">─────────────</text>
+      <text x="100" y="136" text-anchor="middle" font-size="12" fill="#334155">把通过的稿件</text>
+      <text x="100" y="154" text-anchor="middle" font-size="12" fill="#334155">存进资料库</text>
+      <text x="100" y="178" text-anchor="middle" font-size="11" fill="#7c3aed" font-style="italic">AutoWorker</text>
+    </g>
+
+    <!-- 扩展位 -->
+    <g transform="translate(940, 60)">
+      <rect width="180" height="190" rx="12" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4 3"/>
+      <text x="90" y="52" text-anchor="middle" font-size="36">➕</text>
+      <text x="90" y="92" text-anchor="middle" font-size="14" font-weight="600" fill="#475569">可以加更多工位</text>
+      <text x="90" y="118" text-anchor="middle" font-size="12" fill="#64748b">翻译 / 校对 /</text>
+      <text x="90" y="136" text-anchor="middle" font-size="12" fill="#64748b">脱敏 / 配图 ...</text>
+      <text x="90" y="170" text-anchor="middle" font-size="11" fill="#64748b" font-style="italic">流水线可视化拖拽</text>
+    </g>
+  </g>
+
+  <!-- ========================= 资料库 ========================= -->
+  <g transform="translate(440, 660)">
+    <rect width="400" height="170" rx="16" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+    <text x="200" y="42" text-anchor="middle" font-size="22">🗂️</text>
+    <text x="200" y="74" text-anchor="middle" font-size="18" font-weight="700" fill="#14532d">
+      资料库 (dataset_records)
+    </text>
+    <text x="200" y="100" text-anchor="middle" font-size="13" fill="#166534">每发出一篇合格稿, 这里存一份</text>
+    <text x="200" y="124" text-anchor="middle" font-size="13" fill="#166534">长期保留, 给业务方使用</text>
+    <text x="200" y="152" text-anchor="middle" font-size="12" fill="#15803d" font-style="italic">"成稿库" → 训练数据 / 报表 / 下游消费</text>
+  </g>
+
+  <!-- ========================= 箭头 ========================= -->
+  <line x1="240" y1="180" x2="305" y2="180" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
+  <text x="272" y="172" text-anchor="middle" font-size="11" fill="#1e40af">①报选题</text>
+
+  <path d="M 580 285 L 580 320" stroke="#7c3aed" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="608" y="307" font-size="11" fill="#5b21b6">②派到工位</text>
+
+  <path d="M 700 320 L 700 285" stroke="#16a34a" stroke-width="2.5" fill="none" marker-end="url(#arrow)" stroke-dasharray="5 3"/>
+  <text x="710" y="305" font-size="11" fill="#166534">③交稿回报</text>
+
+  <path d="M 815 510 Q 700 580 640 660" stroke="#16a34a" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="700" y="600" font-size="12" fill="#15803d" font-weight="600">④终稿入库</text>
+
+  <path d="M 1060 285 Q 1060 380 980 380" stroke="#dc2626" stroke-width="2" fill="none" stroke-dasharray="4 4"/>
+  <text x="1085" y="340" font-size="11" fill="#991b1b">巡视</text>
+
+  <!-- 图例 -->
+  <g transform="translate(60, 760)">
+    <text x="0" y="0" font-size="13" font-weight="700" fill="#1f2937">图例</text>
+    <rect x="0" y="14" width="14" height="14" fill="#fff" stroke="#0d9488" stroke-width="2"/>
+    <text x="22" y="26" font-size="12" fill="#1f2937">人工工位 (真人来做)</text>
+    <rect x="180" y="14" width="14" height="14" fill="#fff" stroke="#7c3aed" stroke-width="2"/>
+    <text x="202" y="26" font-size="12" fill="#1f2937">自动系统 (后台进程)</text>
+    <line x1="370" y1="21" x2="400" y2="21" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="408" y="26" font-size="12" fill="#1f2937">实线 = 实际数据流转</text>
+    <line x1="600" y1="21" x2="630" y2="21" stroke="#dc2626" stroke-width="2" stroke-dasharray="4 4"/>
+    <text x="638" y="26" font-size="12" fill="#1f2937">虚线 = 后台监督</text>
+  </g>
+</svg>

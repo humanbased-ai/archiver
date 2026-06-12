@@ -1,0 +1,8 @@
+{
+  "addresses": {
+    "ECDSAStakeRegistry": "0x92601483aeE0db2F901bAFD72B020944a69d9040",
+    "ECDSAStakeRegistryImplementation": "0x92FF0B56528CaBf05866B29E8A00C41dFD646Ae1",
+    "votingDigestServiceManagerImplementation": "0x391Af426b1f3D3c39A4328663883d06c57333C33",
+    "votingDigestServiceManagerProxy": "0x72932C94f9da06BB02f3CE75E6bF3332597988d4"
+  }
+}

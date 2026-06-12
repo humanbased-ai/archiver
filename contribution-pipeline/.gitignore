@@ -1,0 +1,35 @@
+# 子仓库 (独立管理，主仓库不跟踪)
+/ml-backend/
+/api-sdk/
+/core/
+
+# 本地开发
+.env
+.env.bak*
+.env.local
+.pids/
+logs/
+output/
+*/node_modules
+
+# 虚拟环境 (uv 管理, 三个组件各自隔离)
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# AI / 编辑器 工具本地配置 (按机器/用户分, 不入仓)
+.claude/
+.windsurf/
+.vscode/
+.idea/
+AGENTS.md

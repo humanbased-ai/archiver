@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 620" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+  <defs>
+    <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <text x="440" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">总体架构</text>
+  <text x="440" y="58" text-anchor="middle" font-size="13" fill="#64748b">前端 / 后端单进程 / Worker 多进程,共用一个 PostgreSQL</text>
+
+  <!-- Frontend -->
+  <rect x="80" y="86" width="720" height="100" rx="14" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <rect x="80" y="86" width="720" height="32" rx="14" fill="#2563eb"/>
+  <rect x="80" y="102" width="720" height="16" fill="#2563eb"/>
+  <text x="440" y="108" text-anchor="middle" font-size="15" font-weight="700" fill="white">Frontend (Web)</text>
+
+  <rect x="120" y="134" width="200" height="40" rx="8" fill="white" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="220" y="160" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a8a">PipelineEditor</text>
+
+  <rect x="340" y="134" width="200" height="40" rx="8" fill="white" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="440" y="160" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a8a">CollectList [规划]</text>
+
+  <rect x="560" y="134" width="200" height="40" rx="8" fill="white" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="660" y="160" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a8a">ReviewList [规划]</text>
+
+  <line x1="440" y1="186" x2="440" y2="208" stroke="#475569" stroke-width="2" marker-end="url(#a1)"/>
+  <text x="450" y="202" font-size="11" fill="#475569">HTTP</text>
+
+  <!-- Backend -->
+  <rect x="80" y="210" width="720" height="180" rx="14" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+  <rect x="80" y="210" width="720" height="32" rx="14" fill="#059669"/>
+  <rect x="80" y="226" width="720" height="16" fill="#059669"/>
+  <text x="440" y="232" text-anchor="middle" font-size="15" font-weight="700" fill="white">Backend (单进程,模块化)</text>
+
+  <rect x="110" y="258" width="240" height="80" rx="8" fill="white" stroke="#059669" stroke-width="1.5"/>
+  <text x="230" y="280" text-anchor="middle" font-size="13" font-weight="700" fill="#064e3b">business/</text>
+  <text x="230" y="300" text-anchor="middle" font-size="11" fill="#1f2937">采集 / 审核 / 用户去重</text>
+  <text x="230" y="318" text-anchor="middle" font-size="11" fill="#1f2937">业务校验</text>
+  <text x="230" y="334" text-anchor="middle" font-size="10" fill="#64748b" font-style="italic">[规划拆分]</text>
+
+  <rect x="430" y="258" width="240" height="80" rx="8" fill="white" stroke="#059669" stroke-width="1.5"/>
+  <text x="550" y="280" text-anchor="middle" font-size="13" font-weight="700" fill="#064e3b">sched/</text>
+  <text x="550" y="300" text-anchor="middle" font-size="11" fill="#1f2937">调度核心</text>
+  <text x="550" y="318" text-anchor="middle" font-size="11" fill="#1f2937">outbox / 路由 / 对账 / 重试</text>
+  <text x="550" y="334" text-anchor="middle" font-size="10" fill="#64748b" font-style="italic">不感知业务</text>
+
+  <line x1="350" y1="298" x2="430" y2="298" stroke="#475569" stroke-width="2" marker-end="url(#a1)"/>
+  <text x="780" y="294" text-anchor="end" font-size="11" fill="#475569">POST /lease</text>
+  <text x="780" y="310" text-anchor="end" font-size="11" fill="#475569">POST /result</text>
+  <line x1="780" y1="298" x2="672" y2="298" stroke="#475569" stroke-width="2" marker-end="url(#a1)"/>
+
+  <text x="440" y="368" text-anchor="middle" font-size="11" fill="#064e3b" font-style="italic">边界规则:business 可调 sched/outbox · sched 不能 import business</text>
+
+  <!-- Database -->
+  <rect x="240" y="412" width="400" height="80" rx="14" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5"/>
+  <rect x="240" y="412" width="400" height="28" rx="14" fill="#dc2626"/>
+  <rect x="240" y="426" width="400" height="14" fill="#dc2626"/>
+  <text x="440" y="432" text-anchor="middle" font-size="14" font-weight="700" fill="white">PostgreSQL (单实例)</text>
+  <text x="440" y="464" text-anchor="middle" font-size="11" fill="#1f2937">items · outbox · attempts · submissions</text>
+  <text x="440" y="482" text-anchor="middle" font-size="11" fill="#1f2937">dataset_records · pipelines · node_definitions</text>
+
+  <line x1="440" y1="390" x2="440" y2="410" stroke="#475569" stroke-width="2" marker-end="url(#a1)"/>
+
+  <!-- Workers -->
+  <line x1="440" y1="492" x2="440" y2="514" stroke="#475569" stroke-width="2" marker-end="url(#a1)"/>
+  <text x="450" y="508" font-size="11" fill="#475569">HTTP (lease / result)</text>
+
+  <rect x="80" y="516" width="720" height="86" rx="14" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <rect x="80" y="516" width="720" height="28" rx="14" fill="#d97706"/>
+  <rect x="80" y="530" width="720" height="14" fill="#d97706"/>
+  <text x="440" y="536" text-anchor="middle" font-size="14" font-weight="700" fill="white">Worker 进程(一类节点一个进程,水平可扩)</text>
+  <text x="440" y="566" text-anchor="middle" font-size="12" fill="#1f2937">worker.ts → driver registry → ingest / translate / dedup / …</text>
+  <text x="440" y="586" text-anchor="middle" font-size="11" fill="#92400e" font-style="italic">每个进程绑定 NODE_KEYS,独立伸缩</text>
+</svg>

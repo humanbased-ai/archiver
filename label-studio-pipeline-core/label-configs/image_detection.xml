@@ -1,0 +1,16 @@
+<!--
+  图像目标检测标注模板
+  使用 RectangleLabels 画矩形框, 配合 YOLO ML Backend 预标注
+  修改 Label 列表以匹配你的模型类别
+-->
+<View>
+  <Image name="image" value="$image" zoom="true" zoomControl="true" rotateControl="true"/>
+  <RectangleLabels name="label" toName="image" strokeWidth="2" smart="true">
+    <Label value="person" background="#FF0000"/>
+    <Label value="car" background="#00FF00"/>
+    <Label value="truck" background="#0000FF"/>
+    <Label value="bus" background="#FFFF00"/>
+    <Label value="motorcycle" background="#FF00FF"/>
+    <Label value="bicycle" background="#00FFFF"/>
+  </RectangleLabels>
+</View>

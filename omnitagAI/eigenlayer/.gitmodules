@@ -1,0 +1,9 @@
+[submodule "voting-digest-avs/contracts/lib/openzeppelin-contracts"]
+	path = voting-digest-avs/contracts/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "voting-digest-avs/contracts/lib/eigenlayer-middleware"]
+	path = voting-digest-avs/contracts/lib/eigenlayer-middleware
+	url = https://github.com/layr-Labs/eigenlayer-middleware
+[submodule "voting-digest-avs/contracts/lib/forge-std"]
+	path = voting-digest-avs/contracts/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std

@@ -1,0 +1,5 @@
+# Reputation
+
+The Reputation System is a crucial component of the Codatta Protocol, used to measure and evaluate the quality and reliability of the data provided by nodes, that is, data contributors and validators. The purpose of the Reputation System is to motivate nodes to provide high-quality data in a quantifiable way and to ensure the robustness of the entire protocol's data. The reputation score of a node is directly proportional to its data decision-making, incentive weighting, and community governance rights, which means that the higher the reputation of a node, the greater its influence on the protocol and the more incentives it receives.
+
+The design and implementation of the Reputation System aims to foster positive competition among contributors, encouraging them to provide more accurate and timely metadata, thereby forming a positive metadata infrastructure ecosystem. In this way, the Codatta Protocol can ensure the quality and reliability of its data services and provide a robust data infrastructure for the Web3 ecosystem.

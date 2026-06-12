@@ -1,0 +1,5 @@
+flowchart LR
+  P1[项目A\n粗标] -->|Webhook / SDK| ORCH[外部编排器]
+  ORCH --> P2[项目B\n精标]
+  P2 --> ORCH
+  ORCH --> P3[项目C\n审核]

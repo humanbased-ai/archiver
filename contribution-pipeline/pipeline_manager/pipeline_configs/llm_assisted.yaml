@@ -1,0 +1,92 @@
+name: llm_assisted_classification
+description: "LLM 辅助分类: 采集 → 清洗 → LLM预分类 → 置信度路由 → 人工标注 → 导出"
+
+variables:
+  confidence_threshold: 0.9
+  llm_backend: "gpt4o"
+  annotation_backend: "label-studio"
+
+steps:
+  - name: collect_data
+    type: collect
+    params:
+      source_type: directory
+      source_config:
+        path: "${source_path}"
+        patterns: ["*.jpg", "*.png", "*.jpeg"]
+      output_slot: records
+
+  - name: clean_data
+    type: clean
+    params:
+      input_slot: records
+      output_slot: records
+      rules:
+        - type: dedup
+          fields: ["content"]
+        - type: validate
+          check: image_integrity
+
+  - name: llm_classify
+    type: llm_invoke
+    params:
+      backend: "${llm_backend}"
+      input_slot: records
+      output_slot: records
+      prompt_template: |
+        请分析这张图片并分类。
+        可选类别: person, car, truck, bicycle, motorcycle, other
+        返回 JSON: {"category": "...", "confidence": 0.0-1.0}
+      response_format: json
+      output_field: "predictions.category"
+      attach_image: true
+
+  - name: route_by_confidence
+    type: route
+    params:
+      input_slot: records
+      conditions:
+        - name: high_confidence
+          condition: "record.predictions.category.confidence >= ${confidence_threshold}"
+          output_slot: auto_approved
+        - name: low_confidence
+          condition: "record.predictions.category.confidence < ${confidence_threshold}"
+          output_slot: needs_annotation
+      default_slot: needs_annotation
+
+  - name: human_annotate
+    type: annotate
+    params:
+      backend: "${annotation_backend}"
+      input_slot: needs_annotation
+      project_config:
+        title: "图片分类标注"
+        ui_config: |
+          <View>
+            <Image name="image" value="$image" zoom="true"/>
+            <Choices name="category" toName="image" choice="single-radio">
+              <Choice value="person"/>
+              <Choice value="car"/>
+              <Choice value="truck"/>
+              <Choice value="bicycle"/>
+              <Choice value="motorcycle"/>
+              <Choice value="other"/>
+            </Choices>
+          </View>
+
+  # --- 以下步骤在标注完成后的第二段 Run 中执行 ---
+
+  - name: merge_results
+    type: merge
+    params:
+      input_slots:
+        - auto_approved
+        - needs_annotation
+      output_slot: all_records
+
+  - name: export_results
+    type: export
+    params:
+      input_slot: all_records
+      format: jsonl
+      output_path: "./exports/classification_${run.id}.jsonl"

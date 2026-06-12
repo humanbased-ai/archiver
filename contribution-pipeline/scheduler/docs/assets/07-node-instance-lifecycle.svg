@@ -1,0 +1,222 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 1480" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12">
+  <!--
+    单个节点实例处理一个 job 的完整生命周期
+    重点: 标明每一步在哪一层 — 基类 (BaseNode/ExternalWorkerNode) vs 子类 (XxxNode.handle)
+  -->
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#374151"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ea580c"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/>
+    </marker>
+  </defs>
+
+  <!-- 标题 -->
+  <text x="590" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#111827">节点实例生命周期 — 处理一个 job</text>
+  <text x="590" y="54" text-anchor="middle" font-size="12" fill="#6b7280">每步标明执行者 (基类公共 / 子类业务) · 以 ExternalWorker 为主示范, InProcess 走类似路径但跳过 lease/heartbeat</text>
+
+  <!-- 两道泳道: 左=节点实例侧 (基类+子类), 右=调度中心 -->
+  <rect x="20" y="76" width="700" height="32" rx="6" fill="#fff7ed"/>
+  <text x="370" y="96" text-anchor="middle" font-weight="700" fill="#9a3412">节点实例进程 (例: sandbox-worker pod, 含基类壳 + 业务子类)</text>
+  <rect x="740" y="76" width="420" height="32" rx="6" fill="#ede9fe"/>
+  <text x="950" y="96" text-anchor="middle" font-weight="700" fill="#5b21b6">调度中心 (scheduler-backend)</text>
+
+  <line x1="730" y1="116" x2="730" y2="1450" stroke="#e5e7eb" stroke-dasharray="4,4"/>
+
+  <!-- ====================== 阶段 A: 实例化 + 启动 ====================== -->
+  <text x="40" y="140" font-size="13" font-weight="700" fill="#111827">A · 实例化 + 注册</text>
+
+  <rect x="20" y="154" width="350" height="78" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="195" y="174" text-anchor="middle" font-weight="700" font-size="12" fill="#1e3a8a">[基类构造]</text>
+  <text x="30" y="194" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">const node = new SandboxWorkerNode(cfg);</text>
+  <text x="30" y="210" font-size="11" fill="#374151">基类设 logger / 解析 schedulerBaseUrl</text>
+  <text x="30" y="224" font-size="11" fill="#374151">/ 编译 ajv validator (inputs/outputs schema)</text>
+
+  <rect x="380" y="154" width="340" height="78" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="550" y="174" text-anchor="middle" font-weight="700" font-size="12" fill="#92400e">[子类钩子] onInit()</text>
+  <text x="390" y="194" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">async onInit() {</text>
+  <text x="390" y="210" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">  this.threadPool = new WorkerPool();</text>
+  <text x="390" y="224" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">}  // 建连接池 / 加载模型 / 校验 env</text>
+
+  <line x1="370" y1="193" x2="378" y2="193" stroke="#374151" marker-end="url(#arrow)"/>
+
+  <!-- 注册 → upsert -->
+  <rect x="740" y="154" width="420" height="78" rx="8" fill="#f3e8ff" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="950" y="174" text-anchor="middle" font-weight="700" font-size="12" fill="#5b21b6">node_definitions auto-upsert (POST 内部)</text>
+  <text x="750" y="194" font-size="11" fill="#374151">register(node) 内部走 auto-upsert: 把</text>
+  <text x="750" y="208" font-size="11" fill="#374151">nodeDefinition 的 schema/presets/examples</text>
+  <text x="750" y="224" font-size="11" fill="#374151">写入 DB, status='active'</text>
+
+  <line x1="720" y1="193" x2="738" y2="193" stroke="#374151" marker-end="url(#arrow)"/>
+
+  <!-- ====================== 阶段 B: 启动 lease 循环 ====================== -->
+  <text x="40" y="258" font-size="13" font-weight="700" fill="#111827">B · 启动 lease 循环 (仅 ExternalWorker / InProcess 也跑这循环但在主进程)</text>
+
+  <rect x="20" y="272" width="350" height="64" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="195" y="292" text-anchor="middle" font-weight="700" font-size="12" fill="#1e3a8a">[基类] node.start() → leaseLoop()</text>
+  <text x="30" y="312" font-size="11" fill="#374151">setInterval/setTimeout 循环, 空轮询退避 (2s↔10s)</text>
+  <text x="30" y="326" font-size="11" fill="#374151">每 tick: 调一次 lease (见 C)</text>
+
+  <!-- ====================== 阶段 C: 每 tick 拉活 ====================== -->
+  <text x="40" y="362" font-size="13" font-weight="700" fill="#111827">C · 每个 tick: 拉活</text>
+
+  <rect x="20" y="376" width="350" height="68" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="195" y="396" text-anchor="middle" font-weight="700" font-size="12" fill="#1e3a8a">[基类] leaseOnce()</text>
+  <text x="30" y="416" font-family="ui-monospace, monospace" font-size="10" fill="#1f2937">POST /api/v1/queue/:nodeKey/lease</text>
+  <text x="30" y="430" font-size="11" fill="#374151">{ workerId, batchSize, leaseSeconds }</text>
+
+  <rect x="740" y="376" width="420" height="92" rx="8" fill="#faf5ff" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="950" y="396" text-anchor="middle" font-weight="700" font-size="12" fill="#5b21b6">调度中心: 服务端 lease 合并</text>
+  <text x="750" y="414" font-size="11" fill="#374151">① 锁 outbox (FOR UPDATE SKIP LOCKED) +</text>
+  <text x="750" y="428" font-size="11" fill="#374151">  status='active' 节点 + 公平调度</text>
+  <text x="750" y="442" font-size="11" fill="#374151">② mergeEffectiveParams (defaults+step+pin)</text>
+  <text x="750" y="456" font-size="11" fill="#374151">③ resolveBindings (step.inputs → job.inputs)</text>
+
+  <path d="M 370 410 L 738 410" stroke="#ea580c" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+  <path d="M 738 450 L 370 450" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="3,3" marker-end="url(#arrow)"/>
+  <text x="430" y="404" font-size="10" fill="#ea580c">lease req</text>
+  <text x="430" y="466" font-size="10" fill="#5b21b6">jobs[] 返回</text>
+
+  <!-- ====================== 阶段 D: 处理每个 job (重点) ====================== -->
+  <text x="40" y="494" font-size="13" font-weight="700" fill="#111827">D · 处理每个 job (核心 — 基类壳 + 子类 handle 分工)</text>
+
+  <!-- D1 校验入参 -->
+  <rect x="20" y="508" width="700" height="54" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="370" y="528" text-anchor="middle" font-weight="700" font-size="12" fill="#1e3a8a">D1 · [基类] validateInputs(job)</text>
+  <text x="30" y="548" font-size="11" fill="#374151">按 nodeDefinition.inputsSchema.required 校验 job.inputs; 缺失 → 立刻 submitResult(failed) 不进 handle</text>
+
+  <line x1="370" y1="448" x2="370" y2="508" stroke="#374151" marker-end="url(#arrow)" stroke-dasharray="3,3"/>
+
+  <!-- D2 beforeHandle -->
+  <rect x="20" y="576" width="700" height="50" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="370" y="596" text-anchor="middle" font-weight="700" font-size="12" fill="#92400e">D2 · [子类钩子, 可选] beforeHandle(job)</text>
+  <text x="30" y="613" font-size="11" fill="#374151">dryRun 短路 / 鉴权检查 / 限流; 默认 noop</text>
+
+  <line x1="370" y1="562" x2="370" y2="576" stroke="#374151" marker-end="url(#arrow)"/>
+
+  <!-- D3 handle (核心) -->
+  <rect x="20" y="640" width="700" height="90" rx="8" fill="#fde68a" stroke="#d97706" stroke-width="2.5"/>
+  <text x="370" y="662" text-anchor="middle" font-weight="700" font-size="14" fill="#78350f">D3 · [子类核心] handle(job) — 唯一 abstract, 业务逻辑全在这</text>
+  <text x="30" y="684" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">async handle(job) {</text>
+  <text x="30" y="698" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">  // SandboxWorkerNode: 放进 worker_thread + resourceLimits 跑用户脚本</text>
+  <text x="30" y="712" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">  // ComputeNode:       evaluator(inputs.expression)</text>
+  <text x="30" y="726" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">  return { status: 'success', output: {...} };  }</text>
+
+  <line x1="370" y1="626" x2="370" y2="638" stroke="#374151" marker-end="url(#arrow)"/>
+
+  <!-- 长任务 heartbeat 旁支 -->
+  <rect x="740" y="640" width="420" height="90" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="950" y="662" text-anchor="middle" font-weight="700" font-size="12" fill="#9a3412">[基类] 长任务 heartbeat (并发触发)</text>
+  <text x="750" y="682" font-size="11" fill="#374151">handle 进行中, 基类后台跑 setInterval:</text>
+  <text x="750" y="696" font-family="ui-monospace, monospace" font-size="10" fill="#1f2937">POST /queue/lease/:runId/heartbeat</text>
+  <text x="750" y="712" font-size="11" fill="#374151">每 (leaseSeconds × 0.5) 续一次; handle 返回后停</text>
+
+  <path d="M 720 685 L 738 685" stroke="#ea580c" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+
+  <!-- D4 afterHandle -->
+  <rect x="20" y="744" width="700" height="50" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="370" y="764" text-anchor="middle" font-weight="700" font-size="12" fill="#92400e">D4 · [子类钩子, 可选] afterHandle(job, output)</text>
+  <text x="30" y="781" font-size="11" fill="#374151">脱敏 / 数据增强 / metrics 上报; 默认 noop</text>
+
+  <line x1="370" y1="730" x2="370" y2="744" stroke="#374151" marker-end="url(#arrow)"/>
+
+  <!-- D5 validateOutput -->
+  <rect x="20" y="808" width="700" height="56" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="370" y="828" text-anchor="middle" font-weight="700" font-size="12" fill="#1e3a8a">D5 · [基类] validateOutput(output)</text>
+  <text x="30" y="848" font-size="11" fill="#374151">按 outputsSchema 走 ajv 校验; strict 不符 → 改写为 failed retryable=false</text>
+  <text x="30" y="861" font-size="11" fill="#374151">warn 仅记 audit; off 跳过 (06-node-design §4.4)</text>
+
+  <line x1="370" y1="794" x2="370" y2="808" stroke="#374151" marker-end="url(#arrow)"/>
+
+  <!-- D6 submitResult -->
+  <rect x="20" y="878" width="350" height="78" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="195" y="898" text-anchor="middle" font-weight="700" font-size="12" fill="#1e3a8a">D6 · [基类] submitResult(runId, r)</text>
+  <text x="30" y="918" font-family="ui-monospace, monospace" font-size="10" fill="#1f2937">POST /api/v1/result</text>
+  <text x="30" y="932" font-size="11" fill="#374151">含 retry 兜底 (网络失败 2 次重试)</text>
+  <text x="30" y="946" font-size="11" fill="#374151">emitMetrics(job, durationMs)</text>
+
+  <rect x="740" y="878" width="420" height="78" rx="8" fill="#faf5ff" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="950" y="898" text-anchor="middle" font-weight="700" font-size="12" fill="#5b21b6">调度中心: apply 路由 + 推进</text>
+  <text x="750" y="918" font-size="11" fill="#374151">outbox.status=done, envelope.outputs[stepKey]=output</text>
+  <text x="750" y="932" font-size="11" fill="#374151">→ computeNextStep → 写下一 step 的 outbox</text>
+  <text x="750" y="946" font-size="11" fill="#374151">失败: attempts++ 或 DLQ</text>
+
+  <line x1="370" y1="864" x2="195" y2="876" stroke="#374151" marker-end="url(#arrow)"/>
+  <path d="M 370 917 L 738 917" stroke="#ea580c" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+
+  <!-- ====================== 阶段 E: 异常路径 ====================== -->
+  <text x="40" y="984" font-size="13" font-weight="700" fill="#111827">E · 异常路径 (基类全权处理, 子类只管 throw)</text>
+
+  <rect x="20" y="998" width="350" height="124" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="195" y="1018" text-anchor="middle" font-weight="700" font-size="12" fill="#991b1b">[基类] try/catch + classifyError(e)</text>
+  <text x="30" y="1038" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">subclass.handle throws → 基类捕获</text>
+  <text x="30" y="1052" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">classifyError 按异常名归类:</text>
+  <text x="30" y="1066" font-family="ui-monospace, monospace" font-size="11" fill="#374151">  TimeoutError/Network → retryable=true</text>
+  <text x="30" y="1080" font-family="ui-monospace, monospace" font-size="11" fill="#374151">  ValidationError      → retryable=false</text>
+  <text x="30" y="1094" font-family="ui-monospace, monospace" font-size="11" fill="#374151">  其它               → retryable=true</text>
+  <text x="30" y="1110" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">→ submitResult(failed, error)</text>
+
+  <rect x="395" y="998" width="325" height="124" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="557" y="1018" text-anchor="middle" font-weight="700" font-size="12" fill="#991b1b">子类抛错示例</text>
+  <text x="405" y="1040" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">// 业务可读异常, 不用关心 retry</text>
+  <text x="405" y="1058" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">if (!ok) throw new TimeoutError(...);</text>
+  <text x="405" y="1076" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">if (badData) throw new ValidationError(...);</text>
+  <text x="405" y="1096" font-size="11" fill="#374151">子类只关心 "这次能不能干, 干完是啥".</text>
+  <text x="405" y="1110" font-size="11" fill="#374151">retryable / submitResult / metrics 全在基类</text>
+
+  <!-- ====================== 阶段 F: 优雅停机 ====================== -->
+  <text x="40" y="1148" font-size="13" font-weight="700" fill="#111827">F · 优雅停机 (SIGTERM)</text>
+
+  <rect x="20" y="1162" width="350" height="78" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="195" y="1182" text-anchor="middle" font-weight="700" font-size="12" fill="#1e3a8a">[基类] node.stop()</text>
+  <text x="30" y="1202" font-size="11" fill="#374151">① 停 leaseLoop (不再拉新活)</text>
+  <text x="30" y="1216" font-size="11" fill="#374151">② 等待 in-flight handle 完成 (有上限)</text>
+  <text x="30" y="1230" font-size="11" fill="#374151">③ release 未完成 runs 的租约</text>
+
+  <rect x="380" y="1162" width="340" height="78" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="550" y="1182" text-anchor="middle" font-weight="700" font-size="12" fill="#92400e">[子类钩子, 可选] onShutdown()</text>
+  <text x="390" y="1202" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">async onShutdown() {</text>
+  <text x="390" y="1216" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">  await this.threadPool.terminate();</text>
+  <text x="390" y="1230" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">}  // 释放连接 / flush 缓存 / metrics</text>
+
+  <line x1="370" y1="1201" x2="378" y2="1201" stroke="#374151" marker-end="url(#arrow)"/>
+
+  <rect x="740" y="1162" width="420" height="78" rx="8" fill="#faf5ff" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="950" y="1182" text-anchor="middle" font-weight="700" font-size="12" fill="#5b21b6">调度中心: 释放路由</text>
+  <text x="750" y="1202" font-size="11" fill="#374151">POST /queue/lease/:runId/release</text>
+  <text x="750" y="1216" font-size="11" fill="#374151">→ outbox.status='pending', scheduled_at 后移</text>
+  <text x="750" y="1230" font-size="11" fill="#374151">下次 lease 可被其它 worker 拿到</text>
+
+  <path d="M 720 1201 L 738 1201" stroke="#ea580c" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+
+  <!-- ====================== 底部图例 ====================== -->
+  <rect x="20" y="1268" width="1140" height="180" rx="8" fill="#f9fafb" stroke="#9ca3af"/>
+  <text x="35" y="1290" font-weight="700" font-size="13" fill="#111827">分工速查 (子类只关心 ① ② ③ 三件事):</text>
+
+  <rect x="35" y="1302" width="6" height="14" fill="#fde68a"/>
+  <text x="48" y="1314" font-size="12" font-weight="700" fill="#78350f">子类 abstract</text>
+  <text x="140" y="1314" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">handle(job): Promise&lt;DriverResult&gt;</text>
+  <text x="430" y="1314" font-size="11" fill="#6b7280">— 唯一必填; 业务逻辑核心</text>
+
+  <rect x="35" y="1322" width="6" height="14" fill="#fef3c7"/>
+  <text x="48" y="1334" font-size="12" font-weight="700" fill="#92400e">子类 hook (可选)</text>
+  <text x="140" y="1334" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">onInit / beforeHandle / afterHandle / onShutdown</text>
+  <text x="500" y="1334" font-size="11" fill="#6b7280">— 资源管理 / 旁路逻辑</text>
+
+  <rect x="35" y="1342" width="6" height="14" fill="#dbeafe"/>
+  <text x="48" y="1354" font-size="12" font-weight="700" fill="#1e3a8a">基类公共 (final, 不可重写)</text>
+  <text x="240" y="1354" font-size="11" fill="#1f2937">lease 循环 + 退避 + 心跳 + 输入校验 + 输出校验 + 异常归类 + 结果提交 + metrics</text>
+
+  <text x="35" y="1382" font-weight="700" font-size="12" fill="#111827">业务侧"加一个新节点"的最短路径:</text>
+  <text x="35" y="1400" font-family="ui-monospace, monospace" font-size="11" fill="#374151">class MyNode extends ExternalWorkerNode {</text>
+  <text x="45" y="1414" font-family="ui-monospace, monospace" font-size="11" fill="#374151">  nodeDefinition = { key: 'my_node', version: '1.0', paramsSchema, inputsSchema, outputsSchema, ... };</text>
+  <text x="45" y="1428" font-family="ui-monospace, monospace" font-size="11" fill="#374151">  async handle(job) { return { status: 'success', output: {...} }; }  // 业务逻辑而已</text>
+  <text x="35" y="1442" font-family="ui-monospace, monospace" font-size="11" fill="#374151">}  →  new MyNode().start();   // 跑起来, 自动注册 / 拉活 / 心跳 / 提交 / 校验</text>
+</svg>

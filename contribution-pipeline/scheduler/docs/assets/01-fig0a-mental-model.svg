@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 540" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+  <defs>
+    <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#16a34a"/>
+    </marker>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#dc2626"/>
+    </marker>
+  </defs>
+
+  <text x="440" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">错的视角 vs 对的视角</text>
+  <text x="440" y="58" text-anchor="middle" font-size="13" fill="#64748b">节点没有"位置 / 先后",DAG 是数据状态变化方向带来的副产物</text>
+
+  <!-- Wrong: conveyor -->
+  <rect x="30" y="86" width="400" height="200" rx="14" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5"/>
+  <rect x="30" y="86" width="400" height="34" rx="14" fill="#dc2626"/>
+  <rect x="30" y="104" width="400" height="16" fill="#dc2626"/>
+  <text x="230" y="110" text-anchor="middle" font-size="14" font-weight="700" fill="white">✗ 传送带视角(误导)</text>
+
+  <rect x="60" y="148" width="84" height="56" rx="8" fill="white" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="102" y="172" text-anchor="middle" font-size="13" font-weight="700" fill="#1f2937">节点 A</text>
+  <text x="102" y="190" text-anchor="middle" font-size="10" fill="#7f1d1d">工位 1</text>
+
+  <rect x="188" y="148" width="84" height="56" rx="8" fill="white" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="230" y="172" text-anchor="middle" font-size="13" font-weight="700" fill="#1f2937">节点 B</text>
+  <text x="230" y="190" text-anchor="middle" font-size="10" fill="#7f1d1d">工位 2</text>
+
+  <rect x="316" y="148" width="84" height="56" rx="8" fill="white" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="358" y="172" text-anchor="middle" font-size="13" font-weight="700" fill="#1f2937">节点 C</text>
+  <text x="358" y="190" text-anchor="middle" font-size="10" fill="#7f1d1d">工位 3</text>
+
+  <line x1="144" y1="176" x2="188" y2="176" stroke="#dc2626" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="272" y1="176" x2="316" y2="176" stroke="#dc2626" stroke-width="2" marker-end="url(#ar)"/>
+
+  <text x="230" y="234" text-anchor="middle" font-size="12" fill="#7f1d1d" font-style="italic">"节点是被排好顺序的工位"</text>
+  <text x="230" y="256" text-anchor="middle" font-size="12" fill="#991b1b">→ 加一个节点要重排,改顺序就崩</text>
+  <text x="230" y="274" text-anchor="middle" font-size="12" fill="#991b1b">→ 节点要"知道"自己在哪一格</text>
+
+  <!-- Right: state machine -->
+  <rect x="450" y="86" width="400" height="200" rx="14" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+  <rect x="450" y="86" width="400" height="34" rx="14" fill="#059669"/>
+  <rect x="450" y="104" width="400" height="16" fill="#059669"/>
+  <text x="650" y="110" text-anchor="middle" font-size="14" font-weight="700" fill="white">✓ 数据状态机视角(实际)</text>
+
+  <text x="470" y="148" font-size="11" font-weight="600" fill="#064e3b">数据状态:</text>
+  <circle cx="510" cy="172" r="18" fill="white" stroke="#059669" stroke-width="2"/>
+  <text x="510" y="176" text-anchor="middle" font-size="12" font-weight="700" fill="#064e3b">S0</text>
+  <circle cx="600" cy="172" r="18" fill="white" stroke="#059669" stroke-width="2"/>
+  <text x="600" y="176" text-anchor="middle" font-size="12" font-weight="700" fill="#064e3b">S1</text>
+  <circle cx="690" cy="172" r="18" fill="white" stroke="#059669" stroke-width="2"/>
+  <text x="690" y="176" text-anchor="middle" font-size="12" font-weight="700" fill="#064e3b">S2</text>
+  <circle cx="780" cy="172" r="18" fill="white" stroke="#059669" stroke-width="2"/>
+  <text x="780" y="176" text-anchor="middle" font-size="12" font-weight="700" fill="#064e3b">S3</text>
+
+  <line x1="528" y1="172" x2="582" y2="172" stroke="#16a34a" stroke-width="2" marker-end="url(#ag)"/>
+  <line x1="618" y1="172" x2="672" y2="172" stroke="#16a34a" stroke-width="2" marker-end="url(#ag)"/>
+  <line x1="708" y1="172" x2="762" y2="172" stroke="#16a34a" stroke-width="2" marker-end="url(#ag)"/>
+
+  <text x="555" y="208" text-anchor="middle" font-size="10" fill="#475569">嗅</text>
+  <text x="645" y="208" text-anchor="middle" font-size="10" fill="#475569">嗅</text>
+  <text x="735" y="208" text-anchor="middle" font-size="10" fill="#475569">嗅</text>
+  <line x1="555" y1="190" x2="555" y2="220" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="645" y1="190" x2="645" y2="220" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="735" y1="190" x2="735" y2="220" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <rect x="528" y="222" width="54" height="44" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="555" y="240" text-anchor="middle" font-size="11" font-weight="700" fill="#1e3a8a">节点 X</text>
+  <text x="555" y="256" text-anchor="middle" font-size="9" fill="#1e3a8a">触发</text>
+
+  <rect x="618" y="222" width="54" height="44" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="645" y="240" text-anchor="middle" font-size="11" font-weight="700" fill="#1e3a8a">节点 Y</text>
+  <text x="645" y="256" text-anchor="middle" font-size="9" fill="#1e3a8a">触发</text>
+
+  <rect x="708" y="222" width="54" height="44" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="735" y="240" text-anchor="middle" font-size="11" font-weight="700" fill="#1e3a8a">节点 Z</text>
+  <text x="735" y="256" text-anchor="middle" font-size="9" fill="#1e3a8a">触发</text>
+
+  <!-- Footer panels -->
+  <rect x="30" y="312" width="820" height="200" rx="12" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+  <text x="440" y="340" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">节点本身没有"位置"或"先后"</text>
+  <text x="440" y="368" text-anchor="middle" font-size="13" fill="#1f2937">它们只是嗅探符合自己条件的数据状态,看到了就处理</text>
+  <text x="440" y="396" text-anchor="middle" font-size="13" fill="#475569" font-style="italic">"先采集再翻译" — 这个顺序是数据状态变化方向带来的</text>
+  <text x="440" y="416" text-anchor="middle" font-size="13" fill="#475569" font-style="italic">不是有人告诉节点要排队</text>
+
+  <rect x="100" y="442" width="220" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="210" y="461" text-anchor="middle" font-size="12" font-weight="700" fill="#1e3a8a">加新节点零侵入</text>
+  <text x="210" y="481" text-anchor="middle" font-size="11" fill="#1f2937">声明触发条件,老节点不动</text>
+
+  <rect x="350" y="442" width="220" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="460" y="461" text-anchor="middle" font-size="12" font-weight="700" fill="#1e3a8a">技术栈自由</text>
+  <text x="460" y="481" text-anchor="middle" font-size="11" fill="#1f2937">Python / Go / 网页都行</text>
+
+  <rect x="600" y="442" width="170" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="685" y="461" text-anchor="middle" font-size="12" font-weight="700" fill="#1e3a8a">混编人和机器</text>
+  <text x="685" y="481" text-anchor="middle" font-size="11" fill="#1f2937">同一套接口</text>
+</svg>

@@ -1,0 +1,10 @@
+flowchart LR
+  RAW[数据采集] --> CLEAN[清洗/去重]
+  CLEAN --> MODEL[AI 预标注]
+  MODEL --> ROUTE{模型有把握?}
+  ROUTE -->|是| AUTO[自动审核]
+  ROUTE -->|否| ANN[人工标注]
+  ANN --> HR[人工/抽检审核]
+  HR -->|不合格| ANN
+  AUTO --> EXP[导出]
+  HR -->|合格| EXP

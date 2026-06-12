@@ -1,0 +1,20 @@
+{
+  "name": "scheduler-worker-example",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --env-file=../backend/.env src/worker.ts",
+    "dev:ingest": "NODE_KEYS=ingest WORKER_ID=worker-ingest tsx watch --env-file=../backend/.env src/worker.ts",
+    "dev:translate": "NODE_KEYS=translate WORKER_ID=worker-translate tsx watch --env-file=../backend/.env src/worker.ts",
+    "dev:dedup": "NODE_KEYS=dedup WORKER_ID=worker-dedup tsx watch --env-file=../backend/.env src/worker.ts",
+    "dev:export": "NODE_KEYS=export WORKER_ID=worker-export tsx watch --env-file=../backend/.env src/worker.ts"
+  },
+  "dependencies": {
+    "undici": "^7.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

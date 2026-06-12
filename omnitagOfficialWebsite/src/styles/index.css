@@ -1,0 +1,20 @@
+html {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.font-inter {
+    font-family: "Inter", sans-serif;
+}
+
+/* For WebKit-based browsers */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* For Firefox */
+  .scrollbar-hide {
+    scrollbar-width: none; /* Firefox */
+  }

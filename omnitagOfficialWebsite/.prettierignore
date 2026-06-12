@@ -1,0 +1,3 @@
+dist/
+eslint.config.mjs
+src/components/v3/blockchain-visualization/pc-node.tsx

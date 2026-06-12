@@ -1,0 +1,46 @@
+{
+    "data": [
+        {
+            "name": "key_features_validation",
+            "desc": "validation 卡片信息",
+            "card_type": "key_features",
+            "ext_info": {
+                "desc": "Data view",
+                "title": "Validation",
+                "schema": "",
+                "status": "normal",
+                "subDesc": "",
+                "subTitle": ""
+            }
+        },
+        {
+            "name": "key_features_submission",
+            "desc": "submission 卡片",
+            "card_type": "key_features",
+            "ext_info": {
+                "desc": "Data view",
+                "title": "Submission",
+                "schema": "",
+                "status": "normal",
+                "subDesc": "",
+                "subTitle": ""
+            }
+        },
+        {
+            "name": "key_features_bounty",
+            "desc": "bounty 卡片信息",
+            "card_type": "key_features",
+            "ext_info": {
+                "desc": "Data view",
+                "title": "Bounty Hunting",
+                "schema": "",
+                "status": "normal",
+                "subDesc": "",
+                "subTitle": ""
+            }
+        }
+    ],
+    "success": true,
+    "errorCode": 0,
+    "errorMessage": "SUCCESS"
+}

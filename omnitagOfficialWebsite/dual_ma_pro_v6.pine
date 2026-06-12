@@ -1,0 +1,119 @@
+// © 2025 Optimized by Cascade
+//@version=6
+indicator("高低均线通道指标", "Gemini HL-MA Channel v6", overlay=true)
+
+// =========================================================================================
+//                                     输入选项 (INPUTS)
+// =========================================================================================
+
+//------------------------------------------------------------------------------------------
+// 均线共同设置
+//------------------------------------------------------------------------------------------
+ma_common_group = "均线共同设置"
+ma_len = input.int(20, "周期", minval=1, group=ma_common_group)
+ma_type = input.string("EMA", "类型", options=["SMA", "EMA", "WMA", "HMA", "RMA", "VWMA", "TEMA", "DEMA"], group=ma_common_group)
+
+//------------------------------------------------------------------------------------------
+// 高价均线设置
+//------------------------------------------------------------------------------------------
+ma_high_group = "高价均线设置"
+show_ma_high = input.bool(true, "显示", group=ma_high_group, inline="ma_high_show")
+ma_high_color = input.color(color.new(#2962FF, 40), "颜色", group=ma_high_group, inline="ma_high_style")
+ma_high_style = input.string("solid", "样式", options=["solid", "dashed", "dotted"], group=ma_high_group, inline="ma_high_style")
+ma_high_width = input.int(1, "线宽", minval=1, group=ma_high_group, inline="ma_high_style")
+
+//------------------------------------------------------------------------------------------
+// 低价均线设置
+//------------------------------------------------------------------------------------------
+ma_low_group = "低价均线设置"
+show_ma_low = input.bool(true, "显示", group=ma_low_group, inline="ma_low_show")
+ma_low_color = input.color(color.new(#FFAB00, 40), "颜色", group=ma_low_group, inline="ma_low_style")
+ma_low_style = input.string("solid", "样式", options=["solid", "dashed", "dotted"], group=ma_low_group, inline="ma_low_style")
+ma_low_width = input.int(1, "线宽", minval=1, group=ma_low_group, inline="ma_low_style")
+
+//------------------------------------------------------------------------------------------
+// 背景填充设置
+//------------------------------------------------------------------------------------------
+fill_group = "背景填充设置"
+show_fill = input.bool(true, "显示", group=fill_group)
+fill_color = input.color(color.new(color.gray, 90), "颜色", group=fill_group)
+
+// =========================================================================================
+//                                     计算逻辑 (CALCULATIONS)
+// =========================================================================================
+
+// 定义一个函数用于根据用户选择的类型计算均线
+// 版本6优化：添加TEMA和DEMA支持
+f_getMA(source, length, type) =>
+    switch type
+        "SMA"  => ta.sma(source, length)
+        "EMA"  => ta.ema(source, length)
+        "WMA"  => ta.wma(source, length)
+        "HMA"  => ta.hma(source, length)
+        "RMA"  => ta.rma(source, length)
+        "VWMA" => ta.vwma(source, length)
+        "TEMA" => 3 * ta.ema(source, length) - 3 * ta.ema(ta.ema(source, length), length) + ta.ema(ta.ema(ta.ema(source, length), length), length)
+        "DEMA" => 2 * ta.ema(source, length) - ta.ema(ta.ema(source, length), length)
+        => na // 如果出现意外类型，返回na
+
+// 获取线条样式
+f_getPlotStyle(style) =>
+    switch style
+        "solid"  => plot.style_line
+        "dashed" => plot.style_circles
+        "dotted" => plot.style_stepline
+        => plot.style_line // 默认为实线
+
+// 计算高价和低价均线的值
+ma_high_value = f_getMA(high, ma_len, ma_type)  // 使用最高价
+ma_low_value = f_getMA(low, ma_len, ma_type)    // 使用最低价
+ma_high_plot_style = f_getPlotStyle(ma_high_style)
+ma_low_plot_style = f_getPlotStyle(ma_low_style)
+
+// =========================================================================================
+//                                     绘图展示 (PLOTTING)
+// =========================================================================================
+
+// 绘制高价和低价均线
+p_high = plot(show_ma_high ? ma_high_value : na, "高价均线", color=ma_high_color, style=ma_high_plot_style, linewidth=ma_high_width)
+p_low = plot(show_ma_low ? ma_low_value : na, "低价均线", color=ma_low_color, style=ma_low_plot_style, linewidth=ma_low_width)
+
+// 绘制填充
+fill(p_high, p_low, color=show_fill ? fill_color : na, title="均线通道填充")
+
+// =========================================================================================
+//                                     信号指示 (SIGNALS)
+// =========================================================================================
+
+// 计算多空信号对
+// 价格从通道上方突破进入通道 = 空头信号
+short_signal = ta.crossunder(close, ma_high_value)
+// 价格从通道下方突破进入通道 = 多头信号
+long_signal = ta.crossover(close, ma_low_value)
+
+// 计算加仓点
+// 当价格在通道外并向通道内运动时，就是加仓机会
+var bool price_outside_high = false  // 价格在通道上方
+var bool price_outside_low = false   // 价格在通道下方
+
+price_outside_high := close > ma_high_value
+price_outside_low := close < ma_low_value
+
+// 加仓点：价格从通道外开始向通道内运动
+add_to_short = price_outside_high[1] and not price_outside_high and not short_signal
+add_to_long = price_outside_low[1] and not price_outside_low and not long_signal
+
+// 在图表上标记信号点
+// 多空信号对
+plotshape(short_signal, "空头信号", shape.triangledown, location.abovebar, color.new(color.red, 0), size=size.tiny)
+plotshape(long_signal, "多头信号", shape.triangleup, location.belowbar, color.new(color.green, 0), size=size.tiny)
+
+// 加仓点使用圆点标记
+plotshape(add_to_short, "空头加仓", shape.circle, location.abovebar, color.new(color.red, 0), size=size.tiny)
+plotshape(add_to_long, "多头加仓", shape.circle, location.belowbar, color.new(color.green, 0), size=size.tiny)
+
+// 添加警报条件
+alertcondition(short_signal, title="空头信号", message="空头信号：价格从通道上方突破进入通道")
+alertcondition(long_signal, title="多头信号", message="多头信号：价格从通道下方突破进入通道")
+alertcondition(add_to_short, title="空头加仓", message="空头加仓机会：价格开始从通道上方向通道内运动")
+alertcondition(add_to_long, title="多头加仓", message="多头加仓机会：价格开始从通道下方向通道内运动")

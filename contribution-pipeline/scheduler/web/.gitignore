@@ -1,0 +1,9 @@
+node_modules
+dist
+.vite
+*.log
+
+# 防止 tsc -b 产物污染根目录
+vite.config.js
+vite.config.d.ts
+*.tsbuildinfo

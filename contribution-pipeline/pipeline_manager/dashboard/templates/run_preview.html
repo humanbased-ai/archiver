@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Run #{{ run.id }} — Preview{% endblock %}
+{% block content %}
+<h2 style="margin-bottom: 16px;">
+  Run #{{ run.id }} — Frame Preview
+  <span style="font-size: 14px; color: #666;">({{ total }} frames)</span>
+</h2>
+
+<div class="frame-grid">
+  {% for frame in frames %}
+  <div class="frame-card">
+    <div style="background: #eee; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #999;">
+      {{ frame.filename[:20] }}
+    </div>
+    <div class="info">
+      <div class="conf" style="color: {% if frame.filter_confidence and frame.filter_confidence >= 0.8 %}#2e7d32{% elif frame.filter_confidence and frame.filter_confidence >= 0.5 %}#f57f17{% else %}#c62828{% endif %};">
+        {{ "%.2f" | format(frame.filter_confidence) if frame.filter_confidence else '-' }}
+      </div>
+      <div style="color: #999; margin-top: 2px;">
+        #{{ frame.frame_index }}
+        {% if frame.task_id %}
+        · <a href="{{ ls_url }}/projects/{{ run.project_id }}/data?task={{ frame.task_id }}" target="_blank">task</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% if total_pages > 1 %}
+<div class="pagination">
+  {% if page > 1 %}
+  <a href="/dashboard/runs/{{ run.id }}/preview?page={{ page - 1 }}" class="btn btn-sm">Prev</a>
+  {% endif %}
+  <span style="padding: 4px 12px; font-size: 14px;">Page {{ page }} / {{ total_pages }}</span>
+  {% if page < total_pages %}
+  <a href="/dashboard/runs/{{ run.id }}/preview?page={{ page + 1 }}" class="btn btn-sm">Next</a>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 260" width="100%" style="max-width:880px;height:auto;background:transparent" font-family='-apple-system,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif'>
+  <defs>
+    <marker id="arr5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#94A3B8"/>
+    </marker>
+  </defs>
+
+  <text x="440" y="26" text-anchor="middle" fill="#0f172a" font-size="14" font-weight="600">三大收益</text>
+
+  <!-- Column 1: 更高效 (sky) -->
+  <rect x="20" y="50" width="270" height="60" rx="14" fill="#E0F2FE" stroke="#0EA5E9" stroke-width="1.5"/>
+  <text x="155" y="78" text-anchor="middle" fill="#0C4A6E" font-size="15" font-weight="700">更 · 高效</text>
+  <text x="155" y="98" text-anchor="middle" fill="#075985" font-size="11">从需求到产出 · 时间大幅缩短</text>
+
+  <rect x="32"  y="160" width="120" height="56" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="92"  y="183" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="600">新任务</text>
+  <text x="92"  y="201" text-anchor="middle" fill="#64748B" font-size="11">当天即可上线</text>
+
+  <rect x="158" y="160" width="120" height="56" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="218" y="183" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="600">流转自动化</text>
+  <text x="218" y="201" text-anchor="middle" fill="#64748B" font-size="11">不靠人工搬数据</text>
+
+  <line x1="92"  y1="160" x2="120" y2="115" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr5)"/>
+  <line x1="218" y1="160" x2="190" y2="115" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr5)"/>
+
+  <!-- Column 2: 更省钱 (emerald) -->
+  <rect x="305" y="50" width="270" height="60" rx="14" fill="#ECFDF5" stroke="#10B981" stroke-width="1.5"/>
+  <text x="440" y="78" text-anchor="middle" fill="#064E3B" font-size="15" font-weight="700">更 · 省钱</text>
+  <text x="440" y="98" text-anchor="middle" fill="#065F46" font-size="11">同样数据量 · 更少人 / 更少开发</text>
+
+  <rect x="317" y="160" width="120" height="56" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="377" y="178" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="600">模型预标</text>
+  <text x="377" y="196" text-anchor="middle" fill="#64748B" font-size="11">+ 自动审核</text>
+
+  <rect x="443" y="160" width="120" height="56" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="503" y="183" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="600">配置即上线</text>
+  <text x="503" y="201" text-anchor="middle" fill="#64748B" font-size="11">无需写新页面</text>
+
+  <line x1="377" y1="160" x2="405" y2="115" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr5)"/>
+  <line x1="503" y1="160" x2="475" y2="115" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr5)"/>
+
+  <!-- Column 3: 更能干 (amber) -->
+  <rect x="590" y="50" width="270" height="60" rx="14" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.5"/>
+  <text x="725" y="78" text-anchor="middle" fill="#78350F" font-size="15" font-weight="700">更 · 能干</text>
+  <text x="725" y="98" text-anchor="middle" fill="#92400E" font-size="11">画框圈词 + 复杂业务 · 全场景覆盖</text>
+
+  <rect x="602" y="160" width="120" height="56" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="662" y="178" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="600">画布 + 表单</text>
+  <text x="662" y="196" text-anchor="middle" fill="#64748B" font-size="11">双车间互补</text>
+
+  <rect x="728" y="160" width="120" height="56" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="788" y="178" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="600">流水线编排</text>
+  <text x="788" y="196" text-anchor="middle" fill="#64748B" font-size="11">采集到导出全链</text>
+
+  <line x1="662" y1="160" x2="690" y2="115" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr5)"/>
+  <line x1="788" y1="160" x2="760" y2="115" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr5)"/>
+</svg>

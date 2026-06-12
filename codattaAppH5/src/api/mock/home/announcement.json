@@ -1,0 +1,21 @@
+{
+    "data": [
+        {
+            "name": "announcement",
+            "desc": "公告",
+            "card_type": "announcement",
+            "ext_info": {
+                "desc": "announcement desc",
+                "image": "https://static.codatta.io/static/activity/2a4c9f8307b361b84cda6c06ecbc8489.png",
+                "title": "无活动公告",
+                "schema": "app://quest/SUBCATE004",
+                "status": "none",
+                "backgroundColor": "#000000",
+                "backgroundPosition": "top"
+            }
+        }
+    ],
+    "success": true,
+    "errorCode": 0,
+    "errorMessage": "SUCCESS"
+}

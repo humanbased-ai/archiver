@@ -1,0 +1,24 @@
+[游戏化功能拆分](https://chaintool.larksuite.com/docx/OGtFdhOhCoTEsKxBaorukaqks2e?from=from_copylink)
+
+首页
+
+游戏关卡
+- 加载状态
+- 圆盘破碎效果
+- 修复飞刀重置位置
+- 清晰度优化
+- 稀有度图标
+
+结果页
+- 打开相关数据页
+- 分享逻辑
+
+埋点
+- 游戏开始
+- 游戏结束
+- 游戏失败
+- 游戏成功
+- 游戏中断
+- 游戏重置
+- 游戏暂停
+- 游戏继续

@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 1260" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12">
+  <!--
+    节点分层架构 — 抽象协议 → 公共基类 → 4 种 runMode 壳 → 具体节点类 → 实例
+    设计原则: 公共逻辑 (lease 轮询 / 心跳 / 退避 / 校验 / 提交结果) 在基类, 子类只关心业务
+  -->
+  <defs>
+    <marker id="inherit" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="14" markerHeight="14" orient="auto">
+      <!-- 继承 (UML): 空心三角 -->
+      <path d="M 0 0 L 12 6 L 0 12 Z" fill="white" stroke="#374151" stroke-width="1.5"/>
+    </marker>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#374151"/>
+    </marker>
+  </defs>
+
+  <!-- 标题 -->
+  <text x="590" y="32" text-anchor="middle" font-size="20" font-weight="700" fill="#111827">节点分层架构 (目标架构图)</text>
+  <text x="590" y="52" text-anchor="middle" font-size="12" fill="#6b7280">公共逻辑下沉到基类 · 子类只实现业务 handle · 实例化后 register 到调度中心</text>
+  <text x="590" y="68" text-anchor="middle" font-size="11" font-weight="700" fill="#dc2626">⚠ 这是目标形态图, 不是 P1 实现范围. 每个 L2 壳上的 [P1/P2/P3/P4] 标签是落地排期</text>
+
+  <!-- ============ Layer 0: 抽象协议 ============ -->
+  <text x="40" y="92" font-size="13" font-weight="700" fill="#111827">L0 · 抽象协议层 (类型契约, 跟运行无关)</text>
+  <rect x="380" y="104" width="420" height="92" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="590" y="126" text-anchor="middle" font-weight="700" font-size="14" fill="#5b21b6">«interface» INodeContract</text>
+  <line x1="392" y1="138" x2="788" y2="138" stroke="#7c3aed" stroke-dasharray="2,2"/>
+  <text x="395" y="156" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">+ nodeDefinition: { key, version, paramsSchema,</text>
+  <text x="405" y="170" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">    inputsSchema, outputsSchema, presets, ... }</text>
+  <text x="395" y="187" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">+ handle(job: DriverJob) → Promise&lt;DriverResult&gt;</text>
+
+  <!-- ============ Layer 1: 公共基类 ============ -->
+  <text x="40" y="226" font-size="13" font-weight="700" fill="#111827">L1 · 公共基类 (所有节点共享的运行壳)</text>
+  <rect x="260" y="240" width="660" height="232" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="590" y="262" text-anchor="middle" font-weight="700" font-size="14" fill="#1e3a8a">«abstract» BaseNode  implements INodeContract</text>
+  <line x1="272" y1="274" x2="908" y2="274" stroke="#2563eb" stroke-dasharray="2,2"/>
+  <text x="275" y="291" font-size="11" font-weight="700" fill="#1e3a8a">公共字段:</text>
+  <text x="285" y="306" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">+ nodeDefinition (定义时绑定)   + logger / metrics</text>
+  <line x1="272" y1="318" x2="908" y2="318" stroke="#2563eb" stroke-dasharray="2,2"/>
+  <text x="275" y="334" font-size="11" font-weight="700" fill="#1e3a8a">公共方法 (final, 子类不重写):</text>
+  <text x="285" y="350" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">+ validateInputs(job)        校验 inputs 满足 inputsSchema.required</text>
+  <text x="285" y="364" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">+ validateOutput(output)     按 outputsSchema 校验 (strict/warn/off)</text>
+  <text x="285" y="378" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">+ classifyError(e)           异常 → retryable 分类 + 错误码归一</text>
+  <text x="285" y="392" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">+ emitMetrics(job, ms)       耗时/成功率上报</text>
+  <line x1="272" y1="404" x2="908" y2="404" stroke="#2563eb" stroke-dasharray="2,2"/>
+  <text x="275" y="420" font-size="11" font-weight="700" fill="#1e3a8a">生命周期钩子 (子类可重写, 可选):</text>
+  <text x="285" y="435" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">+ onInit()                   注册时调用 (建连接池 / 加载缓存 / 校验环境)</text>
+  <text x="285" y="449" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">+ beforeHandle(job)          每次 handle 前 (鉴权 / dryRun 短路)</text>
+  <text x="285" y="463" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">+ afterHandle(out) / onShutdown()   后置清理 / 释放连接</text>
+
+  <line x1="590" y1="196" x2="590" y2="238" stroke="#374151" stroke-width="1.5" marker-end="url(#inherit)"/>
+  <text x="600" y="220" font-size="10" fill="#6b7280">实现</text>
+
+  <!-- ============ Layer 2: 4 种 runMode 壳 ============ -->
+  <text x="40" y="502" font-size="13" font-weight="700" fill="#111827">L2 · runMode 形态壳 (按执行方式分化, 各自封装专有协议)</text>
+
+  <!-- InProcessNode -->
+  <rect x="20" y="516" width="270" height="178" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+  <rect x="245" y="520" width="40" height="18" rx="9" fill="#fef3c7" stroke="#d97706"/>
+  <text x="265" y="533" text-anchor="middle" font-size="10" font-weight="700" fill="#92400e">P2</text>
+  <text x="155" y="538" text-anchor="middle" font-weight="700" font-size="13" fill="#065f46">«abstract» InProcessNode</text>
+  <text x="155" y="554" text-anchor="middle" font-size="11" fill="#065f46">runMode = embedded</text>
+  <line x1="32" y1="566" x2="278" y2="566" stroke="#10b981" stroke-dasharray="2,2"/>
+  <text x="32" y="583" font-size="10" font-weight="700" fill="#065f46">作用域: scheduler 主进程</text>
+  <text x="32" y="600" font-family="ui-monospace, monospace" font-size="10" fill="#1f2937">+ register(): 注册到 driver</text>
+  <text x="42" y="612" font-family="ui-monospace, monospace" font-size="10" fill="#1f2937">  registry, autoworker 派发</text>
+  <text x="32" y="630" font-family="ui-monospace, monospace" font-size="10" fill="#1f2937">+ wrapHandle(): try/catch +</text>
+  <text x="42" y="642" font-family="ui-monospace, monospace" font-size="10" fill="#1f2937">  校验 + dryRun + metrics</text>
+  <line x1="32" y1="654" x2="278" y2="654" stroke="#10b981" stroke-dasharray="2,2"/>
+  <text x="32" y="670" font-size="10" font-style="italic" fill="#047857">abstract:</text>
+  <text x="32" y="685" font-family="ui-monospace, monospace" font-size="10" fill="#1f2937">+ handle(job) — 子类必填</text>
+
+  <!-- HttpServiceNode -->
+  <rect x="305" y="516" width="270" height="178" rx="8" fill="#fefce8" stroke="#ca8a04" stroke-width="2"/>
+  <rect x="530" y="520" width="40" height="18" rx="9" fill="#fef3c7" stroke="#d97706"/>
+  <text x="550" y="533" text-anchor="middle" font-size="10" font-weight="700" fill="#92400e">P3</text>
+  <text x="440" y="538" text-anchor="middle" font-weight="700" font-size="13" fill="#854d0e">HttpServiceNode</text>
+  <text x="440" y="554" text-anchor="middle" font-size="11" fill="#854d0e">runMode = internal_http</text>
+  <line x1="317" y1="566" x2="563" y2="566" stroke="#ca8a04" stroke-dasharray="2,2"/>
+  <text x="317" y="583" font-size="10" font-weight="700" fill="#854d0e">作用域: scheduler 主进程</text>
+  <text x="317" y="595" font-size="10" fill="#854d0e">(转发到内网服务)</text>
+  <text x="317" y="613" font-family="ui-monospace, monospace" font-size="10" fill="#1f2937">+ serviceUrl (allowlist 校验)</text>
+  <text x="317" y="627" font-family="ui-monospace, monospace" font-size="10" fill="#1f2937">+ timeoutMs / retries</text>
+  <text x="317" y="641" font-family="ui-monospace, monospace" font-size="10" fill="#1f2937">+ authHeader (可选)</text>
+  <line x1="317" y1="654" x2="563" y2="654" stroke="#ca8a04" stroke-dasharray="2,2"/>
+  <text x="317" y="670" font-size="10" font-style="italic" fill="#a16207">默认 handle 已实现:</text>
+  <text x="317" y="685" font-family="ui-monospace, monospace" font-size="10" fill="#1f2937">POST job → 内网 HTTP 服务</text>
+
+  <!-- ExternalWorkerNode (重点抽象, 框稍大) -->
+  <rect x="590" y="516" width="270" height="178" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="2.5"/>
+  <rect x="813" y="520" width="42" height="18" rx="9" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="834" y="533" text-anchor="middle" font-size="10" font-weight="700" fill="#166534">P1</text>
+  <text x="725" y="538" text-anchor="middle" font-weight="700" font-size="13" fill="#9a3412">«abstract» ExternalWorkerNode</text>
+  <text x="725" y="554" text-anchor="middle" font-size="11" fill="#9a3412">runMode = external_worker</text>
+  <line x1="602" y1="566" x2="848" y2="566" stroke="#ea580c" stroke-dasharray="2,2"/>
+  <text x="602" y="583" font-size="10" font-weight="700" fill="#9a3412">作用域: 独立进程 (生产首选)</text>
+  <text x="602" y="601" font-family="ui-monospace, monospace" font-size="10" fill="#1f2937">+ start() / stop()</text>
+  <text x="602" y="615" font-family="ui-monospace, monospace" font-size="10" fill="#1f2937">+ leaseLoop() — 主循环</text>
+  <text x="612" y="627" font-family="ui-monospace, monospace" font-size="10" fill="#6b7280">  /queue/:nk/lease + 退避</text>
+  <text x="602" y="643" font-family="ui-monospace, monospace" font-size="10" fill="#1f2937">+ heartbeat(runId) — 长任务续租</text>
+  <text x="602" y="657" font-family="ui-monospace, monospace" font-size="10" fill="#1f2937">+ submitResult(runId, r) — /result</text>
+  <line x1="602" y1="668" x2="848" y2="668" stroke="#ea580c" stroke-dasharray="2,2"/>
+  <text x="602" y="684" font-size="10" font-style="italic" fill="#c2410c">abstract: handle(job) — 子类必填</text>
+
+  <!-- ManualNode — P4 暂缓, 用虚线边 + 灰底提示不进 MVP -->
+  <rect x="875" y="516" width="270" height="178" rx="8" fill="#f9fafb" stroke="#9ca3af" stroke-width="2" stroke-dasharray="6,4"/>
+  <rect x="1085" y="520" width="58" height="18" rx="9" fill="#fee2e2" stroke="#dc2626"/>
+  <text x="1114" y="533" text-anchor="middle" font-size="10" font-weight="700" fill="#991b1b">P4 暂缓</text>
+  <text x="1010" y="538" text-anchor="middle" font-weight="700" font-size="13" fill="#6b7280">«abstract» ManualNode</text>
+  <text x="1010" y="554" text-anchor="middle" font-size="11" fill="#6b7280">runMode = manual</text>
+  <line x1="887" y1="566" x2="1133" y2="566" stroke="#db2777" stroke-dasharray="2,2"/>
+  <text x="887" y="583" font-size="10" font-weight="700" fill="#9d174d">作用域: 业务层 + 浏览器</text>
+  <text x="887" y="595" font-size="10" fill="#9d174d">(没有自动 driver)</text>
+  <text x="887" y="613" font-family="ui-monospace, monospace" font-size="10" fill="#1f2937">+ uiSchema (表单渲染)</text>
+  <text x="887" y="627" font-family="ui-monospace, monospace" font-size="10" fill="#1f2937">+ claim() / submit()  HTTP</text>
+  <text x="887" y="641" font-family="ui-monospace, monospace" font-size="10" fill="#1f2937">+ 配额 / 互斥 / 角色规则</text>
+  <line x1="887" y1="654" x2="1133" y2="654" stroke="#db2777" stroke-dasharray="2,2"/>
+  <text x="887" y="670" font-size="10" font-style="italic" fill="#be185d">无 handle (用户在 UI 提交)</text>
+  <text x="887" y="685" font-family="ui-monospace, monospace" font-size="10" fill="#1f2937">+ validateSubmission()</text>
+
+  <!-- L1 → L2 继承箭头 (4 条, 汇聚点 y=472, 分发到 4 个子类 y=516) -->
+  <line x1="155" y1="472" x2="155" y2="514" stroke="#374151" stroke-width="1.5" marker-end="url(#inherit)"/>
+  <line x1="440" y1="472" x2="440" y2="514" stroke="#374151" stroke-width="1.5" marker-end="url(#inherit)"/>
+  <line x1="725" y1="472" x2="725" y2="514" stroke="#374151" stroke-width="1.5" marker-end="url(#inherit)"/>
+  <line x1="1010" y1="472" x2="1010" y2="514" stroke="#374151" stroke-width="1.5" marker-end="url(#inherit)"/>
+
+  <!-- ============ Layer 3: 具体节点 ============ -->
+  <text x="40" y="724" font-size="13" font-weight="700" fill="#111827">L3 · 具体节点类 (业务实现, 只关心 handle 业务逻辑)</text>
+
+  <!-- InProcessNode 派生 -->
+  <rect x="20" y="738" width="270" height="220" rx="8" fill="white" stroke="#10b981" stroke-width="1.5"/>
+  <text x="155" y="757" text-anchor="middle" font-weight="700" font-size="12" fill="#065f46">InProcess 派生 (主进程内建)</text>
+  <line x1="32" y1="767" x2="278" y2="767" stroke="#10b981" stroke-dasharray="2,2"/>
+  <text x="35" y="785" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">class DedupNode extends</text>
+  <text x="45" y="797" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">  InProcessNode { handle() {…} }</text>
+  <text x="35" y="817" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">class ExportNode extends …</text>
+  <text x="35" y="836" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">class ComputeNode extends …</text>
+  <text x="35" y="855" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">class SandboxJsNode extends …</text>
+  <text x="35" y="874" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">class LlmTranslateNode extends …</text>
+  <text x="35" y="900" font-size="10" fill="#6b7280" font-style="italic">轻量算子, 不需独立进程</text>
+  <text x="35" y="916" font-size="10" fill="#6b7280" font-style="italic">代码发布与 scheduler 一致</text>
+  <text x="35" y="936" font-size="10" font-weight="700" fill="#065f46">→ 当前 5 个内置 driver 走这条</text>
+
+  <!-- HttpServiceNode 派生 -->
+  <rect x="305" y="738" width="270" height="220" rx="8" fill="white" stroke="#ca8a04" stroke-width="1.5"/>
+  <text x="440" y="757" text-anchor="middle" font-weight="700" font-size="12" fill="#854d0e">Http 派生 (内网服务调用)</text>
+  <line x1="317" y1="767" x2="563" y2="767" stroke="#ca8a04" stroke-dasharray="2,2"/>
+  <text x="320" y="785" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">class OcrHttpNode extends</text>
+  <text x="330" y="797" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">  HttpServiceNode {</text>
+  <text x="330" y="811" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">  serviceUrl = "…"</text>
+  <text x="330" y="825" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">  // handle 不必重写</text>
+  <text x="330" y="839" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">}</text>
+  <text x="320" y="861" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">class TranslateHttpNode extends …</text>
+  <text x="320" y="887" font-size="10" fill="#6b7280" font-style="italic">默认 handle 已封装 fetch + 重试</text>
+  <text x="320" y="903" font-size="10" fill="#6b7280" font-style="italic">子类一般只配 URL + auth</text>
+  <text x="320" y="923" font-size="10" font-weight="700" fill="#854d0e">→ allowlist 安全防 SSRF</text>
+  <text x="320" y="939" font-size="10" font-weight="700" fill="#854d0e">→ 当前 1 个 http driver 例</text>
+
+  <!-- ExternalWorker 派生 -->
+  <rect x="590" y="738" width="270" height="220" rx="8" fill="white" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="725" y="757" text-anchor="middle" font-weight="700" font-size="12" fill="#9a3412">External 派生 (独立进程)</text>
+  <line x1="602" y1="767" x2="848" y2="767" stroke="#ea580c" stroke-dasharray="2,2"/>
+  <text x="605" y="785" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">class SandboxWorkerNode extends</text>
+  <text x="615" y="797" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">  ExternalWorkerNode {</text>
+  <text x="615" y="811" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">  handle(job) { worker_threads }</text>
+  <text x="615" y="825" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">}</text>
+  <text x="605" y="847" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">class PythonInferNode extends …</text>
+  <text x="605" y="866" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">class GpuTrainNode extends …</text>
+  <text x="605" y="890" font-size="10" fill="#6b7280" font-style="italic">每个 worker 进程独立部署</text>
+  <text x="605" y="906" font-size="10" fill="#6b7280" font-style="italic">崩溃只影响自己, 不波及主</text>
+  <text x="605" y="926" font-size="10" font-weight="700" fill="#9a3412">→ sandbox-js 生产化的目标</text>
+  <text x="605" y="942" font-size="10" font-weight="700" fill="#9a3412">→ Python / GPU 推理</text>
+
+  <!-- ManualNode 派生 — P4 暂缓 -->
+  <rect x="875" y="738" width="270" height="220" rx="8" fill="#fafafa" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="1010" y="757" text-anchor="middle" font-weight="700" font-size="12" fill="#6b7280">Manual 派生 (P4 暂缓, 概念占位)</text>
+  <line x1="887" y1="767" x2="1133" y2="767" stroke="#db2777" stroke-dasharray="2,2"/>
+  <text x="890" y="785" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">class AnnotateNode extends</text>
+  <text x="900" y="797" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">  ManualNode {</text>
+  <text x="900" y="811" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">  uiSchema = {…}</text>
+  <text x="900" y="825" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">  // 配额 / disallow 规则</text>
+  <text x="900" y="839" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">}</text>
+  <text x="890" y="861" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">class ReviewNode extends …</text>
+  <text x="890" y="887" font-size="10" fill="#6b7280" font-style="italic">没有 lease 循环</text>
+  <text x="890" y="903" font-size="10" fill="#6b7280" font-style="italic">业务层 claim() + submit()</text>
+  <text x="890" y="923" font-size="10" font-weight="700" fill="#9d174d">→ 当前 annotate / review</text>
+  <text x="890" y="939" font-size="10" font-weight="700" fill="#9d174d">→ 收紧到统一基类管配额</text>
+
+  <!-- L2 → L3 继承箭头 -->
+  <line x1="155" y1="694" x2="155" y2="736" stroke="#374151" stroke-width="1.5" marker-end="url(#inherit)"/>
+  <line x1="440" y1="694" x2="440" y2="736" stroke="#374151" stroke-width="1.5" marker-end="url(#inherit)"/>
+  <line x1="725" y1="694" x2="725" y2="736" stroke="#374151" stroke-width="1.5" marker-end="url(#inherit)"/>
+  <line x1="1010" y1="694" x2="1010" y2="736" stroke="#374151" stroke-width="1.5" marker-end="url(#inherit)"/>
+
+  <!-- ============ Layer 4: 实例化 + 注册 ============ -->
+  <text x="40" y="990" font-size="13" font-weight="700" fill="#111827">L4 · 实例化 + 注册 (启动时, 跨进程)</text>
+
+  <rect x="20" y="1004" width="560" height="160" rx="8" fill="#f9fafb" stroke="#6b7280" stroke-width="1.5"/>
+  <text x="35" y="1024" font-weight="700" font-size="12" fill="#111827">主进程 (scheduler-backend) 启动:</text>
+  <text x="35" y="1045" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">// src/autoworker.ts → bootstrapDrivers()</text>
+  <text x="35" y="1062" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">const dedup    = new DedupNode();</text>
+  <text x="35" y="1078" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">const export_  = new ExportNode();</text>
+  <text x="35" y="1094" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">const compute  = new ComputeNode();</text>
+  <text x="35" y="1110" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">register(dedup); register(export_); register(compute);</text>
+  <text x="35" y="1130" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">// register 内部: 调 onInit → auto-upsert 写 DB → 加入 driver registry</text>
+  <text x="35" y="1150" font-size="10" font-style="italic" fill="#6b7280">所有 InProcess / Http 节点共用主进程 autoworker 循环</text>
+
+  <rect x="600" y="1004" width="560" height="160" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="615" y="1024" font-weight="700" font-size="12" fill="#9a3412">独立进程 (sandbox-worker / py-worker) 启动:</text>
+  <text x="615" y="1045" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">// services/sandbox-worker/main.ts</text>
+  <text x="615" y="1062" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">const sandboxNode = new SandboxWorkerNode({</text>
+  <text x="615" y="1078" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">  schedulerBaseUrl: env.SCHEDULER_URL,</text>
+  <text x="615" y="1094" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">  workerApiKey:     env.WORKER_API_KEY,</text>
+  <text x="615" y="1110" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">});</text>
+  <text x="615" y="1126" font-family="ui-monospace, monospace" font-size="11" fill="#1f2937">await sandboxNode.start();   // 启 lease 循环</text>
+  <text x="615" y="1150" font-size="10" font-style="italic" fill="#9a3412">每个 ExternalWorker 节点 = 一个独立服务 / 容器 / k8s pod</text>
+
+  <!-- ============ 底部图例 ============ -->
+  <text x="40" y="1198" font-size="12" font-weight="700" fill="#111827">设计原则:</text>
+  <text x="40" y="1216" font-size="11" fill="#374151">① 公共逻辑 (lease 轮询 / 退避 / 心跳 / 输入校验 / 输出校验 / 结果提交 / 异常归类) 只写一遍, 沉到 BaseNode + 4 个 runMode 壳</text>
+  <text x="40" y="1232" font-size="11" font-weight="700" fill="#374151">② 子类只 implement handle(job) — 业务逻辑而已, 不感知调度协议</text>
+  <text x="40" y="1248" font-size="11" fill="#374151">③ 加新节点 = 写一个继承类 + new + register, 不动调度核心 / 不动 lease 协议; 老 driver 通过 BaseNode.asDriver() 兼容, 不强迫迁移</text>
+</svg>

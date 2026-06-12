@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer base {
+  .section {
+    @apply px-6 min-w-[320px] max-w-[1440px] md:px-[80px] lg:px-[120px] m-auto
+  }
+}
+

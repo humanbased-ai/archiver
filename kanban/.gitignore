@@ -1,0 +1,12 @@
+node_modules
+dist/
+*.local
+
+# yarn.lock
+pnpm-lock.yaml
+
+# Editor directories and files
+.idea
+.DS_Store
+# 要变更时，在github上更改
+.env 

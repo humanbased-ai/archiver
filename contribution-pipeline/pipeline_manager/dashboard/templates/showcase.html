@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Label Pipeline — 数据标注平台</title>
+<style>
+/* ===== Reset & Base ===== */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;color:#1a1a2e;line-height:1.6;background:#fff}
+a{color:#4361ee;text-decoration:none}
+/* ===== Nav ===== */
+.nav{position:fixed;top:0;width:100%;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);z-index:100;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:56px}
+.nav-brand{font-weight:700;font-size:18px;color:#1a1a2e;display:flex;align-items:center;gap:8px}
+.nav-brand span{background:linear-gradient(135deg,#4361ee,#7209b7);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:28px}
+.nav-links a{color:#666;font-size:14px;font-weight:500;transition:.2s}
+.nav-links a:hover{color:#4361ee}
+/* ===== Sections ===== */
+section{padding:100px 40px 60px;max-width:1200px;margin:0 auto}
+.section-label{font-size:13px;font-weight:600;color:#4361ee;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px}
+.section-title{font-size:36px;font-weight:700;margin-bottom:16px;line-height:1.3}
+.section-desc{font-size:17px;color:#555;max-width:680px;margin-bottom:40px}
+/* ===== Hero ===== */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding-top:56px;background:linear-gradient(180deg,#f8f9ff 0%,#fff 100%)}
+.hero h1{font-size:52px;font-weight:800;margin-bottom:20px;line-height:1.2}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,#4361ee,#7209b7);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:20px;color:#555;max-width:640px;margin-bottom:40px}
+.hero-stats{display:flex;gap:48px;margin-bottom:48px}
+.hero-stat .num{font-size:42px;font-weight:800;color:#1a1a2e}
+.hero-stat .label{font-size:14px;color:#888}
+.hero-cta{display:flex;gap:16px}
+.btn-primary{padding:14px 32px;background:linear-gradient(135deg,#4361ee,#7209b7);color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;transition:.2s;box-shadow:0 4px 20px rgba(67,97,238,.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(67,97,238,.4)}
+.btn-outline{padding:14px 32px;background:transparent;color:#4361ee;border:2px solid #4361ee;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;transition:.2s}
+.btn-outline:hover{background:#4361ee;color:#fff}
+/* ===== Problems ===== */
+.problems{background:#f8f9ff}
+.problem-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.problem-card{background:#fff;border-radius:16px;padding:32px;box-shadow:0 2px 12px rgba(0,0,0,.06);border-left:4px solid #ef476f}
+.problem-card .icon{font-size:28px;margin-bottom:12px}
+.problem-card h3{font-size:18px;margin-bottom:8px}
+.problem-card p{color:#666;font-size:15px}
+/* ===== Solution Overview ===== */
+.solution-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:48px}
+.sol-card{background:#fff;border-radius:16px;padding:32px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.06);transition:.3s}
+.sol-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.1)}
+.sol-card .icon{font-size:48px;margin-bottom:16px}
+.sol-card h3{font-size:18px;margin-bottom:8px}
+.sol-card p{color:#666;font-size:14px}
+.compare-box{background:#f8f9ff;border-radius:16px;padding:40px;display:flex;align-items:center;gap:40px;justify-content:center}
+.compare-side{text-align:center;flex:1}
+.compare-side .label{font-size:13px;color:#888;margin-bottom:8px}
+.compare-side .code{background:#1a1a2e;color:#a5f3c4;border-radius:12px;padding:20px;font-family:'Courier New',monospace;font-size:14px;text-align:left;min-height:120px;white-space:pre-line}
+.compare-arrow{font-size:36px;color:#4361ee}
+/* ===== Flow Editor Prototype ===== */
+.flow-editor-wrap{background:#1a1a2e;border-radius:20px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.2)}
+.flow-toolbar{background:#16213e;padding:12px 20px;display:flex;align-items:center;justify-content:space-between}
+.flow-toolbar .title{color:#fff;font-weight:600;font-size:14px}
+.flow-toolbar .actions{display:flex;gap:8px}
+.flow-toolbar .actions button{padding:6px 16px;border-radius:6px;border:none;font-size:13px;cursor:pointer;font-weight:500}
+.flow-toolbar .save-btn{background:#4361ee;color:#fff}
+.flow-toolbar .run-btn{background:#06d6a0;color:#1a1a2e}
+.flow-canvas{position:relative;height:420px;overflow:hidden}
+.flow-node{position:absolute;background:#fff;border-radius:12px;padding:14px 20px;font-size:13px;font-weight:600;cursor:grab;display:flex;align-items:center;gap:10px;box-shadow:0 4px 16px rgba(0,0,0,.3);transition:box-shadow .2s;user-select:none;z-index:2}
+.flow-node:hover{box-shadow:0 6px 24px rgba(0,0,0,.4)}
+.flow-node .dot{width:10px;height:10px;border-radius:50%}
+.flow-node.active{outline:2px solid #4361ee;outline-offset:2px}
+.flow-line{position:absolute;z-index:1}
+.flow-condition{position:absolute;background:rgba(255,255,255,.12);color:#fff;font-size:11px;padding:3px 10px;border-radius:10px;z-index:2;white-space:nowrap}
+.flow-palette{background:#0f1629;padding:16px 20px;display:flex;gap:10px;flex-wrap:wrap;border-top:1px solid #2a2a4a}
+.flow-palette .chip{background:#1a1a2e;color:#ccc;padding:6px 14px;border-radius:8px;font-size:12px;cursor:grab;display:flex;align-items:center;gap:6px;border:1px solid #2a2a4a;transition:.2s}
+.flow-palette .chip:hover{border-color:#4361ee;color:#fff}
+/* ===== Form Prototype ===== */
+.form-proto-wrap{display:grid;grid-template-columns:360px 1fr;gap:0;background:#f0f2f5;border-radius:20px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.1)}
+.form-config{background:#1a1a2e;color:#a5f3c4;padding:24px;font-family:'Courier New',monospace;font-size:12px;line-height:1.8;overflow-y:auto;max-height:500px;white-space:pre}
+.form-preview{padding:32px;background:#fff}
+.form-preview h4{font-size:14px;color:#888;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.form-preview h4::before{content:'';width:8px;height:8px;background:#06d6a0;border-radius:50%}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-size:13px;font-weight:600;color:#333;margin-bottom:6px}
+.form-group label .req{color:#ef476f}
+.form-input{width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:8px;font-size:14px;transition:.2s;outline:none}
+.form-input:focus{border-color:#4361ee;box-shadow:0 0 0 3px rgba(67,97,238,.1)}
+.form-select{width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:8px;font-size:14px;background:#fff;outline:none}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-upload{border:2px dashed #ddd;border-radius:12px;padding:24px;text-align:center;color:#999;font-size:13px;cursor:pointer;transition:.2s}
+.form-upload:hover{border-color:#4361ee;color:#4361ee}
+.form-submit{width:100%;padding:12px;background:linear-gradient(135deg,#4361ee,#7209b7);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;margin-top:8px}
+.cond-badge{display:inline-block;background:#fff3cd;color:#856404;font-size:11px;padding:2px 8px;border-radius:4px;margin-left:8px}
+/* ===== Dashboard Prototype ===== */
+.dash-wrap{background:#f5f5f5;border-radius:20px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.1)}
+.dash-nav{background:#1a1a2e;color:#fff;padding:14px 24px;display:flex;align-items:center;gap:20px}
+.dash-nav .brand{font-weight:700;font-size:15px}
+.dash-nav a{color:#aaa;font-size:13px}
+.dash-nav a.active{color:#fff}
+.dash-body{padding:24px}
+.dash-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.dash-stat{background:#fff;border-radius:12px;padding:20px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.dash-stat .num{font-size:32px;font-weight:800}
+.dash-stat .num.green{color:#06d6a0}
+.dash-stat .num.blue{color:#4361ee}
+.dash-stat .num.orange{color:#ff9f1c}
+.dash-stat .num.purple{color:#7209b7}
+.dash-stat .lbl{font-size:12px;color:#888;margin-top:4px}
+.dash-table{width:100%;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.dash-table th{background:#f8f9ff;padding:12px 16px;font-size:12px;color:#888;text-transform:uppercase;text-align:left;font-weight:600}
+.dash-table td{padding:12px 16px;font-size:14px;border-top:1px solid #f0f0f0}
+.dash-badge{display:inline-block;padding:3px 10px;border-radius:10px;font-size:12px;font-weight:600}
+.dash-badge.green{background:#e8f5e9;color:#2e7d32}
+.dash-badge.blue{background:#e3f2fd;color:#1565c0}
+.dash-badge.red{background:#fce4ec;color:#c62828}
+.progress-bar{height:6px;background:#eee;border-radius:3px;overflow:hidden;width:120px;display:inline-block;vertical-align:middle;margin-left:8px}
+.progress-fill{height:100%;background:linear-gradient(90deg,#4361ee,#06d6a0);border-radius:3px}
+/* ===== Coverage ===== */
+.coverage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.cov-card{background:#f8f9ff;border-radius:12px;padding:24px;transition:.2s}
+.cov-card:hover{background:#eef0ff}
+.cov-card .icon{font-size:28px;margin-bottom:8px}
+.cov-card h4{font-size:15px;margin-bottom:4px}
+.cov-card p{font-size:13px;color:#666}
+/* ===== Timeline ===== */
+.timeline{position:relative;padding-left:40px}
+.timeline::before{content:'';position:absolute;left:15px;top:0;bottom:0;width:2px;background:#e0e0e0}
+.tl-item{position:relative;margin-bottom:32px}
+.tl-item::before{content:'';position:absolute;left:-33px;top:4px;width:14px;height:14px;border-radius:50%;background:#4361ee;border:3px solid #fff;box-shadow:0 0 0 2px #4361ee}
+.tl-item.done::before{background:#06d6a0;box-shadow:0 0 0 2px #06d6a0}
+.tl-item h4{font-size:16px;margin-bottom:4px}
+.tl-item .meta{font-size:13px;color:#888;margin-bottom:4px}
+.tl-item p{font-size:14px;color:#555}
+/* ===== Footer ===== */
+footer{background:#1a1a2e;color:#aaa;text-align:center;padding:40px;font-size:13px}
+/* ===== Responsive ===== */
+@media(max-width:768px){
+  .hero h1{font-size:32px}
+  .problem-grid,.solution-cards,.coverage-grid{grid-template-columns:1fr}
+  .form-proto-wrap{grid-template-columns:1fr}
+  .form-config{max-height:200px}
+  .dash-stats{grid-template-columns:repeat(2,1fr)}
+  .compare-box{flex-direction:column}
+  section{padding:60px 20px 40px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Nav ===== -->
+<nav class="nav">
+  <div class="nav-brand">🏷️ <span>Label Pipeline</span></div>
+  <div class="nav-links">
+    <a href="#problems">痛点</a>
+    <a href="#solution">方案</a>
+    <a href="#flow-editor">流程编排</a>
+    <a href="#form-engine">配置引擎</a>
+    <a href="#dashboard">管理面板</a>
+    <a href="#coverage">覆盖场景</a>
+    <a href="#timeline">实施路线</a>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<section class="hero" id="hero">
+  <h1>所有任务<em>配置</em>定义<br>所有流程<em>拖拽</em>编排</h1>
+  <p>一个统一的数据标注平台，覆盖数据采集、清洗、AI 预标注、人工标注、审核、导出全流程。不写代码，只写配置。</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">0</div><div class="label">新增任务写代码行数</div></div>
+    <div class="hero-stat"><div class="num">22+</div><div class="label">可覆盖标注场景</div></div>
+    <div class="hero-stat"><div class="num">10</div><div class="label">分钟配置一个新任务</div></div>
+  </div>
+  <div class="hero-cta">
+    <button class="btn-primary" onclick="document.getElementById('solution').scrollIntoView()">了解方案</button>
+    <button class="btn-outline" onclick="document.getElementById('flow-editor').scrollIntoView()">看原型演示</button>
+  </div>
+</section>
+
+<!-- ===== Problems ===== -->
+<section class="problems" id="problems">
+  <div class="section-label">现状痛点</div>
+  <div class="section-title">为什么需要这个系统</div>
+  <div class="section-desc">当前 12 种任务 = 12 个独立开发的页面，约 3600 行代码，80% 是重复的。</div>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="icon">🔨</div>
+      <h3>每个任务都要从头开发</h3>
+      <p>一个交易所充值采集页面写了 1113 行代码。仅仅改几个字段的变体也得新建整个文件。新增一种任务 = 开发 1~2 周。</p>
+    </div>
+    <div class="problem-card">
+      <div class="icon">🏝️</div>
+      <h3>各自为政，没有统一管理</h3>
+      <p>每个页面自己定义数据格式、自己做校验、自己提交。无法看全局进度，无法控制标注员配额，无法跨任务分析质量。</p>
+    </div>
+    <div class="problem-card">
+      <div class="icon">🚫</div>
+      <h3>只能填表，不能标图</h3>
+      <p>目前只支持表单类采集。图片画框、语义分割、文本 NER、音频转写、视频时间线等标准 ML 标注场景完全做不了。</p>
+    </div>
+    <div class="problem-card">
+      <div class="icon">🔗</div>
+      <h3>流程断裂，全靠手动串</h3>
+      <p>采集→清洗→AI 预处理→人工标注→审核→退回→导出，这些步骤之间是断开的，没有自动化的流程管理。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Solution ===== -->
+<section id="solution">
+  <div class="section-label">解决方案</div>
+  <div class="section-title">三个引擎，解决所有问题</div>
+  <div class="section-desc">配置引擎渲染界面，编排引擎管理流程，管理引擎分配任务。三者协同，覆盖完整标注闭环。</div>
+  <div class="solution-cards">
+    <div class="sol-card">
+      <div class="icon">⚙️</div>
+      <h3>配置引擎</h3>
+      <p>读配置文件自动渲染界面。表单和画布标注都支持。新增任务 = 写一份配置文件。</p>
+    </div>
+    <div class="sol-card">
+      <div class="icon">🔀</div>
+      <h3>编排引擎</h3>
+      <p>在可视化编辑器里拖拽积木、连线。支持分流、汇合、退回闭环。全自动执行。</p>
+    </div>
+    <div class="sol-card">
+      <div class="icon">👥</div>
+      <h3>管理引擎</h3>
+      <p>统一分配任务、控制配额、金标测试、质量追踪。标注员和管理员都只看一个面板。</p>
+    </div>
+  </div>
+  <div class="compare-box">
+    <div class="compare-side">
+      <div class="label">之前：1113 行 React 代码</div>
+      <div class="code">const [formData, setFormData] = useState({
+  exchange_name: '',
+  screenshot: [],
+  network: '',
+  token: '',
+  amount: '',
+  // ... 15 more fields
+})
+const validateForm = () => {
+  // ... 80 lines of validation
+}
+// ... 900 more lines of UI</div>
+    </div>
+    <div class="compare-arrow">→</div>
+    <div class="compare-side">
+      <div class="label">之后：100 行 YAML 配置</div>
+      <div class="code">fields:
+  - field: exchange
+    type: select
+    options_from: {api: "/exchanges"}
+  - field: network
+    type: select
+    options: [Ethereum, Bitcoin]
+  - field: token
+    type: select
+    cascade_from: network
+  - field: tx_hash
+    type: text
+    async_validate:
+      api: "/validate/tx_hash"</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Flow Editor ===== -->
+<section id="flow-editor" style="background:#f8f9ff;padding-bottom:80px">
+  <div class="section-label">流程编排</div>
+  <div class="section-title">拖拽构建标注流程</div>
+  <div class="section-desc">底部面板拖出积木块，连线设定依赖，点击连线设置条件。支持分流、汇合、退回闭环。</div>
+  <div class="flow-editor-wrap">
+    <div class="flow-toolbar">
+      <span class="title">📋 流程编辑器 — 电商商品标注</span>
+      <div class="actions">
+        <button class="save-btn">💾 保存</button>
+        <button class="run-btn">▶ 运行</button>
+      </div>
+    </div>
+    <div class="flow-canvas" id="flowCanvas">
+      <!-- SVG Lines -->
+      <svg width="100%" height="100%" style="position:absolute;top:0;left:0">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4361ee"/></marker>
+          <marker id="arrow-g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#06d6a0"/></marker>
+          <marker id="arrow-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ef476f"/></marker>
+        </defs>
+        <line x1="152" y1="50" x2="248" y2="50" stroke="#4361ee" stroke-width="2" marker-end="url(#arrow)"/>
+        <line x1="365" y1="50" x2="460" y2="50" stroke="#4361ee" stroke-width="2" marker-end="url(#arrow)"/>
+        <line x1="555" y1="50" x2="640" y2="50" stroke="#4361ee" stroke-width="2" marker-end="url(#arrow)"/>
+        <line x1="710" y1="65" x2="710" y2="130" stroke="#06d6a0" stroke-width="2" marker-end="url(#arrow-g)"/>
+        <line x1="710" y1="65" x2="560" y2="200" stroke="#4361ee" stroke-width="2" marker-end="url(#arrow)"/>
+        <line x1="710" y1="65" x2="860" y2="200" stroke="#4361ee" stroke-width="2" marker-end="url(#arrow)"/>
+        <line x1="560" y1="240" x2="710" y2="300" stroke="#4361ee" stroke-width="2" marker-end="url(#arrow)"/>
+        <line x1="860" y1="240" x2="710" y2="300" stroke="#4361ee" stroke-width="2" marker-end="url(#arrow)"/>
+        <line x1="710" y1="335" x2="610" y2="380" stroke="#06d6a0" stroke-width="2" marker-end="url(#arrow-g)"/>
+        <line x1="710" y1="335" x2="870" y2="370" stroke="#ef476f" stroke-width="2" marker-end="url(#arrow-r)"/>
+        <path d="M 920 380 Q 980 380 980 310 Q 980 240 760 310" stroke="#ef476f" stroke-width="2" fill="none" stroke-dasharray="6" marker-end="url(#arrow-r)"/>
+        <line x1="680" y1="170" x2="610" y2="390" stroke="#06d6a0" stroke-width="2" stroke-dasharray="4" marker-end="url(#arrow-g)"/>
+      </svg>
+      <!-- Nodes -->
+      <div class="flow-node" style="left:40px;top:32px"><div class="dot" style="background:#4361ee"></div>📥 数据采集</div>
+      <div class="flow-node" style="left:250px;top:32px"><div class="dot" style="background:#06d6a0"></div>🧹 清洗去重</div>
+      <div class="flow-node" style="left:460px;top:32px"><div class="dot" style="background:#7209b7"></div>🤖 AI 预分类</div>
+      <div class="flow-node active" style="left:650px;top:32px"><div class="dot" style="background:#ff9f1c"></div>🔀 分流</div>
+      <div class="flow-node" style="left:640px;top:140px"><div class="dot" style="background:#06d6a0"></div>✅ 自动通过</div>
+      <div class="flow-node" style="left:460px;top:200px"><div class="dot" style="background:#4361ee"></div>🖼️ 图片标注</div>
+      <div class="flow-node" style="left:790px;top:200px"><div class="dot" style="background:#4361ee"></div>📋 表单标注</div>
+      <div class="flow-node" style="left:640px;top:295px"><div class="dot" style="background:#ff9f1c"></div>👁️ 审核</div>
+      <div class="flow-node" style="left:530px;top:376px"><div class="dot" style="background:#06d6a0"></div>📤 导出</div>
+      <div class="flow-node" style="left:820px;top:360px"><div class="dot" style="background:#ef476f"></div>🔄 退回重标</div>
+      <!-- Conditions -->
+      <div class="flow-condition" style="left:700px;top:95px">置信度 ≥ 90%</div>
+      <div class="flow-condition" style="left:555px;top:150px">有图 + &lt;90%</div>
+      <div class="flow-condition" style="left:800px;top:150px">无图 + &lt;90%</div>
+      <div class="flow-condition" style="left:595px;top:355px;color:#a5f3c4">通过 ✓</div>
+      <div class="flow-condition" style="left:800px;top:340px;color:#ef476f">不通过 ✗</div>
+    </div>
+    <div class="flow-palette">
+      <div class="chip">📥 采集</div>
+      <div class="chip">🧹 清洗</div>
+      <div class="chip">🤖 AI 模型</div>
+      <div class="chip">🔀 分流</div>
+      <div class="chip">📋 人工标注</div>
+      <div class="chip">👁️ 审核</div>
+      <div class="chip">🔄 合并</div>
+      <div class="chip">📤 导出</div>
+      <div class="chip">🔔 通知</div>
+      <div class="chip">🎓 训练</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Form Engine ===== -->
+<section id="form-engine">
+  <div class="section-label">配置引擎</div>
+  <div class="section-title">左边写配置，右边实时预览</div>
+  <div class="section-desc">配置文件定义字段、校验、条件。系统自动渲染表单或标注画布。</div>
+  <div class="form-proto-wrap">
+    <div class="form-config"><span style="color:#888"># 任务配置文件</span>
+<span style="color:#ffd166">task</span>:
+  name: food_collection
+  title: 食物数据采集
+
+<span style="color:#ffd166">form</span>:
+  <span style="color:#ffd166">fields</span>:
+    - field: image
+      type: <span style="color:#a5f3c4">image_upload</span>
+      label: 食物照片
+      required: true
+
+    - field: food_name
+      type: <span style="color:#a5f3c4">text</span>
+      label: 食物名称
+      max_length: 64
+      required: true
+
+    - field: weight
+      type: <span style="color:#a5f3c4">number</span>
+      label: 重量
+      suffix: 克
+      required: true
+
+    - field: cooking_method
+      type: <span style="color:#a5f3c4">select</span>
+      label: 烹饪方式
+      options:
+        - 炒
+        - 蒸
+        - 煮
+        - 烤
+        - 生食
+
+    - field: calories
+      type: <span style="color:#a5f3c4">number</span>
+      label: 热量
+      suffix: kcal</div>
+    <div class="form-preview">
+      <h4>实时预览：食物数据采集</h4>
+      <div class="form-group">
+        <label>食物照片 <span class="req">*</span></label>
+        <div class="form-upload">📷 点击上传或拖拽图片到此处<br><span style="font-size:11px;color:#bbb">支持 JPG、PNG，最大 10MB</span></div>
+      </div>
+      <div class="form-group">
+        <label>食物名称 <span class="req">*</span></label>
+        <input class="form-input" placeholder="输入食物名称" maxlength="64">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>重量 <span class="req">*</span></label>
+          <div style="position:relative"><input class="form-input" placeholder="0" type="number"><span style="position:absolute;right:12px;top:10px;color:#999;font-size:13px">克</span></div>
+        </div>
+        <div class="form-group">
+          <label>热量</label>
+          <div style="position:relative"><input class="form-input" placeholder="0" type="number"><span style="position:absolute;right:12px;top:10px;color:#999;font-size:13px">kcal</span></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>烹饪方式</label>
+        <select class="form-select">
+          <option value="">请选择</option><option>炒</option><option>蒸</option><option>煮</option><option>烤</option><option>生食</option>
+        </select>
+      </div>
+      <button class="form-submit">提交</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Dashboard ===== -->
+<section id="dashboard" style="background:#f8f9ff">
+  <div class="section-label">统一管理</div>
+  <div class="section-title">标注员和管理员只看一个面板</div>
+  <div class="section-desc">不管背后是画布标注还是表单采集，标注员只看到统一的任务列表。管理员一个面板看所有项目。</div>
+  <div class="dash-wrap">
+    <div class="dash-nav">
+      <span class="brand">🏷️ Label Pipeline</span>
+      <a href="#" class="active">项目</a>
+      <a href="#">标注员</a>
+      <a href="#">设置</a>
+      <span style="margin-left:auto;font-size:13px">👋 管理员</span>
+    </div>
+    <div class="dash-body">
+      <div class="dash-stats">
+        <div class="dash-stat"><div class="num blue">5</div><div class="lbl">进行中项目</div></div>
+        <div class="dash-stat"><div class="num green">12,480</div><div class="lbl">今日完成标注</div></div>
+        <div class="dash-stat"><div class="num orange">23</div><div class="lbl">活跃标注员</div></div>
+        <div class="dash-stat"><div class="num purple">0.93</div><div class="lbl">平均质量分</div></div>
+      </div>
+      <table class="dash-table">
+        <thead><tr><th>项目</th><th>进度</th><th>质量</th><th>标注员</th><th>状态</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>电商商品标注</strong></td>
+            <td>68% <div class="progress-bar"><div class="progress-fill" style="width:68%"></div></div></td>
+            <td>0.94</td>
+            <td>8 人</td>
+            <td><span class="dash-badge blue">进行中</span></td>
+          </tr>
+          <tr>
+            <td><strong>CEX 充值数据采集</strong></td>
+            <td>45% <div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div></td>
+            <td>0.91</td>
+            <td>12 人</td>
+            <td><span class="dash-badge blue">进行中</span></td>
+          </tr>
+          <tr>
+            <td><strong>语音转写校对</strong></td>
+            <td>92% <div class="progress-bar"><div class="progress-fill" style="width:92%"></div></div></td>
+            <td>0.96</td>
+            <td>5 人</td>
+            <td><span class="dash-badge green">即将完成</span></td>
+          </tr>
+          <tr>
+            <td><strong>商品图片检测</strong></td>
+            <td>23% <div class="progress-bar"><div class="progress-fill" style="width:23%"></div></div></td>
+            <td>0.89</td>
+            <td>6 人</td>
+            <td><span class="dash-badge blue">进行中</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Coverage ===== -->
+<section id="coverage">
+  <div class="section-label">场景覆盖</div>
+  <div class="section-title">一个系统覆盖所有场景</div>
+  <div class="section-desc">从表单数据采集到图片分割、从语音转写到 RLHF，全部通过配置+编排完成。</div>
+  <div class="coverage-grid">
+    <div class="cov-card"><div class="icon">📋</div><h4>表单数据采集</h4><p>交易记录、食物数据、照片采集、问卷调查、信息搜集</p></div>
+    <div class="cov-card"><div class="icon">🖼️</div><h4>图像标注</h4><p>目标检测、语义分割、关键点、图片分类、OCR</p></div>
+    <div class="cov-card"><div class="icon">📝</div><h4>文本标注</h4><p>命名实体识别(NER)、文本分类、情感分析、关系抽取</p></div>
+    <div class="cov-card"><div class="icon">🎵</div><h4>音频标注</h4><p>语音转写、说话人分离、音频事件检测</p></div>
+    <div class="cov-card"><div class="icon">🎬</div><h4>视频标注</h4><p>时间线段落、视频分类、目标跟踪</p></div>
+    <div class="cov-card"><div class="icon">🤖</div><h4>LLM 数据工程</h4><p>SFT 指令数据、RLHF 偏好、RAG 评估、安全红队</p></div>
+    <div class="cov-card"><div class="icon">📄</div><h4>文档信息提取</h4><p>发票、合同、财报结构化字段提取</p></div>
+    <div class="cov-card"><div class="icon">🏭</div><h4>质检报告</h4><p>复杂嵌套表单、条件字段、可重复组、级联下拉</p></div>
+    <div class="cov-card"><div class="icon">🔀</div><h4>混合标注</h4><p>同一个任务里既画框又填表，同一个流程里走不同标注工具</p></div>
+  </div>
+</section>
+
+<!-- ===== Timeline ===== -->
+<section id="timeline" style="background:#f8f9ff">
+  <div class="section-label">实施路线</div>
+  <div class="section-title">分阶段交付，每步可独立上线</div>
+  <div class="timeline">
+    <div class="tl-item done">
+      <h4>第一阶段：通用表单渲染器</h4>
+      <div class="meta">2 周 · 迁移 3 个简单任务</div>
+      <p>表单渲染器 + 15 种字段组件。迁移食物采集、照片采集、标注员调查。</p>
+    </div>
+    <div class="tl-item">
+      <h4>第二阶段：高级表单能力</h4>
+      <div class="meta">1 周 · 迁移 3 个复杂任务</div>
+      <p>级联下拉、异步校验、条件显示、跨字段校验。迁移 CEX 充值/提现、加密资讯。</p>
+    </div>
+    <div class="tl-item">
+      <h4>第三阶段：画布标注嵌入</h4>
+      <div class="meta">1 周 · 新增画图标注能力</div>
+      <p>嵌入 Label Studio 编辑器组件。支持图片检测/分割/NER/音频/视频标注。</p>
+    </div>
+    <div class="tl-item">
+      <h4>第四阶段：可视化流程编排</h4>
+      <div class="meta">2 周 · 拖拽编排上线</div>
+      <p>可视化编辑器、任务依赖调度、条件分流、审核闭环。</p>
+    </div>
+    <div class="tl-item">
+      <h4>第五阶段：管理面板</h4>
+      <div class="meta">1 周 · 统一管理上线</div>
+      <p>标注员面板、项目仪表盘、分配配额、质量控制。</p>
+    </div>
+    <div class="tl-item">
+      <h4>第六阶段：逐任务上线</h4>
+      <div class="meta">持续 · 旧系统平滑切换</div>
+      <p>每个旧任务 A/B 对比测试后切换路由，新旧系统并行，不影响业务。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <p><strong>Label Pipeline</strong> — 配置定义任务 · 拖拽编排流程 · 统一管理质量</p>
+  <p style="margin-top:8px;font-size:12px;color:#666">codatta · 2026</p>
+</footer>
+
+</body>
+</html>

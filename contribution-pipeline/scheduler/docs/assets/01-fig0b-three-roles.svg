@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 540" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+  <defs>
+    <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <text x="440" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">三方分工</text>
+  <text x="440" y="62" text-anchor="middle" font-size="13" fill="#64748b">节点 / 调度中心 / Pipeline 三者知识边界完全不重叠</text>
+
+  <!-- Node -->
+  <rect x="30" y="100" width="250" height="380" rx="14" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <rect x="30" y="100" width="250" height="56" rx="14" fill="#2563eb"/>
+  <rect x="30" y="142" width="250" height="14" fill="#2563eb"/>
+  <text x="155" y="135" text-anchor="middle" font-size="19" font-weight="700" fill="white">节点 Worker</text>
+  <text x="155" y="180" text-anchor="middle" font-size="13" fill="#1e3a8a" font-style="italic">"我是手艺人"</text>
+
+  <text x="50" y="220" font-size="13" font-weight="700" fill="#15803d">✓ 知道</text>
+  <text x="62" y="244" font-size="13" fill="#1f2937">我能干什么活</text>
+  <text x="62" y="264" font-size="13" fill="#1f2937">输入 / 输出长啥样</text>
+
+  <text x="50" y="305" font-size="13" font-weight="700" fill="#b91c1c">✗ 不知道</text>
+  <text x="62" y="329" font-size="13" fill="#1f2937">数据从哪来</text>
+  <text x="62" y="349" font-size="13" fill="#1f2937">数据接下来去哪</text>
+  <text x="62" y="369" font-size="13" fill="#1f2937">自己在哪条 pipeline</text>
+  <text x="62" y="389" font-size="13" fill="#1f2937">谁会处理我的产出</text>
+  <text x="62" y="409" font-size="13" fill="#1f2937">全公司有多少节点</text>
+
+  <!-- Scheduler -->
+  <rect x="315" y="100" width="250" height="380" rx="14" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+  <rect x="315" y="100" width="250" height="56" rx="14" fill="#059669"/>
+  <rect x="315" y="142" width="250" height="14" fill="#059669"/>
+  <text x="440" y="135" text-anchor="middle" font-size="19" font-weight="700" fill="white">调度中心 Scheduler</text>
+  <text x="440" y="180" text-anchor="middle" font-size="13" fill="#064e3b" font-style="italic">"我是导演"</text>
+
+  <text x="335" y="220" font-size="13" font-weight="700" fill="#15803d">✓ 知道</text>
+  <text x="347" y="244" font-size="13" fill="#1f2937">每条数据当前状态</text>
+  <text x="347" y="264" font-size="13" fill="#1f2937">每条 pipeline 迁移规则</text>
+  <text x="347" y="284" font-size="13" fill="#1f2937">谁领了什么活、何时过期</text>
+
+  <text x="335" y="325" font-size="13" font-weight="700" fill="#b91c1c">✗ 不知道</text>
+  <text x="347" y="349" font-size="13" fill="#1f2937">节点内部怎么实现</text>
+  <text x="347" y="369" font-size="13" fill="#1f2937">翻译用 GPT 还是百度</text>
+  <text x="347" y="389" font-size="13" fill="#1f2937">谁在审核(业务概念)</text>
+
+  <!-- Pipeline -->
+  <rect x="600" y="100" width="250" height="380" rx="14" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <rect x="600" y="100" width="250" height="56" rx="14" fill="#d97706"/>
+  <rect x="600" y="142" width="250" height="14" fill="#d97706"/>
+  <text x="725" y="135" text-anchor="middle" font-size="19" font-weight="700" fill="white">Pipeline 定义</text>
+  <text x="725" y="180" text-anchor="middle" font-size="13" fill="#78350f" font-style="italic">"我是剧本"</text>
+
+  <text x="725" y="218" text-anchor="middle" font-size="13" fill="#1f2937">状态迁移规则的集合</text>
+
+  <rect x="615" y="240" width="220" height="155" rx="6" fill="white" stroke="#d97706" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="625" y="263" font-size="12" fill="#1f2937">采集 → 翻译</text>
+  <text x="625" y="285" font-size="12" fill="#1f2937">翻译 → 审核</text>
+  <text x="625" y="307" font-size="12" fill="#1f2937">审核(通过) → 入库</text>
+  <text x="625" y="329" font-size="12" fill="#1f2937">审核(拒绝) → 返工</text>
+  <text x="625" y="351" font-size="12" fill="#1f2937">入库 → done</text>
+  <text x="625" y="380" font-size="11" fill="#92400e" font-style="italic">… 一组迁移箭头</text>
+
+  <text x="725" y="425" text-anchor="middle" font-size="12" fill="#92400e" font-style="italic">纯数据,没有行为</text>
+
+  <!-- Arrows -->
+  <line x1="280" y1="285" x2="315" y2="285" stroke="#475569" stroke-width="2" marker-end="url(#a1)"/>
+  <text x="297" y="277" text-anchor="middle" font-size="10" fill="#475569">领活</text>
+  <line x1="315" y1="325" x2="280" y2="325" stroke="#475569" stroke-width="2" marker-end="url(#a1)"/>
+  <text x="297" y="340" text-anchor="middle" font-size="10" fill="#475569">交活</text>
+
+  <line x1="565" y1="305" x2="600" y2="305" stroke="#475569" stroke-width="2" marker-end="url(#a1)"/>
+  <text x="582" y="297" text-anchor="middle" font-size="10" fill="#475569">读</text>
+
+  <text x="440" y="514" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">节点之间不互相认识,所有协调都通过调度中心</text>
+</svg>

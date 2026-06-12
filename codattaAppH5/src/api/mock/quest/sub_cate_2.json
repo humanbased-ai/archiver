@@ -1,0 +1,75 @@
+{
+  "data": {
+    "sub_cate_id": "SUBCATE003",
+    "sub_cate_name": "Advanced use of codatta: Mastering submission.",
+    "sub_cate_description": "Complete the quests in this module to unlock the bounty feature. The codatta platform will provide algorithm-based rewards based on the confidence level and freshness of the tags. ",
+    "help_info": [
+      {
+        "icon": "xxx.jpg",
+        "link": "https://help.codatta.io/docs/data-contribution/data-contribution-flow/submission",
+        "name": "What is submission？"
+      },
+      {
+        "icon": "xxx.jpg",
+        "link": "https://docs.codatta.io/codatta/data-collection-tutorial",
+        "name": "Learn more about submission"
+      }
+    ],
+    "tasks": [
+      {
+        "task_id": "TSK-QUEST-SUBMISSION",
+        "name": "Understand submission and choose the correct answer.",
+        "description": "Complete all quests within the \"Start your codatta journey: How to perform validation\" to unlock.",
+        "type": "AUTO",
+        "schema": "app://quest/new-user-submission-quest/challenge",
+        "rewards": [
+          {
+            "reward_icon": "https://file.b18a.io/ee6ce56e-6080-411d-9ccf-62c5899e9052_810879_.png",
+            "reward_type": "points",
+            "reward_value": "50"
+          },
+          {
+            "reward_icon": "https://file.b18a.io/ee6ce56e-6080-411d-9ccf-62c5899e9052_871730_.png",
+            "reward_type": "reputation",
+            "reward_value": "100"
+          }
+        ],
+        "locked": false,
+        "how_to_unlock": "FINISH【quest·New user validation quest】",
+        "refresh_time": null,
+        "duration": 0,
+        "status": "PENDING"
+      },
+      {
+        "task_id": "TSK-TRIPLE-SUBMISSION",
+        "name": "Complete three valid submissions.",
+        "description": "Complete three valid submissions to earn rewards. The submitted data will undergo a validation process, and with each step of validation, you will automatically receive rewards for your data contribution！",
+        "type": "AUTO",
+        "schema": "app://submission",
+        "rewards": [
+          {
+            "reward_icon": "https://file.b18a.io/ee6ce56e-6080-411d-9ccf-62c5899e9052_810879_.png",
+            "reward_type": "points",
+            "reward_value": "60"
+          },
+          {
+            "reward_icon": "https://file.b18a.io/ee6ce56e-6080-411d-9ccf-62c5899e9052_871730_.png",
+            "reward_type": "reputation",
+            "reward_value": "100"
+          }
+        ],
+        "locked": false,
+        "how_to_unlock": null,
+        "refresh_time": null,
+        "duration": 0,
+        "max_count": 3,
+        "current_count": 1,
+        "instance_id": "TSK202407240355271818",
+        "status": "PENDING"
+      }
+    ]
+  },
+  "success": true,
+  "errorCode": 0,
+  "errorMessage": "SUCCESS"
+}

@@ -1,0 +1,29 @@
+name: frames_segment
+description: "Filter frames → segment persons → upload as frame tasks"
+
+steps:
+  - name: ingest
+    type: ingest
+
+  - name: filter
+    type: filter
+    params:
+      model: yolo26n.pt
+      target_classes: [person]
+      confidence: 0.5
+      batch_size: 32
+
+  - name: preannotate
+    type: preannotate
+    params:
+      models:
+        - model: yolo26n-seg.pt
+          task_type: segment
+          confidence: 0.5
+          label_override: other
+
+  - name: upload
+    type: upload
+
+  - name: aggregate
+    type: aggregate

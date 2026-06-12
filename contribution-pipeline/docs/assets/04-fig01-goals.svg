@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 280" width="100%" style="max-width:880px;height:auto;background:transparent" font-family='-apple-system,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif'>
+  <text x="440" y="26" text-anchor="middle" fill="#0f172a" font-size="14" font-weight="600">三个核心目标</text>
+
+  <!-- Card 1: 提高效率 (sky) -->
+  <rect x="10" y="50" width="270" height="210" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <rect x="10" y="50" width="270" height="6" rx="3" fill="#0EA5E9"/>
+  <circle cx="38" cy="92" r="16" fill="#E0F2FE" stroke="#BAE6FD"/>
+  <text x="38" y="98" text-anchor="middle" fill="#0284C7" font-size="14" font-weight="700">1</text>
+  <text x="64" y="90" fill="#0f172a" font-size="15" font-weight="600">提高数据流转效率</text>
+  <text x="64" y="108" fill="#64748B" font-size="11">从需求到可用数据 · 时间大幅缩短</text>
+
+  <line x1="22" y1="128" x2="268" y2="128" stroke="#F1F5F9"/>
+
+  <g font-size="12" fill="#334155">
+    <circle cx="30" cy="151" r="2.5" fill="#0EA5E9"/><text x="42" y="155">新任务当天上线</text>
+    <circle cx="30" cy="183" r="2.5" fill="#0EA5E9"/><text x="42" y="187">流转全自动 · 不靠人搬</text>
+    <circle cx="30" cy="215" r="2.5" fill="#0EA5E9"/><text x="42" y="219">人只做关键判断</text>
+  </g>
+
+  <!-- Card 2: 降低成本 (emerald) -->
+  <rect x="305" y="50" width="270" height="210" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <rect x="305" y="50" width="270" height="6" rx="3" fill="#10B981"/>
+  <circle cx="333" cy="92" r="16" fill="#ECFDF5" stroke="#A7F3D0"/>
+  <text x="333" y="98" text-anchor="middle" fill="#059669" font-size="14" font-weight="700">2</text>
+  <text x="359" y="90" fill="#0f172a" font-size="15" font-weight="600">降低交付成本</text>
+  <text x="359" y="108" fill="#64748B" font-size="11">同样数据量 · 更少人 / 更少开发</text>
+
+  <line x1="317" y1="128" x2="563" y2="128" stroke="#F1F5F9"/>
+
+  <g font-size="12" fill="#334155">
+    <circle cx="325" cy="151" r="2.5" fill="#10B981"/><text x="337" y="155">模型预标注</text>
+    <circle cx="325" cy="183" r="2.5" fill="#10B981"/><text x="337" y="187">自动审核 · 抽检替代全检</text>
+    <circle cx="325" cy="215" r="2.5" fill="#10B981"/><text x="337" y="219">配置复用 · 不重写代码</text>
+  </g>
+
+  <!-- Card 3: 复杂任务 + 编排 (amber) -->
+  <rect x="600" y="50" width="270" height="210" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <rect x="600" y="50" width="270" height="6" rx="3" fill="#F59E0B"/>
+  <circle cx="628" cy="92" r="16" fill="#FEF3C7" stroke="#FCD34D"/>
+  <text x="628" y="98" text-anchor="middle" fill="#B45309" font-size="14" font-weight="700">3</text>
+  <text x="654" y="90" fill="#0f172a" font-size="15" font-weight="600">支持复杂任务 + 编排</text>
+  <text x="654" y="108" fill="#64748B" font-size="11">既能画框圈词 · 也能跑整条流水线</text>
+
+  <line x1="612" y1="128" x2="858" y2="128" stroke="#F1F5F9"/>
+
+  <g font-size="12" fill="#334155">
+    <circle cx="620" cy="151" r="2.5" fill="#F59E0B"/><text x="632" y="155">画布标注 · 标准动作</text>
+    <circle cx="620" cy="183" r="2.5" fill="#F59E0B"/><text x="632" y="187">表单工具 · 复杂业务</text>
+    <circle cx="620" cy="215" r="2.5" fill="#F59E0B"/><text x="632" y="219">采集 → 导出 全链路串通</text>
+  </g>
+</svg>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>Scheduler API Tester</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5/swagger-ui.css" />
+    <style>
+      body { margin: 0; background: #f6f7f9; }
+      .header {
+        padding: 14px 24px; background: #0f172a; color: white;
+        font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+        display: flex; align-items: center; gap: 16px;
+      }
+      .header h1 { margin: 0; font-size: 16px; font-weight: 600; }
+      .header .hint { font-size: 12px; color: #94a3b8; }
+      .header a { color: #93c5fd; text-decoration: none; }
+      #swagger-ui { background: white; }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>🛰 Scheduler API Tester</h1>
+      <div class="hint">
+        基于 <code>openapi.yaml</code> · 直连 <a href="http://localhost:4000">http://localhost:4000</a> · 任意接口可点
+        <strong>Try it out</strong> 实测
+      </div>
+    </div>
+    <div id="swagger-ui"></div>
+    <script src="https://unpkg.com/swagger-ui-dist@5/swagger-ui-bundle.js" crossorigin></script>
+    <script src="https://unpkg.com/swagger-ui-dist@5/swagger-ui-standalone-preset.js" crossorigin></script>
+    <script>
+      window.onload = () => {
+        window.ui = SwaggerUIBundle({
+          url: "/docs/openapi.yaml",
+          dom_id: "#swagger-ui",
+          deepLinking: true,
+          presets: [
+            SwaggerUIBundle.presets.apis,
+            SwaggerUIStandalonePreset.slice(1), // 去掉 topbar
+          ],
+          plugins: [SwaggerUIBundle.plugins.DownloadUrl],
+          layout: "StandaloneLayout",
+          tryItOutEnabled: true,
+          persistAuthorization: true,
+          defaultModelsExpandDepth: 1,
+          docExpansion: "list",
+        });
+      };
+    </script>
+  </body>
+</html>

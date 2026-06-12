@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 480" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+  <defs>
+    <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <text x="440" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">人和机器同一套方法</text>
+  <text x="440" y="58" text-anchor="middle" font-size="13" fill="#64748b">调度系统看不出区别 — 都是"领→交"</text>
+
+  <!-- Task board -->
+  <rect x="180" y="92" width="520" height="100" rx="14" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5"/>
+  <rect x="180" y="92" width="520" height="32" rx="14" fill="#dc2626"/>
+  <rect x="180" y="108" width="520" height="16" fill="#dc2626"/>
+  <text x="440" y="114" text-anchor="middle" font-size="15" font-weight="700" fill="white">中央任务板</text>
+
+  <rect x="208" y="138" width="140" height="40" rx="6" fill="white" stroke="#dc2626" stroke-width="1"/>
+  <text x="278" y="163" text-anchor="middle" font-size="13" font-weight="600" fill="#1f2937">[翻译 A]</text>
+  <rect x="370" y="138" width="140" height="40" rx="6" fill="white" stroke="#dc2626" stroke-width="1"/>
+  <text x="440" y="163" text-anchor="middle" font-size="13" font-weight="600" fill="#1f2937">[审核 B]</text>
+  <rect x="532" y="138" width="140" height="40" rx="6" fill="white" stroke="#dc2626" stroke-width="1"/>
+  <text x="602" y="163" text-anchor="middle" font-size="13" font-weight="600" fill="#1f2937">[采集 C]</text>
+
+  <!-- Both arrows up to board -->
+  <line x1="220" y1="280" x2="320" y2="200" stroke="#475569" stroke-width="2" marker-end="url(#a1)"/>
+  <line x1="660" y1="280" x2="560" y2="200" stroke="#475569" stroke-width="2" marker-end="url(#a1)"/>
+
+  <!-- Machine worker -->
+  <rect x="80" y="280" width="280" height="120" rx="14" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <rect x="80" y="280" width="280" height="32" rx="14" fill="#2563eb"/>
+  <rect x="80" y="296" width="280" height="16" fill="#2563eb"/>
+  <text x="220" y="302" text-anchor="middle" font-size="14" font-weight="700" fill="white">机器工人</text>
+  <text x="220" y="338" text-anchor="middle" font-size="13" fill="#1f2937">自动循环</text>
+  <text x="220" y="362" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">领 → 干 → 交</text>
+  <text x="220" y="384" text-anchor="middle" font-size="11" fill="#475569" font-style="italic">HTTP /lease /result</text>
+
+  <!-- Human worker -->
+  <rect x="520" y="280" width="280" height="120" rx="14" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <rect x="520" y="280" width="280" height="32" rx="14" fill="#2563eb"/>
+  <rect x="520" y="296" width="280" height="16" fill="#2563eb"/>
+  <text x="660" y="302" text-anchor="middle" font-size="14" font-weight="700" fill="white">人(浏览器)</text>
+  <text x="660" y="338" text-anchor="middle" font-size="13" fill="#1f2937">打开页面</text>
+  <text x="660" y="362" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">挑 → 干 → 提交</text>
+  <text x="660" y="384" text-anchor="middle" font-size="11" fill="#475569" font-style="italic">同样的 HTTP 接口</text>
+
+  <!-- Footer -->
+  <rect x="80" y="420" width="720" height="44" rx="10" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+  <text x="440" y="446" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">混编流程 机器→人→机器→人→机器 自然能跑,故障恢复逻辑一致</text>
+</svg>

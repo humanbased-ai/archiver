@@ -1,0 +1,5 @@
+flowchart LR
+  UI[可视化拖拽画布\n运营/产品] -->|保存| CFG[(同一份配置\nYAML / JSON)]
+  CODE[配置文件\n研发/算法] -->|提交| CFG
+  CFG --> RUN[Pipeline Runner\n实际执行]
+  CFG -.加载回画布.-> UI

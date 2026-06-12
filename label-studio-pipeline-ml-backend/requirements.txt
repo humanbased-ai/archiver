@@ -1,0 +1,2 @@
+label-studio-ml
+ultralytics>=8.0

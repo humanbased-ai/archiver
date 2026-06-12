@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "ad_id": "1",
+      "ad_type": "IMAGE",
+      "ad_content": "https://img.yzcdn.cn/vant/apple-1.jpg"
+    },
+    {
+      "ad_id": "2",
+      "ad_type": "VIDEO",
+      "ad_content": "https://prod-streaming-video-msn-com.akamaized.net/da8b8a96-5a73-4a17-8ed8-960b8cd5afb1/30223688-167c-48a2-aa96-9764378a92d4.mp4"
+    },
+    {
+      "ad_id": "3",
+      "ad_type": "TEXT",
+      "ad_content": "https://img.yzcdn.cn/vant/apple-3.jpg"
+    }
+  ],
+  "success": true,
+  "errorCode": 0,
+  "errorMessage": "SUCCESS"
+}

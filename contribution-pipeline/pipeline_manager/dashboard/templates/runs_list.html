@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Pipeline Runs{% endblock %}
+{% block content %}
+<h2 style="margin-bottom: 16px;">Pipeline Runs</h2>
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Config</th>
+        <th>Mode</th>
+        <th>Status</th>
+        <th>Frames</th>
+        <th>Kept</th>
+        <th>Filtered</th>
+        <th>Project</th>
+        <th>Created</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for run in runs %}
+      <tr>
+        <td><a href="/dashboard/runs/{{ run.id }}">#{{ run.id }}</a></td>
+        <td>{{ run.pipeline_config }}</td>
+        <td>{{ run.mode }}</td>
+        <td><span class="badge badge-{{ run.status }}">{{ run.status }}</span></td>
+        <td>{{ run.total_frames }}</td>
+        <td>{{ run.kept_frames }}</td>
+        <td>{{ run.filtered_frames }}</td>
+        <td>
+          {% if run.project_id > 0 %}
+          <a href="{{ ls_url }}/projects/{{ run.project_id }}/data" target="_blank">P{{ run.project_id }}</a>
+          {% else %}-{% endif %}
+        </td>
+        <td>{{ run.created_at.strftime('%m-%d %H:%M') if run.created_at else '-' }}</td>
+        <td>
+          <a href="/dashboard/runs/{{ run.id }}" class="btn btn-sm">Detail</a>
+          <a href="/dashboard/runs/{{ run.id }}/preview" class="btn btn-sm">Preview</a>
+        </td>
+      </tr>
+      {% endfor %}
+      {% if not runs %}
+      <tr><td colspan="10" style="text-align: center; color: #999; padding: 40px;">No pipeline runs yet</td></tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
